@@ -1,0 +1,240 @@
+\chapter{IMPLEMENTASI}
+	Bab ini membahas mengenai implementasi dari sistem yang sudah di desain dan dirancang pada bab sebelumnya. Pembahasan secara rinci akan dijelaskan pada setiap komponen yang ada yaitu load generator, pengambil data uji beban, web service dan task queue.
+	
+	\section{Lingkungan Implementasi}
+		Dalam mengimplementasikan sistem, digunakan beberapa perangkat pendukung sebagai berikut.
+		
+		\subsection{Perangkat Keras}
+		Perangkat keras yang digunakan dalam pengembangan sistem adalah sebagai berikut:
+		\begin{enumerate}
+			\item Web Service, processor AMD FX-7600P Radeon R7, 12 Compute Cores 4C+8G dan RAM 8GB.
+			\item Node docker swarm dengan IP 178.128.122.150, processor Intel(R) Xeon(R) Gold 6140 CPU @ 2.30GHz dan RAM 4GB.
+			\item Node docker swarm dengan IP 178.128.118.155, processor Intel(R) Xeon(R) CPU E5-2650 v4 @ 2.20GHz dan RAM 4GB.
+			\item Node docker swarm dengan IP 178.128.124.127, processor Intel(R) Xeon(R) CPU E5-2650 v4 @ 2.20GHz dan RAM 4GB.
+		\end{enumerate}
+	
+		\subsection{Perangkat Lunak}
+		Perangkat lunak yang digunakan dalam pengembangan sistem adalah sebagai berikut:
+		\begin{enumerate}
+			\item Sistem Operasi Ubuntu 18.04 LTS 64 Bit
+			\item Docker versi 18.09.6 
+			\item Headless Chrome 
+			\item Puppeteer versi 0.12.0
+			\item NPM versi 6.4.1
+			\item Node.js versi 8.15.1
+			\item Python versi 3.6.8
+			\item MySQL Ver 14.14 Distrib 5.7.26
+			\item Shell Script
+			\item PHP dan Laravel 5.8
+		\end{enumerate}
+		
+	\section{Implementasi Load Generator}
+		Berdasarkan perancangan dan desain, load generator merupakan aktor yang akan berfungsi menggantikan pengguna ketika mengakses ke web. Load generator yang akan digunakan adalah Docker, namun diperlukan beberapa tahap untuk bisa menggunakan Docker atau kontainer sebagai load generator, yaitu tahap pemasangan dan konfigurasi. Tahap pemasangan docker dapat dilihat di Kode Sumber \ref{instalasidocker}, sedangkan untuk konfigurasi akan dibagi menjadi beberapa tahap yaitu:
+		\begin{enumerate}
+			\item Pembuatan Docker Image
+			\item Pembuatan lingkungan kontainer
+			\item Pemasangan Headless Chrome dan Puppeteer
+		\end{enumerate}
+			
+		\subsection{Implementasi Pembuatan Docker Image}
+			Docker Image digunakan untuk menjalankan kontainer, pada tugas akhir ini Docker Image akan dibuat terlebih dahulu agar bisa digunakan untuk menjalankan Puppeteer dan Headless Chrome. Namun untuk membuat Docker Image diperlukan beberapa tahapan yaitu konfigurasi Dockerfile, pemasangan Docker Compose dapat dilihat pada Kode Sumber \ref{dockercomposeinstall} dan konfigurasi docker-compsoe.yml dan unggah Docker Image ke Docker Hub.
+			
+			\indent Konfigurasi Dockerfile dapat dilihat pada Kode Sumber \ref{dockerimage}, sedangkan konfigurasi docker-compose.yml dapat dilihat pada Kode Sumber \ref{dockercompose}.
+				\begin{lstlisting}[frame=single,tabsize=2,breaklines,caption={Konfigurasi Dockerfile },label=dockerimage, captionpos=b, language=json]
+	FROM node:8
+	RUN apt-get update
+	# for https
+	RUN apt-get install -yyq ca-certificates
+	# install libraries
+	RUN apt-get install -yyq libappindicator1 libasound2 libatk1.0-0 libc6 libcairo2 libcups2 libdbus-1-3 libexpat1 libfontconfig1 libgcc1 libgconf-2-4 libgdk-pixbuf2.0-0 libglib2.0-0 libgtk-3-0 libnspr4 libnss3 libpango-1.0-0 libpangocairo-1.0-0 libstdc++6 libx11-6 libx11-xcb1 libxcb1 libxcomposite1 libxcursor1 libxdamage1 libxext6 libxfixes3 libxi6 libxrandr2 libxrender1 libxss1 libxtst6
+	# tools
+	RUN apt-get install -yyq gconf-service lsb-release wget xdg-utils
+	# and fonts
+	RUN apt-get install -yyq fonts-liberation 
+	COPY code /app/code
+	COPY output /app/output
+	WORKDIR /app/code
+	RUN yarn install
+				\end{lstlisting}
+				
+				\begin{lstlisting}[frame=single,tabsize=2,breaklines,caption={Konfigurasi docker-compose.yml },label=dockercompose, captionpos=b, language=json]
+	version: '3'
+	services:
+		puppeteer:
+			build: .
+			shm_size: '1gb'
+			entrypoint: ["sh", "-c", "sleep infinity"]
+				\end{lstlisting}
+				
+				Kemudian jalankan perintah Docker Compose berikut untuk pembuatan Docker Image.
+				\begin{lstlisting}[frame=single,tabsize=2,breaklines,caption={Perintah untuk menjalankan  Docker Compose},label=createimg, captionpos=b, language=json,numbers=none]
+	$ docker-compose up
+				\end{lstlisting}
+				
+				Setelah Docker Image terbuat, ubah nama Docker Image tersebut dan melakukan commit agar bisa di push. Perintah pada kode sumber \ref{pushimagedocker} yang digunakan oleh penulis ketika mengunggah Docker Image ke Docker Hub.
+				\begin{lstlisting}[frame=single,tabsize=2,breaklines,caption={Perintah untuk mengunggah Docker Image},label=pushimagedocker, captionpos=b, language=json,numbers=none]
+	$ docker tag puppeteer_puppeteer:latest cphikmawan/ta2019:newpupp
+	
+	$ docker push cphikmawan/ta2019:newpupp
+				\end{lstlisting}
+				
+		\subsection{Implementasi Pembuatan Lingkungan Kontainer}
+			Kontainer akan dipasangkan pada suatu lingkungan yang bisa mengatur segala aktivitas kontainer, lingkungan yang akan dibangun pada sistem menggunakan alat orkestrasi yaitu Docker Swarm. Untuk mengimplementasikan Docker Swarm pada sistem ini, dibutuhkan satu node host sebagai manager node dan dua lainnya sebagai worker. Tahap pertama yang dilakukan yaitu menginisiasi salah satu node host yang akan digunakan sebagai manager node. Perintah inisiasi manager node terdapat pada Kode Sumber \ref{swarminit}. \\
+			\begin{lstlisting}[frame=single,tabsize=2,breaklines,caption={Perintah untuk inisiasi manager node},label=swarminit, captionpos=b, language=json,numbers=none]
+	$ docker swarm init --advertise-addr [IP NODE]
+			\end{lstlisting}
+			
+			Setelah perintah pada kode sumber \ref{swarminit} dijalankan, maka manager node akan menghasilkan sebuah token yang digunakan oleh node host yang lain untuk bergabung sebagai worker. Perintah yang harus dijalankan pada setiap node host yang lain terdapat pada Kode Sumber \ref{swarmjoin}.
+			\begin{lstlisting}[frame=single,tabsize=2,breaklines,caption={Perintah untuk bergabung ke Swarm},label=swarmjoin, captionpos=b, language=json,numbers=none]
+	$ docker swarm join --token [token] [IP MANAGER]:2377
+			\end{lstlisting}
+			
+			Tahap terakhir yang dilakukan yaitu memastikan semua node host sudah tergabung dengan manager node.
+			\begin{lstlisting}[frame=single,tabsize=2,breaklines,caption={Perintah untuk melihat daftar Swarm Node},label=dockernodels, captionpos=b, language=json,numbers=none]
+	$ docker node ls
+			\end{lstlisting}
+			
+		\subsection{Implementasi Pemasangan Headless Chrome dan Puppeteer}
+			Headless Chrome dan Puppeteer akan dipasang pada masing-masing kontainer menggunakan Docker Image yang telah dibuat sebelumnya, untuk pemasangannya akan dilakukan dilingkungan Docker Swarm dan dilakukan pada manager node. Namun untuk implementasinya dibutuhkan beberapa persiapan dan konfigurasi yang harus dilakukan terlebih dahulu yaitu konfigurasi unduh Docker Image, konfigurasi membuat Docker Network, konfigurasi puppeteer.yml, konfigurasi deployment.
+			
+			\indent untuk mengunduh Docker Image menggunakan perintah pada Kode Sumber \ref{unduhimage} dan membuat Docker Network pada Kode Sumber \ref{createnetwork}. Sedangkan konfigurasi puppeteer.yml dapat dilihat di Kode Sumber \ref{puppyaml}
+			\begin{lstlisting}[frame=single,tabsize=2,breaklines,caption={Perintah untuk mengunduh Docker Image },label=unduhimage, captionpos=b, language=json,numbers=none]
+	# dijalankan pada setiap node host
+	$ docker image pull cphikmawan/ta2019:puppeteer
+			\end{lstlisting}
+			
+			\begin{lstlisting}[frame=single,tabsize=2,breaklines,caption={Perintah untuk membuat Docker Network },label=createnetwork, captionpos=b, language=json,numbers=none]
+	$ docker network create \
+		--driver overlay \
+		--subnet 10.0.0.0/18 \
+		--attachable \
+		[nama_network]
+			\end{lstlisting}
+			
+			\begin{lstlisting}[frame=single,tabsize=2,breaklines,caption={Konfigurasi puppeteer.yml},label=puppyaml, captionpos=b, language=json]
+	version: '3'
+	# konfigurasi service
+	services:
+		# nama service yang akan dibuat
+		puppeteer:
+			# docker image yang digunakan
+			image: cphikmawan/ta2019:newpupp
+			# sinkronisasi penyimpanan antara kontainer dengan host
+			volumes:
+				- ./output:/app/output
+				- ./code:/app/code
+			# direktori kerja didalam kontainer
+			working_dir: /app/code
+			# konfigurasi untuk jumlah kontainer dan handling
+			deploy:
+				replicas: 1000
+				restart_policy:
+					condition: on-failure
+			# entrypoint awal tidak akan melakukan apapun
+			entrypoint: ["sh", "-c", "sleep infinity"]
+	# konfigurasi jaringan
+	networks:
+		default:
+			# jaringan default akan diubah ke jaringan eksternal
+			external:
+				# akan terkonek ke jaringan "swarm-network"
+				name: swarm-network
+			\end{lstlisting}
+			
+			\indent Jika persiapan diatas sudah dilakukan, maka tahapan selanjutnya adalah konfigurasi deployment dengan menjalankan perintah yang ditunjukkan pada Kode Sumber \ref{pemasanganstack} di terminal manager node
+			\begin{lstlisting}[frame=single,tabsize=2,breaklines,caption={Perintah untuk pemasangan kontainer },label=pemasanganstack, captionpos=b, language=json,numbers=none]
+	$ docker stack deploy --compose-file=puppeteer.yml [nama_stack]
+			\end{lstlisting}
+	
+	\section{Implementasi Pengambil Data Uji Beban}
+		Pengambil Data Uji Beban akan dilakukan menggunakan sebuah pustaka Node yaitu Puppeteer. Pada saat dilakukan uji beban, Puppeteer akan mengambil data uji beban dari Headless Chrome menggunakan API secara otomatis. Beberapa data uji beban yang akan diambil yaitu:
+		\begin{enumerate}
+			\item Response End \\
+				Atribut ini menunjukkan waktu setelah user menerima byte terakhir dari dokumen sebelum koneksi transportasi ditutup.
+			\item DOM Interactive \\
+				Atribut ini menunjukkan waktu ketika kesiapan dokumen berada dalam keadaan interaktif.
+			\item DOM Content Loaded \\
+				Atribut ini menunjukkan waktu setelah dokumen sudah diterima oleh user.
+			\item Load Event End \\
+				Atribut ini mengembalikan waktu ketika memuat dokumen selesai.
+			\item CSS Tracing Start \\
+				Atribut ini menunjukkan waktu dari ekstraksi awal file CSS dimuat.
+			\item CSS Tracing End \\
+				Atribut ini menunjukkan waktu dari ekstraksi akhir file CSS dimuat.
+			\item First Meaningfulpain \\
+				Atribut ini adalah atribut khusus yang ada pada Chrome yang menunjukkan bahwa segala konten pada halaman yang dimuat sudah ditampilkan di layar.
+			\item Timestamp \\
+				Atribut ini menunjukkan waktu untuk memuat semua metrics.
+		\end{enumerate}
+	 
+	 	\indent Selain data uji beban diatas, Puppeteer juga digunakan untuk mengambil sebuah tangkapan layar sesuai jumlah skenario yang dikirimkan oleh pengguna dan mengambil data saat terjadi kegagalan saat memuat assets yang tertulis pada console browser. Adapun pseudocode untuk melakukan pengambilan data uji beban dapat dilihat pada Kode Sumber \ref{pseudocodepupp}.
+	 	
+	 	\begin{lstlisting}[frame=single,tabsize=2,breaklines,caption={Pseudocode Puppeteer },label=pseudocodepupp, captionpos=b, language=json,numbers=none]
+ 	Variable Declaration
+ 	Data = Read Scenario File Configuration
+ 	
+ 	TestPage Function:
+ 		Call Helpers Function:
+ 			Get Navigation Start
+ 		Start Trace CSS Data
+ 		Trying to Accessing Website
+ 		End Trace CSS Data
+ 		Call Helpers Function:
+ 			Get Extracted Performance Data
+ 			Get Extracted CSS Tracing
+ 			Send Extracted Data
+ 	
+ 	Helpers Function:
+ 		Get Navigation Start
+ 			Send Navigation Start
+ 		Extracted Performance Data = Performance Data * 1000 - Navigation Start
+ 			Send Extracted Performance Data
+ 		Extracted CSS Tracing = CSS Tracing / 1000
+ 			Send Extracted CSS Tracing 
+ 	
+ 	Main Function:
+ 		Start Headless Browser
+ 		Get Error Console
+ 			Send Data to Database
+ 		Try:
+ 			Call TestPage Function(Data)
+ 				Get Data From TestPage
+ 					Save Data Uji Beban
+ 			Get Page Screenshoot
+ 				Save Screenshoot
+ 		Catch Error:
+ 			Get Error
+ 			Get Page Screenshoot
+ 				Save Screenshoot
+	 	\end{lstlisting}
+	
+	\section{Implementasi Web Service}
+		Pada implementasi web service dibutuhkan beberapa persiapan lingkungan yang perlu dilakukan, pemaparannya meliputi langkah-langkah berikut:
+		\begin{enumerate}
+			\item Instalasi PHP
+			\item Instalasi Composer
+			\item Instalasi Laravel versi 5.8
+			\item Instalasi MySQL
+		\end{enumerate}
+	
+		\begin{figure}[h]
+			\centering
+			\includegraphics[width=11cm,height=7cm]{Images/C-4/gambarweb.png}
+			\caption{Tampilan web antarmuka pengguna}
+			\label{gambarweb}
+		\end{figure}
+		
+		\indent Web service akan menggunakan bahasa PHP dan kerangka kerja Laravel versi 5.8, sedangkan Composer berfungsi untuk memanajemen instalasi pustaka pada PHP dan untuk penyimpanan data yang digunakan pada sistem akan disimpan pada basis data MySQL. Web service pada tugas akhir ini berfungsi untuk memudahkan user melakukan uji beban pada suatu web. Adapun tampilan web antarmuka pengguna ditunjukkan pada Gambar \ref{gambarweb}.
+		
+		\subsection{Implementasi Basis Data}
+			Berdasarkan hasil perancangan basis data pada bab sebelumnya. Terdapat beberapa data yang harus disimpan pada basis data MySQL. Nama atribut dan tipe data yang digunakan pada masing-masing tabel yang akan disimpan adalah sebagai berikut:
+			
+			Tabel Containers
+			
+			Tabel Skenarios
+			
+			Dll
+			
+	\section{Implementasi Task Queue}
+		Task queue yang akan digunakan adalah.
+	

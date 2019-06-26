@@ -1,0 +1,41 @@
+\chapter{PENGUJIAN DAN EVALUASI}
+	Pada bab ini akan dibahas uji coba dan evaluasi dari sistem yang dibuat. Sistem akan diuji coba fungsionalitasnya dengan menjalankan skenario pengujian performa pada web. Uji coba dilakukan untuk mengetahui kinerja sistem dengan lingkungan uji coba yang ditentukan.
+	
+	\section{Lingkungan Uji Coba}
+		Lingkungan Uji coba sistem ini terdiri dari beberapa komponen yaitu web service, server basis data, server manager node, dua server worker. Server yang digunakan sistem menggunakan layanan Virtual Priate Server dari DigitalOcean, sedangkan web service akan dibangun di komputer penulis. Spesifikasi untuk setiap komponen ditunjukkan pada Tabel \ref{tabelspesifikasi}.
+		\begin{longtable}{|p{0.05\textwidth}|p{0.25\textwidth}|p{0.30\textwidth}|p{0.30\textwidth}|}
+			\caption{Spesifikasi komponen} \label{tabelspesifikasi} \\
+			\hline
+			\textbf{No} & \textbf{Komponen} & \textbf{Perangkat Keras} & \textbf{Perangkat Lunak} \\ \hline
+			\endhead
+			\endfoot
+			\endlastfoot
+			1 & Web Service & Processor AMD FX-7600P Radeon R7, 4 Core, 8GB RAM, 250GB SSD & Ubuntu 18.04 LTS, Laravel 5.8, Python 3.6 \\ \hline
+			2 & Basis Data & 1 Core Processor, 1GB RAM, 20GB SSD & Ubuntu 18.04 LTS, MySQL 5.7 \\ \hline
+			3 & Manager Node & 2 Core Processor, 4GB RAM, 80GB SSD & Ubuntu 18.04 LTS, Docker 18.09.6, Node.js 8.15, NPM 6.4.1, Chrome, Puppeteer 0.12.0, Python 3.6, MySQL Client \\ \hline
+			4 & Worker 1 & 2 Core Processor, 4GB RAM, 80GB SSD & Ubuntu 18.04 LTS, Docker 18.09.6, Node.js 8.15, NPM 6.4.1, Chrome, Puppeteer 0.12.0, Python 3.6 \\ \hline
+			5 & Worker 2 & 2 Core Processor, 4GB RAM, 80GB SSD & Ubuntu 18.04 LTS, Docker 18.09.6, Node.js 8.15, NPM 6.4.1, Chrome, Puppeteer 0.12.0, Python 3.6 \\ \hline
+		\end{longtable}
+	
+		\indent Untuk akses ke setiap komponen, digunakan IP publik yang disediakan untuk masing-masing komponen. Detail ditunjukkan pada Tabel \ref{ipserver}.
+		\begin{longtable}{|p{0.05\textwidth}|p{0.25\textwidth}|p{0.30\textwidth}|p{0.30\textwidth}|}
+			\caption{IP dan hostname server} \label{ipserver} \\
+			\hline
+			\textbf{No} & \textbf{Komponen} & \textbf{IP} & \textbf{Hostname} \\ \hline
+			\endhead
+			\endfoot
+			\endlastfoot
+			1 & Web Service & 10.151.253.110 & night \\ \hline
+			2 & Basis Data & 159.89.205.126 & NIGHT \\ \hline
+			3 & Manager Node & 178.128.124.127 & CLOUD \\ \hline
+			4 & Worker 1 & 178.128.118.155 & RAIN \\ \hline
+			5 & Worker 2 & 178.128.122.150 & STORM \\ \hline
+		\end{longtable}
+	
+	\section{Skenario Uji Coba}
+		Uji coba ini dilakukan untuk menguji apakah fungsionalitas yang diidentifikasikan terhadap kebutuhan sistem benar-benar telah diimplementasikan dan bekerja seperti yang seharusnya.
+		
+	\subsection{Skenario Uji Fungsionalitas}
+	
+	\section{Hasil Uji Coba dan Evaluasi}
+	\subsection{Uji Fungsionalitas}

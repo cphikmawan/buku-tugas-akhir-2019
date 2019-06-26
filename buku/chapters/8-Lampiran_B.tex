@@ -1,0 +1,304 @@
+\chapter{KODE SUMBER}
+
+\section*{Kode Sumber Pengambilan Data Metrics Performance} \label{puppeteer}
+	\subsection*{Isi berkas index.js}
+\begin{lstlisting}[frame=single,tabsize=2,breaklines,caption={Isi berkas index.js},label=indexjs, captionpos=b, language=json]
+const puppeteer = require('puppeteer');
+const testPage = require('./testPage');
+const fs = require('fs');
+const db = require('../config/databases');
+const scenario_id = process.argv[2];
+const counter = process.argv[3];
+const worker = process.argv[4];
+const host = process.argv[5];
+
+let rawdata = fs.readFileSync('/app/code/assets/config_'+scenario_id+'.json');  
+let config = JSON.parse(rawdata);
+(async () => {
+	const browser = await puppeteer.launch({args: ['--no-sandbox']});
+	const page = await browser.newPage();
+	await page.on('console', msg => 
+		db.query('INSERT INTO errors (scenario_id, link, worker, username, host, type, text, location_url) VALUES (?, ?, ?, ?, ?, ?, ?, ?)', 
+		[ scenario_id, config.scenario_link, worker, config.username, host, msg._type, msg._text, msg._location.url ])
+	);
+	try{
+		let data = await testPage(page, config, counter);
+		db.query('INSERT INTO tests (scenario_id, link, worker, username, host, response_end, dom_interactive, dom_content_load, load_event_end, css_trace_start, css_trace_end, first_meaningful, timestamp) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)', 
+		[ scenario_id, config.scenario_link, worker, config.username, host, data.Timing.responseEnd, data.Timing.domInteractive, data.Timing.domContentLoadedEventEnd, data.Timing.loadEventEnd, data.TraceResult.cssStart, data.TraceResult.cssEnd, data.Metrics.FirstMeaningfulPaint, data.Metrics.Timestamp ]);
+		db.end();
+		await page.screenshot({path: '/app/output/ss'+scenario_id+'.png'});
+		await browser.close();
+	} catch(error) {
+		console.error(error);
+		await page.screenshot({path: '/app/output/ss'+scenario_id+'.png'});
+		await browser.close();
+	}
+})();
+\end{lstlisting}
+
+	\subsection*{Isi berkas testPage.js}
+\begin{lstlisting}[frame=single,tabsize=2,breaklines,caption={Isi berkas testPage.js},label=testjs, captionpos=b, language=json]
+const {
+getTimeFromPerformanceMetrics,
+	extractDataFromPerformanceMetrics,
+	extractDataFromPerformanceTiming,
+	extractDataFromTracing,
+} = require('./helpers');
+
+async function testPage(page, config, counter) {
+	const client = await page.target().createCDPSession();
+	await client.send('Performance.enable');
+	const navigationStart = getTimeFromPerformanceMetrics(
+		await client.send('Performance.getMetrics'),
+		'NavigationStart'
+	);
+	
+	await page.tracing.start({ path: './trace'+config.scenario_id+counter+'.json' });
+	
+	await page.goto(config.scenario_link);
+
+	if(config.scenario_method == 'POST'){
+		if(config.incr == 'true'){
+			for(var i=0; i<config.attr.length; i++){
+				await page.type('#'+config.attr[i], config.val_attr[i]+counter);
+			}
+			await page.click('button[type='+config.scenario_button+']');
+		} else {
+			for(var i=0; i<config.attr.length; i++){
+				await page.type('#'+config.attr[i], config.val_attr[i]);
+			}
+			await page.click('button[type='+config.scenario_button+']');
+		} 
+	}
+
+	const performanceTiming = JSON.parse(
+		await page.evaluate(() => JSON.stringify(window.performance.timing))
+	);
+
+	let firstMeaningfulPaint = 0;
+	while (firstMeaningfulPaint === 0) {
+		await page.waitFor(300);
+		performanceMetrics = await client.send('Performance.getMetrics');
+		firstMeaningfulPaint = getTimeFromPerformanceMetrics(
+			performanceMetrics, 'FirstMeaningfulPaint'
+		);
+	}
+
+	await page.tracing.stop();
+
+	const cssTracing = await extractDataFromTracing(
+		'./trace'+config.scenario_id+counter+'.json',
+		config.scenario_link,
+	);
+
+	let TraceResult = {
+		cssStart: cssTracing.start - navigationStart,
+		cssEnd: cssTracing.end - navigationStart,
+	}
+
+	let Metrics = extractDataFromPerformanceMetrics(
+		performanceMetrics,
+		'Timestamp',
+		'FirstMeaningfulPaint',
+	);
+
+	let Timing = extractDataFromPerformanceTiming(
+		performanceTiming,
+		'responseEnd',
+		'domInteractive',
+		'domContentLoadedEventEnd',
+		'loadEventEnd',
+	);
+
+	return { TraceResult, Metrics, Timing };
+}
+
+module.exports = testPage;
+\end{lstlisting}
+
+	\subsection*{Isi berkas helpers.js}
+\begin{lstlisting}[frame=single,tabsize=2,breaklines,caption={Isi berkas helpers.js},label=helperjs, captionpos=b, language=json]
+const fs = require('fs');
+
+const getTimeFromPerformanceMetrics = (metrics, name) =>
+	metrics.metrics.find(x => x.name === name).value * 1000;
+
+const extractDataFromPerformanceMetrics = (metrics, ...dataNames) => {
+	const navigationStart = getTimeFromPerformanceMetrics(
+		metrics,
+		'NavigationStart'
+	);
+	const extractedData = {};
+	dataNames.forEach(name => {
+		extractedData[name] =
+			getTimeFromPerformanceMetrics(metrics, name) - navigationStart;
+	});
+	return extractedData;
+};
+
+const extractDataFromPerformanceTiming = (timing, ...dataNames) => {
+	const navStart = timing.navigationStart;
+
+	const extractedData = {};
+	dataNames.forEach(name => {
+		extractedData[name] = timing[name] - navStart;
+	});
+
+	return extractedData;
+};
+
+const extractDataFromTracing = (path, link) => new Promise(resolve => {
+	const tracing = JSON.parse(fs.readFileSync(path, 'utf8'));
+	const resourceTracings = tracing.traceEvents.filter(
+		x =>
+			x.cat === 'devtools.timeline' &&
+			typeof x.args.data !== 'undefined' &&
+			typeof x.args.data.url !== 'undefined' &&
+			x.args.data.url.includes(link)
+	);
+	const resourceTracingSendRequest = resourceTracings.find(
+		x => x.name === 'ResourceSendRequest'
+	);
+	const resourceId = resourceTracingSendRequest.args.data.requestId;
+	const resourceTracingEnd = tracing.traceEvents.filter(
+		x =>
+			x.cat === 'devtools.timeline' &&
+			typeof x.args.data !== 'undefined' &&
+			typeof x.args.data.requestId !== 'undefined' &&
+			x.args.data.requestId === resourceId
+	);
+	const resourceTracingStartTime = resourceTracingSendRequest.ts / 1000;
+	const resourceTracingEndTime =
+		resourceTracingEnd.find(x => x.name === 'ResourceFinish').ts / 1000;
+	
+	fs.unlink(path, () => {
+		resolve({
+			start: resourceTracingStartTime,
+			end: resourceTracingEndTime,
+		});
+	});
+});
+
+module.exports = {
+	getTimeFromPerformanceMetrics,
+	extractDataFromPerformanceMetrics,
+	extractDataFromPerformanceTiming,
+	extractDataFromTracing,
+};
+\end{lstlisting}
+
+\section*{Kode Sumber Basis Data MySQL} \label{mysql}
+	
+\begin{lstlisting}[frame=single,tabsize=2,breaklines,caption={Basis data MySQL},label=mysql, captionpos=b, language=json]
+-- membuat tabel containers -> untuk menyimpan data kontainer
+CREATE TABLE `containers` (
+	`id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
+	`task_id` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+	`node_id` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+	`container_id` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+	`node_ip` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+	`node_host` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+	`status` smallint(6) NOT NULL DEFAULT '0',
+	`username` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '0',
+	PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- membuat tabel errors -> untuk menyimpan error console
+CREATE TABLE `errors` (
+	`id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
+	`scenario_id` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+	`link` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+	`worker` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+	`username` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+	`host` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+	`type` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+	`text` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+	`args` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+	`location_url` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+	PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- membuat tabel results -> untuk menyimpan hasil rata-rata perhitungan hasil pengujian
+CREATE TABLE `results` (
+	`id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
+	`scenario_id` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+	`link` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+	`method` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+	`worker` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+	`username` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+	`error` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+	`response_end` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+	`dom_interactive` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+	`dom_content_load` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+	`load_event_end` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+	`css_trace_start` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+	`css_trace_end` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+	`first_meaningful` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+	`timestamp` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+	PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- membuat tabel scenarios -> untuk menyimpan scenario pengujian
+CREATE TABLE `scenarios` (
+	`id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
+	`created_at` timestamp NULL DEFAULT NULL,
+	`updated_at` timestamp NULL DEFAULT NULL,
+	`scenario_id` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+	`username` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+	`scenario_method` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+	`scenario_link` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+	`scenario_worker` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+	`scenario_status` smallint(6) DEFAULT '0',
+	`scenario_button` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+	PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- membuat tabel swarms -> untuk menyimpan swarm node
+CREATE TABLE `swarms` (
+	`id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
+	`created_at` timestamp NULL DEFAULT NULL,
+	`updated_at` timestamp NULL DEFAULT NULL,
+	`swarm_ip` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+	`swarm_username` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+	`swarm_password` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+	`is_used` smallint(6) DEFAULT '0',
+	PRIMARY KEY (`id`),
+	UNIQUE KEY `swarms_swarm_ip_unique` (`swarm_ip`)
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- membuat tabel test -> untuk menyimpan hasil setiap pengujian
+CREATE TABLE `tests` (
+	`id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
+	`scenario_id` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+	`link` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+	`worker` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+	`username` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+	`host` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+	`response_end` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+	`dom_interactive` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+	`dom_content_load` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+	`load_event_end` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+	`css_trace_start` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+	`css_trace_end` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+	`first_meaningful` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+	`timestamp` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+	`status` smallint(6) DEFAULT '0',
+	PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- membuat tabel users -> menyimpan user
+CREATE TABLE `users` (
+	`id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
+	`name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+	`email` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+	`username` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+	`email_verified_at` timestamp NULL DEFAULT NULL,
+	`password` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+	`remember_token` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+	`created_at` timestamp NULL DEFAULT NULL,
+	`updated_at` timestamp NULL DEFAULT NULL,
+	PRIMARY KEY (`id`),
+	UNIQUE KEY `users_email_unique` (`email`),
+	UNIQUE KEY `users_username_unique` (`username`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+\end{lstlisting}

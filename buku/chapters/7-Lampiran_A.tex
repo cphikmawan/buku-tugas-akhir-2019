@@ -1,0 +1,39 @@
+\chapter{INSTALASI PERANGKAT LUNAK}
+
+\section*{Instalasi Docker}
+	Untuk melakukan instalasi Docker, dilakukan seperti langkah-langkah berikut:
+\begin{lstlisting}[frame=single,tabsize=2,breaklines,caption={Perintah untuk instalasi Docker },label=instalasidocker, captionpos=b, language=json,numbers=none]
+$ sudo apt-get -y install \
+apt-transport-https \
+ca-certificates \
+curl
+
+$ curl -fsSL https://download.docker.com/linux/
+ubuntu/gpg | sudo apt-key add -
+
+$ sudo add-apt-repository \
+"deb [arch=amd64] https://download.docker.com/linux/ubuntu \
+$(lsb_release -cs) \
+stable"
+
+$ sudo apt-get update
+
+$ sudo apt-get install docker-ce docker-ce-cli containerd.io
+\end{lstlisting}
+	
+	Setelah menjalankan perintah pada kode sumber \ref{instalasidocker}. Jalankan perintah berikut agar Docker bisa dijalankan sebagai Non-Root User.
+\begin{lstlisting}[frame=single,tabsize=2,breaklines,caption={Perintah untuk mengubah hak User },label=nonrootuser, captionpos=b, language=json,numbers=none]
+$ sudo groupadd docker
+$ sudo usermod -aG docker $USER
+\end{lstlisting}
+
+\section*{Instalasi Docker Compose}
+Docker Compose digunakan untuk automasi dalam menjalankan Dockerfile dan berperan untuk pembuatan Docker Image. Instalasi Docker Compose dapat dilihat pada kode sumber \ref{dockercomposeinstall}.
+
+\begin{lstlisting}[frame=single,tabsize=2,breaklines,caption={Perintah instalasi Docker Compose},label=dockercomposeinstall, captionpos=b, language=json,numbers=none]
+$ sudo curl -L "https://github.com/docker/compose/releases/download/1.24.0/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
+
+$ sudo chmod +x /usr/local/bin/docker-compose
+
+$ sudo ln -s /usr/local/bin/docker-compose /usr/bin/docker-compose
+\end{lstlisting}
