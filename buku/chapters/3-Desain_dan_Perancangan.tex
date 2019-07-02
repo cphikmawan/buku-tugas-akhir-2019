@@ -35,7 +35,14 @@
     	\end{longtable}
     
     \section{Arsitektur Sistem}
-    	Pada sub-bab ini, akan dibahas mengenai tahap analisis arsitektur, analisis teknologi dan desain sistem yang akan dibangun. Arsitektur sistem secara umum ditunjukkan pada Gambar \ref{arsitekturumum}.
+	    \begin{figure}[H]
+	    	\centering
+	    	\includegraphics[width=10cm,height=6cm]{Images/C-3/arsitektursistem.png}
+	    	\caption{Desain arsitektur sistem}
+	    	\label{arsitekturumum}
+	    \end{figure}
+    	
+    	\indent Pada sub-bab ini, akan dibahas mengenai tahap analisis arsitektur, analisis teknologi dan desain sistem yang akan dibangun. Arsitektur sistem secara umum ditunjukkan pada Gambar \ref{arsitekturumum}.
 
     	\subsection{Desain Umum Sistem}
     		Berdasarkan yang dijelaskan pada deskripsi umum sistem, dapat diperoleh beberapa kebutuhan sistem antara lain:
@@ -43,6 +50,7 @@
     			\item Load generator untuk melakukan uji beban.
     			\item Tester yang bisa mengambil data uji beban.
     			\item Web service sebagai antarmuka pengguna.
+    			\item Basis data untuk menyimpan data sistem.
     			\item Task Queue untuk menangani kasus request lebih dari satu user.
     		\end{enumerate}
     	
@@ -53,30 +61,30 @@
     				Berfungsi sebagai pengganti user yang akan melakukan akses web melalui browser.
     			\item Pengambil data uji beban \\
     				Berfungsi untuk mengambil data uji beban ketika load generator mengakses web dari browser.
-    			\item Web Service \\
-    				Berfungsi sebagai antarmuka pengguna yang akan digunakan user untuk membuat skenario dan melakukan uji beban.
-    			\item Task Queue \\
-    				Berfungsi untuk membuat task scheduler atau antrian untuk menangani kasus request lebih dari satu user.
+    			\item Service Controller \\
+    				Berfungsi sebagai pengatur sistem uji beban yang terdiri :
+    				\begin{itemize}
+    					\item Web Service \\
+    						Berfungsi sebagai tampilan antarmuka pengguna untuk menggunakan sistem.
+    					\item Basis Data \\
+    						Berfungsi untuk menyimpan data yang digunakan untuk menyimpan segala data yang dibutuhkan oleh sistem.
+    					\item Task Queue \\
+    						Berfungsi untuk membuat task scheduler atau antrian untuk menangani kasus request lebih dari satu user.
+    				\end{itemize}
     		\end{enumerate}
     	
-	    	\begin{figure}[H]
-	    		\centering
-	    		\includegraphics[width=11cm,height=7.5cm]{Images/C-3/arsitektursistem.png}
-	    		\caption{Desain arsitektur sistem}
-	    		\label{arsitekturumum}
-	    	\end{figure}
-    	
     	\subsection{Perancangan Load Generator}
+	    	\begin{figure}[h]
+	    		\centering
+	    		\includegraphics[width=11cm,height=6cm]{Images/C-3/dockerdesain.png}
+	    		\caption{Desain perancangan load generator}
+	    		\label{dockerdesain}
+	    	\end{figure}
     		Komponen load generator akan difungsikan sebagai pengganti pengguna yang mengakses ke suatu web melalui browser. Komponen yang akan digunakan sebagai load generator adalah Docker atau bisa disebut kontainer. Ketika melakukan pemasangan kontainer sebuah Docker Image, untuk memenuhi hal tersebut, pada tugas akhir ini penulis akan membuat sebuah Docker Image yang akan diunggah ke Docker Hub. Sehingga ketika akan memasang kontainer pada node host yang baru, node host tersebut hanya perlu mengunduh Docker Image yang telah diunggah sebelumnya. Seluruh kontainer akan dibangun di dalam lingkungan swarm untuk memudahkan dalam mengatur atau memanajemen kontainer ke semua node host yang tergabung di dalam lingkungan swarm, sedangkan untuk memudahkan akses ke setiap kontainer, maka data dari kontainer akan disimpan di dalam basis data MySQL. Load generator akan terdiri dari 3 node host, 1 sebagai manager node dan 2 lainnya sebagai worker, sedangkan basis data akan berada di luar lingkungan swarm. Desain perancangan komponen ini digambarkan pada Gambar \ref{dockerdesain}.
-    		\begin{figure}[H]
-    			\centering
-    			\includegraphics[width=11cm,height=6cm]{Images/C-3/dockerdesain.png}
-    			\caption{Desain perancangan load generator}
-    			\label{dockerdesain}
-    		\end{figure} 
+    		 
     	
     	\subsection{Perancangan Pengambil Data Uji Beban}
-    		Komponen ini akan membutuhkan suatu alat yang bisa mendapatkan data uji beban terlebih dahulu. Pada tugas akhir ini akan menggunakan Headless Chrome untuk mendapatkan data uji beban ketika mengakses web. Setelah mendapatkan data uji beban diperlukan juga suatu alat yang bisa digunakan untuk mengambil data uji beban pada Headless Chrome, alat tersebut adalah Puppeteer. Puppeteer akan melakukan pengambilan secara otomatis ketika ada perintah yang masuk dan menyimpan data uji beban pada basis data MySQL. Alat-alat yang digunakan pada komponen ini akan dipasang pada masing-masing kontainer di setiap node host. Desain perancangan komponen ini digambarkan pada Gambar \ref{puppdesain}.
+    		Komponen ini akan membutuhkan suatu alat yang bisa mendapatkan data uji beban terlebih dahulu. Pada tugas akhir ini, akan menggunakan Headless Chrome untuk mendapatkan data uji beban ketika mengakses web. Setelah mendapatkan data uji beban, diperlukan juga suatu alat yang bisa digunakan untuk mengambil data uji beban pada Headless Chrome, alat tersebut adalah Puppeteer. Puppeteer akan melakukan pengambilan secara otomatis ketika ada perintah yang masuk dan menyimpan data uji beban pada basis data MySQL. Alat-alat yang digunakan pada komponen ini akan dipasang pada masing-masing kontainer di setiap node host. Desain perancangan komponen ini digambarkan pada Gambar \ref{puppdesain}.
     		\begin{figure}[H]
     			\centering
     			\includegraphics[width=10cm,height=4.5cm]{Images/C-3/puppdesain.png}
@@ -84,43 +92,48 @@
     			\label{puppdesain}
     		\end{figure}
     	
-    	\subsection{Perancangan Web Service}
-    		Web service akan berfungsi sebagai antarmuka pengguna dan sebagai penghubung antara user dengan kontainer. Antarmuka pengguna berfungsi memudahkan user untuk membuat skenario yang akan dikirimkan ke load generator dan kemudian load generator akan melakukan uji beban sesuai dengan skenario yang dikirim user melalui web service. Sedangkan untuk mengatur segala aktivitas user dibutuhkan sebuah controller dan rute yang akan dipasang pada web service. Desain antarmuka pengguna ditunjukkan pada Gambar \ref{mockupweb}.
-    		\begin{figure}[H]
-    			\centering
-    			\includegraphics[width=10cm,height=6cm]{Images/C-3/mockupweb.png}
-    			\caption{Desain antarmuka pengguna}
-    			\label{mockupweb}
-    		\end{figure}
-    		
-    		\subsubsection{Desain Basis Data}
-    			Komponen basis data diperlukan untuk menyimpan data-data yang berkaitan dengan web dan hasil pengujian performa, data yang disimpan adalah data kontainer, data error, data hasil pengujian(rata-rata), data skenario pengujian, data swarm node, data pengujian dan data user. Dari data-data tersebut maka dibutuhkan suatu tabel diantaranya yaitu:
-    			\begin{itemize}
-    				\item Tabel containers \\
-    					Menyimpan data Docker Container yang telah dipersiapkan.
-    				\item Tabel errors \\
-    					Menyimpan data console error yang ada di browser.
-    				\item Tabel results \\
-    					Menyimpan data rata-rata hasil pengujian.
-    				\item Tabel scenarios \\
-    					Menyimpan data skenario pengujian yang dibuat.
-    				\item Tabel swarms \\
-    					Menyimpan data swarm node.
-    				\item Tabel tests \\
-    					Menyimpan data hasil pengujian setiap kontainer.
-    				\item Tabel users \\
-    					Menyimpan data pengguna.
-    			\end{itemize}
-    			
-    		\subsubsection{Fitur Web Service}
-    			Komponen ini berfungsi sebagai penghubung antara user dan sistem untuk melakukan pengujian performa suatu web. Fitur-fitur yang akan digunakan user antara lain:
-    			\begin{enumerate}
-    				\item Menambah dan menghapus skenario.
-    				\item Menentukan jumlah worker pengujian.
-    				\item Melihat performa hasil pengujian.
-    				\item Melihat tangkapan layar tampilan web yang diuji.
-    				\item Melihat console error.
-    			\end{enumerate}
-    		
-    	\subsection{Perancangan Task Queue}
-    		Task Queue akan dirancang dan dipasang pada controller web.
+    	\subsection{Perancangan Service Controller}
+    		Komponen ini akan digunakan untuk mengatur segala proses uji beban pada sistem. Pada komponen ini akan terdapat 3 buah sub-komponen yaitu web service, basis data dan task queue atau antrian.
+    	
+	    	\subsubsection{Desain Web Service}
+	    		Web service akan berfungsi sebagai antarmuka pengguna dan sebagai penghubung antara user dengan kontainer. Antarmuka pengguna berfungsi memudahkan user untuk membuat skenario yang akan dikirimkan ke load generator dan kemudian load generator akan melakukan uji beban sesuai dengan skenario yang dikirim user melalui web service. Sedangkan untuk mengatur segala aktivitas user dibutuhkan sebuah controller dan rute yang akan dipasang pada web service. Desain antarmuka pengguna ditunjukkan pada Gambar \ref{mockupweb}.
+	    		\begin{figure}[H]
+	    			\centering
+	    			\includegraphics[width=10cm,height=6cm]{Images/C-3/mockupweb.png}
+	    			\caption{Desain antarmuka pengguna}
+	    			\label{mockupweb}
+	    		\end{figure}
+	    	
+		    	Selain itu, akan dirancang juga fitur-fitur pada web service yang akan digunakan user antara lain:
+		    	\begin{enumerate}
+		    		\item Menambah dan menghapus skenario.
+		    		\item Menentukan jumlah worker pengujian.
+		    		\item Melihat performa hasil pengujian.
+		    		\item Melihat tangkapan layar tampilan web yang diuji.
+		    		\item Melihat console error.
+		    		\item Melihat status antrian proses uji. \\
+		    	\end{enumerate}
+	    		
+	   		\subsubsection{Desain Basis Data}
+	   			Komponen basis data diperlukan untuk menyimpan data-data yang berkaitan dengan sistem. data yang disimpan adalah data node host swarm, data kontainer, data pengguna, data skenario pengujian, data antrian request, data hasil pengujian, data error console, data rata-rata hasil pengujian. Dari data-data tersebut maka dibutuhkan suatu tabel diantaranya yaitu:
+	   			\begin{itemize}
+	   				\item Tabel swarms \\
+	   					Menyimpan data nohe host yang tergabung di dalam lingkungan swarm.
+	   				\item Tabel containers \\
+	   					Menyimpan data Docker Container yang telah dipersiapkan.
+	   				\item Tabel users \\
+	   					Menyimpan data pengguna.
+	   				\item Tabel scenarios \\
+	   					Menyimpan data skenario pengujian.
+	   				\item Tabel queues \\
+		   				Menyimpan data antrian request pengujian dari user.
+	   				\item Tabel results \\
+	   					Menyimpan data hasil pengujian yang dilakukan setiap kontainer.
+	   				\item Tabel errors \\
+	   					Menyimpan data console error yang ada di browser.
+	   				\item Tabel summary results \\
+	   					Menyimpan data rata-rata hasil pengujian setiap skenario.
+	   			\end{itemize}
+	    		
+	    	\subsubsection{Desain Penggunaan Task Queue}
+	    		Pada service controller akan ada banyak request dari user, setiap request tentu saja akan terdapat proses yang akan berjalan dalam jangka waktu yang cukup lama. Jika proses tersebut berada di dalam fungsi yang dipanggil melalui protokol HTTP, maka akan memberikan umpan balik setelah semua proses yang ada dibaliknya selesai. Hal ini akan membuat user yang melakukan request perlu menunggu dan tidak efisien. Untuk mengatasi hal ini, akan dirancang sebuah komponen antrian atau bisa disebut task queue. Task queue akan membuat antrian untuk setiap request dibelakang layar. Antrian request tersebut akan disimpan pada basis data MySQL.

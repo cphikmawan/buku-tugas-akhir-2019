@@ -7,10 +7,11 @@
 		\subsection{Perangkat Keras}
 		Perangkat keras yang digunakan dalam pengembangan sistem adalah sebagai berikut:
 		\begin{enumerate}
-			\item Web Service, processor AMD FX-7600P Radeon R7, 12 Compute Cores 4C+8G dan RAM 8GB.
-			\item Node docker swarm dengan IP 178.128.122.150, processor Intel(R) Xeon(R) Gold 6140 CPU @ 2.30GHz dan RAM 4GB.
-			\item Node docker swarm dengan IP 178.128.118.155, processor Intel(R) Xeon(R) CPU E5-2650 v4 @ 2.20GHz dan RAM 4GB.
-			\item Node docker swarm dengan IP 178.128.124.127, processor Intel(R) Xeon(R) CPU E5-2650 v4 @ 2.20GHz dan RAM 4GB.
+			\item Web service dan task queue, processor AMD FX-7600P Radeon R7, 12 Compute Cores 4C+8G dan RAM 8GB.
+			\item Node host docker swarm dengan IP 167.71.194.235, processor Intel(R) Xeon(R) CPU E5-2650 v4 @ 2.20GHz dan RAM 4GB.
+			\item Node host docker swarm dengan IP 165.22.55.82, processor Intel(R) Xeon(R) CPU E5-2650 v4 @ 2.20GHz dan RAM 4GB.
+			\item Node host docker swarm dengan IP 167.71.194.233, processor Intel(R) Xeon(R) CPU E5-2650 v4 @ 2.20GHz dan RAM 4GB.
+			\item Basis data MySQL dengan IP 178.128.123.143, processor Intel(R) Xeon(R) Gold 6140 CPU @ 2.30GHz dan RAM 1GB.
 		\end{enumerate}
 	
 		\subsection{Perangkat Lunak}
@@ -49,7 +50,6 @@
 	RUN apt-get install -yyq libappindicator1 libasound2 libatk1.0-0 libc6 libcairo2 libcups2 libdbus-1-3 libexpat1 libfontconfig1 libgcc1 libgconf-2-4 libgdk-pixbuf2.0-0 libglib2.0-0 libgtk-3-0 libnspr4 libnss3 libpango-1.0-0 libpangocairo-1.0-0 libstdc++6 libx11-6 libx11-xcb1 libxcb1 libxcomposite1 libxcursor1 libxdamage1 libxext6 libxfixes3 libxi6 libxrandr2 libxrender1 libxss1 libxtst6
 	# tools
 	RUN apt-get install -yyq gconf-service lsb-release wget xdg-utils
-	# and fonts
 	RUN apt-get install -yyq fonts-liberation 
 	COPY code /app/code
 	COPY output /app/output
@@ -147,29 +147,23 @@
 			\end{lstlisting}
 	
 	\section{Implementasi Pengambil Data Uji Beban}
-		Pengambil Data Uji Beban akan dilakukan menggunakan sebuah pustaka Node yaitu Puppeteer. Pada saat dilakukan uji beban, Puppeteer akan mengambil data uji beban dari Headless Chrome menggunakan API secara otomatis. Beberapa data uji beban yang akan diambil yaitu:
+		Pengambil Data Uji Beban akan dilakukan menggunakan sebuah pustaka Node yaitu Puppeteer. Pada saat dilakukan uji beban, Puppeteer akan mengambil data uji beban dari Headless Chrome menggunakan API dari Puppeteer secara otomatis. Beberapa data uji beban yang akan diambil yaitu:
 		\begin{enumerate}
 			\item Response End \\
 				Atribut ini menunjukkan waktu setelah user menerima byte terakhir dari dokumen sebelum koneksi transportasi ditutup.
-			\item DOM Interactive \\
-				Atribut ini menunjukkan waktu ketika kesiapan dokumen berada dalam keadaan interaktif.
 			\item DOM Content Loaded \\
 				Atribut ini menunjukkan waktu setelah dokumen sudah diterima oleh user.
 			\item Load Event End \\
 				Atribut ini mengembalikan waktu ketika memuat dokumen selesai.
-			\item CSS Tracing Start \\
-				Atribut ini menunjukkan waktu dari ekstraksi awal file CSS dimuat.
 			\item CSS Tracing End \\
 				Atribut ini menunjukkan waktu dari ekstraksi akhir file CSS dimuat.
 			\item First Meaningfulpain \\
-				Atribut ini adalah atribut khusus yang ada pada Chrome yang menunjukkan bahwa segala konten pada halaman yang dimuat sudah ditampilkan di layar.
-			\item Timestamp \\
-				Atribut ini menunjukkan waktu untuk memuat semua metrics.
+				Atribut ini adalah atribut khusus yang ada pada Chrome yang menunjukkan bahwa segala konten halaman yang dimuat sudah ditampilkan di layar. \\
 		\end{enumerate}
 	 
-	 	\indent Selain data uji beban diatas, Puppeteer juga digunakan untuk mengambil sebuah tangkapan layar sesuai jumlah skenario yang dikirimkan oleh pengguna dan mengambil data saat terjadi kegagalan saat memuat assets yang tertulis pada console browser. Adapun pseudocode untuk melakukan pengambilan data uji beban dapat dilihat pada Kode Sumber \ref{pseudocodepupp}.
+	 	\indent Selain data uji beban diatas, Puppeteer juga digunakan untuk mengambil sebuah tangkapan layar sesuai skenario yang dikirimkan oleh pengguna dan mengambil data saat terjadi kegagalan saat memuat assets yang tertulis pada console browser. Adapun pseudocode untuk melakukan pengambilan data uji beban dapat dilihat pada Kode Sumber \ref{pseudocodepupp}.
 	 	
-	 	\begin{lstlisting}[frame=single,tabsize=2,breaklines,caption={Pseudocode Puppeteer },label=pseudocodepupp, captionpos=b, language=json,numbers=none]
+	 	\begin{lstlisting}[frame=single,tabsize=2,breaklines,caption={Pseudocode Puppeteer },label=pseudocodepupp, captionpos=b, language=json]
  	Variable Declaration
  	Data = Read Scenario File Configuration
  	
@@ -197,44 +191,150 @@
  		Get Error Console
  			Send Data to Database
  		Try:
- 			Call TestPage Function(Data)
- 				Get Data From TestPage
- 					Save Data Uji Beban
- 			Get Page Screenshoot
- 				Save Screenshoot
+ 			Call TestPage Function(Data):
+ 				Get Data From TestPage -> Save Data Uji Beban
+ 			Get Page Screenshoot -> Save Screenshoot
  		Catch Error:
  			Get Error
- 			Get Page Screenshoot
- 				Save Screenshoot
+ 			Get Page Screenshoot -> Save Screenshoot
 	 	\end{lstlisting}
 	
-	\section{Implementasi Web Service}
-		Pada implementasi web service dibutuhkan beberapa persiapan lingkungan yang perlu dilakukan, pemaparannya meliputi langkah-langkah berikut:
-		\begin{enumerate}
-			\item Instalasi PHP
-			\item Instalasi Composer
-			\item Instalasi Laravel versi 5.8
-			\item Instalasi MySQL
-		\end{enumerate}
-	
-		\begin{figure}[h]
-			\centering
-			\includegraphics[width=11cm,height=7cm]{Images/C-4/gambarweb.png}
-			\caption{Tampilan web antarmuka pengguna}
-			\label{gambarweb}
-		\end{figure}
+	\section{Implementasi Service Controller}
+		Berdasarkan desain dan perancangan, service controller terdiri dari komponen web service, basis data dan task queue. Semua komponen tersebut akan diimplementasikan pada satu komputer milik penulis yang akan digunakan untuk web service dan penggunaan task queue, serta satu buah server untuk basis data MySQL.
 		
-		\indent Web service akan menggunakan bahasa PHP dan kerangka kerja Laravel versi 5.8, sedangkan Composer berfungsi untuk memanajemen instalasi pustaka pada PHP dan untuk penyimpanan data yang digunakan pada sistem akan disimpan pada basis data MySQL. Web service pada tugas akhir ini berfungsi untuk memudahkan user melakukan uji beban pada suatu web. Adapun tampilan web antarmuka pengguna ditunjukkan pada Gambar \ref{gambarweb}.
+		\subsection{Implementasi Web Service}
+			Pada implementasi web service dibutuhkan beberapa persiapan lingkungan yang perlu dilakukan, urutannya meliputi langkah-langkah berikut:
+			\begin{enumerate}
+				\item Instalasi PHP
+				\item Instalasi Composer
+				\item Instalasi Laravel versi 5.8
+				\item Instalasi MySQL
+			\end{enumerate}
 		
-		\subsection{Implementasi Basis Data}
-			Berdasarkan hasil perancangan basis data pada bab sebelumnya. Terdapat beberapa data yang harus disimpan pada basis data MySQL. Nama atribut dan tipe data yang digunakan pada masing-masing tabel yang akan disimpan adalah sebagai berikut:
+			\begin{figure}[H]
+				\centering
+				\includegraphics[width=10cm,height=6cm]{Images/C-4/gambarweb.png}
+				\caption{Tampilan web antarmuka pengguna}
+				\label{gambarweb}
+			\end{figure}
 			
-			Tabel Containers
+			\indent Web service akan menggunakan bahasa PHP dan kerangka kerja Laravel versi 5.8, sedangkan Composer berfungsi untuk memanajemen instalasi pustaka pada PHP dan untuk penyimpanan data yang digunakan pada sistem akan disimpan pada basis data MySQL. Web service berfungsi untuk memudahkan user melakukan uji beban pada suatu web. Tampilan antarmuka pengguna ditunjukkan pada Gambar \ref{gambarweb}. \\
 			
-			Tabel Skenarios
+			\indent Web service memiliki rute-rute HTTP yang akan digunakan oleh user ketika mengakses web sistem. Rute-rute tersebut ditunjukkan pada Tabel \ref{tabelruteweb}.
+			\begin{longtable}{|p{0.05\textwidth}|p{0.25\textwidth}|p{0.30\textwidth}|p{0.30\textwidth}|}
+				\caption{Rute HTTP pada web service} \label{tabelruteweb} \\
+				\hline
+				\textbf{No} & \textbf{Rute} & \textbf{Metode} & \textbf{Aksi} \\ \hline
+				\endhead
+				\endfoot
+				\endlastfoot
+				1 & / & GET & Mengakses halaman home \\ \hline
+				2 & /login & GET & Mengakses halaman login \\ \hline
+				3 & /login & POST & Melakukan login \\ \hline
+				4 & /logout & GET & Melakukan logout \\ \hline
+				5 & /skenario & GET & Melihat skenario \\ \hline
+				6 & /skenario & POST & Menambahkan skenario \\ \hline
+				7 & /skenario & DELETE & Menghapus skenario \\ \hline
+				8 & /worker & GET & Mengakses halaman worker \\ \hline
+				9 & /worker & POST & Menambahkan jumlah worker dan data antrian \\ \hline
+				10 & /hasil/rata-rata & GET & Mendapatkan hasil pengujian \\ \hline
+				11 & /hasil/error-console & GET & Mendapatkan error console web \\ \hline
+				12 & /hasil/images & GET & Melihat tangkapan layar web \\ \hline
+				13 & /antrian & GET & Melihat jumlah dan status antrian \\ \hline
+				
+			\end{longtable}
+		
+		\subsection{Implementasi Skema Basis Data}
+			Berdasarkan hasil perancangan basis data pada bab sebelumnya. Data yang dibutuhkan dan digunakan oleh sistem akan disimpan di dalam basis data MySQL. Data yang disimpan adalah data node host swarm, data kontainer, data pengguna, data skenario pengujian, data antrian request, data hasil pengujian, data error console, data rata-rata hasil pengujian.
 			
-			Dll
+			\subsubsection{Tabel Swarms}
+			\begin{longtable}{|p{0.05\textwidth}|p{0.25\textwidth}|p{0.30\textwidth}|p{0.30\textwidth}|}
+				\caption{Tabel swarms} \label{tabelruteweb} \\
+				\hline
+				\textbf{No} & \textbf{Kolom} & \textbf{Tipe} & \textbf{Keterangan} \\ \hline
+				\endhead
+				\endfoot
+				\endlastfoot
+				1 &  &  &  \\ \hline
+			\end{longtable}
+		
+			\subsubsection{Tabel Containers}
+			\begin{longtable}{|p{0.05\textwidth}|p{0.25\textwidth}|p{0.30\textwidth}|p{0.30\textwidth}|}
+				\caption{Tabel containers} \label{tabelruteweb} \\
+				\hline
+				\textbf{No} & \textbf{Kolom} & \textbf{Tipe} & \textbf{Keterangan} \\ \hline
+				\endhead
+				\endfoot
+				\endlastfoot
+				1 &  &  &  \\ \hline
+			\end{longtable}
+		
+			\subsubsection{Tabel Users}
+			\begin{longtable}{|p{0.05\textwidth}|p{0.25\textwidth}|p{0.30\textwidth}|p{0.30\textwidth}|}
+				\caption{Tabel users} \label{tabelruteweb} \\
+				\hline
+				\textbf{No} & \textbf{Kolom} & \textbf{Tipe} & \textbf{Keterangan} \\ \hline
+				\endhead
+				\endfoot
+				\endlastfoot
+				1 &  &  &  \\ \hline
+			\end{longtable}
+		
+			\subsubsection{Tabel Scenarios}
+			\begin{longtable}{|p{0.05\textwidth}|p{0.25\textwidth}|p{0.30\textwidth}|p{0.30\textwidth}|}
+				\caption{Tabel scenarios} \label{tabelruteweb} \\
+				\hline
+				\textbf{No} & \textbf{Kolom} & \textbf{Tipe} & \textbf{Keterangan} \\ \hline
+				\endhead
+				\endfoot
+				\endlastfoot
+				1 &  &  &  \\ \hline
+			\end{longtable}
+		
+			\subsubsection{Tabel Queues}
+			\begin{longtable}{|p{0.05\textwidth}|p{0.25\textwidth}|p{0.30\textwidth}|p{0.30\textwidth}|}
+				\caption{Tabel queues} \label{tabelruteweb} \\
+				\hline
+				\textbf{No} & \textbf{Kolom} & \textbf{Tipe} & \textbf{Keterangan} \\ \hline
+				\endhead
+				\endfoot
+				\endlastfoot
+				1 &  &  &  \\ \hline
+			\end{longtable}
+		
+			\subsubsection{Tabel Results}
+			\begin{longtable}{|p{0.05\textwidth}|p{0.25\textwidth}|p{0.30\textwidth}|p{0.30\textwidth}|}
+				\caption{Tabel results} \label{tabelruteweb} \\
+				\hline
+				\textbf{No} & \textbf{Kolom} & \textbf{Tipe} & \textbf{Keterangan} \\ \hline
+				\endhead
+				\endfoot
+				\endlastfoot
+				1 &  &  &  \\ \hline
+			\end{longtable}
+		
+			\subsubsection{Tabel Errors}
+			\begin{longtable}{|p{0.05\textwidth}|p{0.25\textwidth}|p{0.30\textwidth}|p{0.30\textwidth}|}
+				\caption{Tabel errors} \label{tabelruteweb} \\
+				\hline
+				\textbf{No} & \textbf{Kolom} & \textbf{Tipe} & \textbf{Keterangan} \\ \hline
+				\endhead
+				\endfoot
+				\endlastfoot
+				1 &  &  &  \\ \hline
+			\end{longtable}
+		
+			\subsubsection{Tabel Summary Results}
+			\begin{longtable}{|p{0.05\textwidth}|p{0.25\textwidth}|p{0.30\textwidth}|p{0.30\textwidth}|}
+				\caption{Tabel summary results} \label{tabelruteweb} \\
+				\hline
+				\textbf{No} & \textbf{Kolom} & \textbf{Tipe} & \textbf{Keterangan} \\ \hline
+				\endhead
+				\endfoot
+				\endlastfoot
+				1 &  &  &  \\ \hline
+			\end{longtable}
 			
-	\section{Implementasi Task Queue}
-		Task queue yang akan digunakan adalah.
+		\subsection{Implementasi Task Queue}
+			Task queue yang akan digunakan adalah.
 	
