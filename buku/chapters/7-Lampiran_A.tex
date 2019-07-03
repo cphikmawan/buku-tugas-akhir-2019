@@ -2,7 +2,7 @@
 
 \section*{Instalasi Docker}
 	Untuk melakukan instalasi Docker, dilakukan seperti langkah-langkah berikut:
-\begin{lstlisting}[frame=single,tabsize=2,breaklines,caption={Perintah untuk instalasi Docker },label=instalasidocker, captionpos=b, language=json,numbers=none]
+\begin{lstlisting}[frame=single,tabsize=2,breaklines,caption={Perintah instalasi Docker },label=instalasidocker, captionpos=b, language=json,numbers=none]
 $ sudo apt-get -y install \
 apt-transport-https \
 ca-certificates \
@@ -22,7 +22,7 @@ $ sudo apt-get install docker-ce docker-ce-cli containerd.io
 \end{lstlisting}
 	
 	Setelah menjalankan perintah pada kode sumber \ref{instalasidocker}. Jalankan perintah berikut agar Docker bisa dijalankan sebagai Non-Root User.
-\begin{lstlisting}[frame=single,tabsize=2,breaklines,caption={Perintah untuk mengubah hak User },label=nonrootuser, captionpos=b, language=json,numbers=none]
+\begin{lstlisting}[frame=single,tabsize=2,breaklines,caption={Perintah mengubah hak User },label=nonrootuser, captionpos=b, language=json,numbers=none]
 $ sudo groupadd docker
 $ sudo usermod -aG docker $USER
 \end{lstlisting}
@@ -37,3 +37,26 @@ $ sudo chmod +x /usr/local/bin/docker-compose
 
 $ sudo ln -s /usr/local/bin/docker-compose /usr/bin/docker-compose
 \end{lstlisting}
+
+\section*{Instalasi Linux Package}
+Beberapa package yang dibutuhkan dalam pembuatan sistem.
+\begin{itemize}
+	\item Node.js \\
+		\texttt{\$ sudo apt install nodejs}\\
+	\item NPM \\
+		\texttt{\$ sudo apt install npm}\\
+	\item MySQL \\
+		\texttt{\$ sudo apt install mysql-server mysql-client}\\
+	\item PIP \\
+		\texttt{\$ sudo apt install python3-pip}\\
+	\item mysql-connector-python \\
+		\texttt{\$ pip3 install mysql-connector-python}\\
+	\item Composer \\
+		\texttt{\$ php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');"} \\ \\
+		\texttt{\$ php -r "if (hash\_file('sha384', 'composer-setup.php') === '48e3236262b34d30969dca3c37281b3b4bbe3221bda826ac6a9a62d6444cdb0dcd0615698a5cbe587c3f0fe57a54d8f5') { echo 'Installer verified'; } else { echo 'Installer corrupt'; unlink('composer-setup.php'); } echo PHP\_EOL;"}\\ \\
+		\texttt{\$ php composer-setup.php} \\
+		\texttt{\$ php -r "unlink('composer-setup.php');"} \\
+		\texttt{\$ mv composer.phar /usr/local/bin/composer} \\
+	\item Laravel \\
+		\texttt{\$ composer global require laravel/installer}\\
+\end{itemize}

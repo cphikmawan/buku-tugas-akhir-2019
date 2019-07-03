@@ -12,10 +12,14 @@
 \contentsline {lstlisting}{\numberline {IV.12}Pseudocode Puppeteer}{32}{lstlisting.4.12}
 \contentsline {lstlisting}{\numberline {IV.13}Konfigurasi docker-compose.yml}{45}{lstlisting.4.13}
 \contentsline {lstlisting}{\numberline {IV.14}Konfigurasi docker-compose.yml}{46}{lstlisting.4.14}
-\contentsline {lstlisting}{\numberline {A.1}Perintah untuk instalasi Docker}{55}{lstlisting.A.1}
-\contentsline {lstlisting}{\numberline {A.2}Perintah untuk mengubah hak User}{55}{lstlisting.A.2}
+\contentsline {lstlisting}{\numberline {A.1}Perintah instalasi Docker}{55}{lstlisting.A.1}
+\contentsline {lstlisting}{\numberline {A.2}Perintah mengubah hak User}{55}{lstlisting.A.2}
 \contentsline {lstlisting}{\numberline {A.3}Perintah instalasi Docker Compose}{56}{lstlisting.A.3}
-\contentsline {lstlisting}{\numberline {B.1}Isi berkas index.js}{57}{lstlisting.B.1}
-\contentsline {lstlisting}{\numberline {B.2}Isi berkas testPage.js}{58}{lstlisting.B.2}
-\contentsline {lstlisting}{\numberline {B.3}Isi berkas helpers.js}{61}{lstlisting.B.3}
-\contentsline {lstlisting}{\numberline {B.4}Basis data MySQL}{64}{lstlisting.B.4}
+\contentsline {lstlisting}{\numberline {B.1}Isi berkas index.js}{59}{lstlisting.B.1}
+\contentsline {lstlisting}{\numberline {B.2}Isi berkas testPage.js}{61}{lstlisting.B.2}
+\contentsline {lstlisting}{\numberline {B.3}Isi berkas helpers.js}{63}{lstlisting.B.3}
+\contentsline {lstlisting}{\numberline {B.4}Basis data MySQL}{66}{lstlisting.B.4}
+\contentsline {lstlisting}{\numberline {B.5}Isi berkas connection.py}{72}{lstlisting.B.5}
+\contentsline {lstlisting}{\numberline {B.6}Isi berkas queue.py}{73}{lstlisting.B.6}
+\contentsline {lstlisting}{\numberline {B.7}Isi berkas run\_scenario.py}{80}{lstlisting.B.7}
+\contentsline {lstlisting}{\numberline {B.8}Isi berkas save\_containers.sh}{81}{lstlisting.B.8}

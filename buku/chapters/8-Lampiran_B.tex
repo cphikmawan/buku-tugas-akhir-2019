@@ -12,25 +12,28 @@ const counter = process.argv[3];
 const worker = process.argv[4];
 const host = process.argv[5];
 
-let rawdata = fs.readFileSync('/app/code/assets/config_'+scenario_id+'.json');  
+let rawdata = fs.readFileSync('/app/code/assets/config_' + scenario_id + '.json');
 let config = JSON.parse(rawdata);
 (async () => {
-	const browser = await puppeteer.launch({args: ['--no-sandbox']});
+	const browser = await puppeteer.launch({ args: ['--no-sandbox'] });
 	const page = await browser.newPage();
-	await page.on('console', msg => 
-		db.query('INSERT INTO errors (scenario_id, link, worker, username, host, type, text, location_url) VALUES (?, ?, ?, ?, ?, ?, ?, ?)', 
-		[ scenario_id, config.scenario_link, worker, config.username, host, msg._type, msg._text, msg._location.url ])
+	await page.on('console', msg =>
+		db.query('INSERT INTO errors (scenario_id, link, worker, username, host, type, text, location_url) VALUES (?, ?, ?, ?, ?, ?, ?, ?)',
+		[scenario_id, config.scenario_link, worker, config.username, host, msg._type, msg._text, msg._location.url])
 	);
-	try{
+	try {
 		let data = await testPage(page, config, counter);
-		db.query('INSERT INTO tests (scenario_id, link, worker, username, host, response_end, dom_interactive, dom_content_load, load_event_end, css_trace_start, css_trace_end, first_meaningful, timestamp) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)', 
-		[ scenario_id, config.scenario_link, worker, config.username, host, data.Timing.responseEnd, data.Timing.domInteractive, data.Timing.domContentLoadedEventEnd, data.Timing.loadEventEnd, data.TraceResult.cssStart, data.TraceResult.cssEnd, data.Metrics.FirstMeaningfulPaint, data.Metrics.Timestamp ]);
+		db.query('INSERT INTO results (scenario_id, link, method, worker, username, host, response_end, dom_content_load, load_event_end, css_trace_end, first_meaningful) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)',
+			[scenario_id, config.scenario_link, config.scenario_method, worker, config.username, host, data.Timing.responseEnd, data.Timing.domContentLoadedEventEnd, data.Timing.loadEventEnd, data.TraceResult.cssEnd, data.Metrics.FirstMeaningfulPaint]);
 		db.end();
-		await page.screenshot({path: '/app/output/ss'+scenario_id+'.png'});
+		await page.screenshot({ path: '/app/output/ss' + scenario_id + '.png' });
 		await browser.close();
-	} catch(error) {
+	} catch (error) {
 		console.error(error);
-		await page.screenshot({path: '/app/output/ss'+scenario_id+'.png'});
+		db.query('INSERT INTO results (scenario_id, link, method, worker, username, host, response_end, dom_content_load, load_event_end, css_trace_end, first_meaningful) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)',
+			[scenario_id, config.scenario_link, config.scenario_method, worker, config.username, host, -1, -1, -1, -1, -1]);
+		db.end();
+		await page.screenshot({ path: '/app/output/ss' + scenario_id + '.png' });
 		await browser.close();
 	}
 })();
@@ -39,7 +42,7 @@ let config = JSON.parse(rawdata);
 	\subsection*{Isi berkas testPage.js}
 \begin{lstlisting}[frame=single,tabsize=2,breaklines,caption={Isi berkas testPage.js},label=testjs, captionpos=b, language=json]
 const {
-getTimeFromPerformanceMetrics,
+	getTimeFromPerformanceMetrics,
 	extractDataFromPerformanceMetrics,
 	extractDataFromPerformanceTiming,
 	extractDataFromTracing,
@@ -53,28 +56,14 @@ async function testPage(page, config, counter) {
 		'NavigationStart'
 	);
 	
-	await page.tracing.start({ path: './trace'+config.scenario_id+counter+'.json' });
+	await page.tracing.start({ path: './trace' + config.scenario_id + counter + '.json' });
 	
 	await page.goto(config.scenario_link);
-
-	if(config.scenario_method == 'POST'){
-		if(config.incr == 'true'){
-			for(var i=0; i<config.attr.length; i++){
-				await page.type('#'+config.attr[i], config.val_attr[i]+counter);
-			}
-			await page.click('button[type='+config.scenario_button+']');
-		} else {
-			for(var i=0; i<config.attr.length; i++){
-				await page.type('#'+config.attr[i], config.val_attr[i]);
-			}
-			await page.click('button[type='+config.scenario_button+']');
-		} 
-	}
-
+	
 	const performanceTiming = JSON.parse(
 		await page.evaluate(() => JSON.stringify(window.performance.timing))
 	);
-
+	
 	let firstMeaningfulPaint = 0;
 	while (firstMeaningfulPaint === 0) {
 		await page.waitFor(300);
@@ -83,30 +72,30 @@ async function testPage(page, config, counter) {
 			performanceMetrics, 'FirstMeaningfulPaint'
 		);
 	}
-
+	
 	await page.tracing.stop();
-
+	
 	const cssTracing = await extractDataFromTracing(
-		'./trace'+config.scenario_id+counter+'.json',
+		'./trace' + config.scenario_id + counter + '.json',
 		config.scenario_link,
 	);
-
+	
 	let TraceResult = {
 		cssEnd: cssTracing.end - navigationStart,
 	}
-
+	
 	let Metrics = extractDataFromPerformanceMetrics(
 		performanceMetrics,
 		'FirstMeaningfulPaint',
 	);
-
+	
 	let Timing = extractDataFromPerformanceTiming(
-		performanceTiming,
+	performanceTiming,
 		'responseEnd',
 		'domContentLoadedEventEnd',
 		'loadEventEnd',
 	);
-
+	
 	return { TraceResult, Metrics, Timing };
 }
 
@@ -135,12 +124,12 @@ const extractDataFromPerformanceMetrics = (metrics, ...dataNames) => {
 
 const extractDataFromPerformanceTiming = (timing, ...dataNames) => {
 	const navStart = timing.navigationStart;
-
+	
 	const extractedData = {};
 	dataNames.forEach(name => {
 		extractedData[name] = timing[name] - navStart;
 	});
-
+	
 	return extractedData;
 };
 
@@ -314,4 +303,269 @@ CREATE TABLE `summary_results` (
 	`first_meaningful` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
 	PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+\end{lstlisting}
+
+\section*{Kode Sumber Task Queue} \label{taskqueue}
+
+\begin{lstlisting}[frame=single,tabsize=2,breaklines,caption={Isi berkas connection.py},label=connectionpy, captionpos=b, language=json]
+import mysql.connector
+from mysql.connector import Error
+
+def connect():
+	connection = mysql.connector.connect(
+		host="178.128.123.143",
+		user="cloudy",
+		passwd="sembarang12",
+		database="tugas_akhir_2019"
+	)
+	return connection
+\end{lstlisting}
+
+\begin{lstlisting}[frame=single,tabsize=2,breaklines,caption={Isi berkas queue.py},label=queuepy, captionpos=b, language=json]
+from connection import connect
+from sys import argv
+import os
+import subprocess
+from pathlib import Path
+
+def checkDb():
+	con = connect()
+	cursor = con.cursor()
+	
+	# get antrian request
+	getQueueStatus = ('SELECT * FROM queues WHERE status < 2 ORDER BY created_at LIMIT 1')
+	cursor.execute(getQueueStatus)
+	result = cursor.fetchone()
+	count = cursor.rowcount
+	return count
+
+def getQueue():
+	# connection
+	con = connect()
+	cursor = con.cursor()
+	
+	# get antrian request
+	getQueueStatus = ('SELECT * FROM queues WHERE status < 2 ORDER BY created_at LIMIT 1')
+	cursor.execute(getQueueStatus)
+	result = cursor.fetchone()
+	id_queue = result[0]
+	username = result[3]
+	status = result[5]
+	
+	# update status antrian menjadi 1 atau proses
+	if status==0:
+		updateQueueStatus = ('UPDATE queues SET status=1 WHERE username=%s AND id=%s')
+		cursor.execute(updateQueueStatus,(username, id_queue,))
+		con.commit()
+
+def runScenario():
+	# connection
+	con = connect()
+	cursor = con.cursor()
+	
+	# get queue status = 1
+	getQueueStatus = ('SELECT * FROM queues WHERE status = 1 ORDER BY created_at LIMIT 1')
+	cursor.execute(getQueueStatus)
+	result = cursor.fetchone()
+	count = cursor.rowcount
+	if count > 0:
+		id_queue = result[0]
+		username = result[3]
+		worker = result[4]
+		
+		# update status kontainer
+		updateContainerStatus = ('UPDATE containers SET status = 1, username = %s WHERE status = 0 LIMIT %s')
+		cursor.execute(updateContainerStatus,(username,worker,))
+		con.commit()
+		
+		# get info swarm untuk sshpass
+		getSwarmConnection = ('SELECT DISTINCT(c.node_ip), s.swarm_username, s.swarm_password, c.username,COUNT(c.node_ip) cc \
+			FROM containers c JOIN swarms s \
+			WHERE s.swarm_ip = c.node_ip AND c.status = 1 AND c.username = %s \
+			GROUP BY c.node_ip HAVING cc > 1')
+		cursor.execute(getSwarmConnection,(username,))
+		swarms = cursor.fetchall()
+		
+		# run sshpass untuk eksekusi skenario
+		print('process...')
+		path='/home/cloudy/tugas-akhir-2019/implementasi/scripts/run_scenario.py'
+		for swarm in swarms:
+			ip = swarm[0]
+			user = swarm[1]
+			passw = swarm[2]
+			command_line = ('sshpass -p %s ssh -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no %s@%s' % (passw, user, ip))
+			cmd = ('python3 %s %s %s' % (path, username, ip))
+			run = command_line.split()
+			run.append(cmd)
+			subprocess.Popen(run, stdout=subprocess.PIPE, stderr=open(os.devnull, 'w'))
+		
+		# update status running
+		updateQueueStatus = ('UPDATE queues SET status = -1 WHERE username=%s AND id=%s')
+		cursor.execute(updateQueueStatus,(username, id_queue,))
+		con.commit()
+
+def calculateResult():
+	# connection
+	con = connect()
+	cursor = con.cursor()
+	
+	# get queue request is done
+	getQueueStatus = ('SELECT * FROM queues WHERE status = -1 ORDER BY created_at LIMIT 1')
+	cursor.execute(getQueueStatus)
+	queue = cursor.fetchone()
+	username = queue[3]
+	
+	# get count result
+	getCountResult = ('SELECT r.scenario_id, s.scenario_worker, count(r.scenario_id) AS jml \
+	FROM results r JOIN scenarios s ON s.scenario_id = r.scenario_id \
+	WHERE r.username=%s AND r.status = 0 GROUP BY r.scenario_id, s.scenario_worker')
+	cursor.execute(getCountResult,(username,))
+	result = cursor.fetchone()
+	check = cursor.rowcount
+	if check > 0:
+		scena_id = result[0]
+		worker = int(result[1])
+		hasil = result[2]
+		if worker == hasil:
+			getAvgResult = ('SELECT t.scenario_id, s.scenario_link, s.scenario_method, s.scenario_worker ,t.username, \
+				(s.scenario_worker - count(t.scenario_id))/s.scenario_worker*100 AS error, \
+				AVG(t.response_end) AS response_end, \
+				AVG(t.dom_content_load) AS dom_content_load, \
+				AVG(t.load_event_end) AS load_event_end, \
+				AVG(t.css_trace_end) AS css_trace_end, \
+				AVG(t.first_meaningful) AS first_meaningful \
+				FROM scenarios s INNER JOIN results t ON t.scenario_id = s.scenario_id \
+				WHERE s.username = %s AND load_event_end > 0 AND s.scenario_id \
+				NOT IN (SELECT scenario_id FROM summary_results) \
+				GROUP BY scenario_id, s.scenario_worker, s.scenario_link, s.scenario_method, t.username')
+			cursor.execute(getAvgResult,(username,))
+			results = cursor.fetchone()
+			check_res = cursor.rowcount
+			if check > 0:
+				scen_id = results[0]
+				link = results[1]
+				method = results[2]
+				scen_worker = results[3]
+				username = results[4]
+				error = results[5]
+				response = results[6]
+				dom = results[7]
+				load = results[8]
+				css = results[9]
+				fmfp = results[10]
+				
+				insertAvgResult = ('INSERT INTO summary_results (scenario_id, link, method, worker, username, error, response_end, dom_content_load, load_event_end, css_trace_end, first_meaningful) \
+				values (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)')
+				cursor.execute(insertAvgResult,(scen_id, link, method, scen_worker, username, error, response, dom, load, css, fmfp,))
+				con.commit()
+				
+				updateQueueStatus = ('UPDATE queues SET status = 2 WHERE status = -1')
+				updateResultStatus = ('UPDATE results SET status = 1 WHERE scenario_id = %s')
+				updateContainerStatus = ('UPDATE containers SET status = 0, username = 0 WHERE status = 1')
+				updateScenarioStatus = ('UPDATE scenarios SET scenario_status = 2 WHERE scenario_id = %s')
+				cursor.execute(updateQueueStatus)
+				cursor.execute(updateResultStatus,(scena_id,))
+				cursor.execute(updateContainerStatus)
+				cursor.execute(updateScenarioStatus,(scena_id,))
+				con.commit()
+				
+				# get info swarm untuk sshpass
+				getConnection = ('SELECT swarm_ip, swarm_username, swarm_password FROM swarms WHERE is_used = 1')
+				cursor.execute(getConnection)
+				swarm_conn = cursor.fetchall()
+				# run sshpass untuk copy gambar
+				for swarm in swarm_conn:
+					ip = swarm[0]
+					user = swarm[1]
+					passw = swarm[2]
+					from_path='/home/cloudy/tugas-akhir-2019/implementasi/output/ss'+scena_id+'.png'
+					to_path='/home/cloudy/web-tugas-akhir-2019/public/images/'
+					command_line = 'sshpass -p %s scp %s@%s:%s %s' % (passw, user, ip, from_path, to_path)
+					os.system(command_line)
+
+def main():
+	check = checkDb()
+	if check > 0:
+		getQueue()
+		runScenario()
+		calculateResult()
+	else:
+		print('Masih Kosong!')
+
+if __name__ == '__main__':
+	main()
+\end{lstlisting}
+
+\begin{lstlisting}[frame=single,tabsize=2,breaklines,caption={Isi berkas run\_scenario.py},label=runscenpy, captionpos=b, language=json]
+from connection import connect
+from sys import argv
+import os
+
+def main():
+	# variabel argv
+	username = argv[1]
+	ip = argv[2]
+	
+	# connection
+	con = connect()
+	cursor = con.cursor()
+	
+	# get id skenario yang akan diuji
+	query = "SELECT scenario_id, scenario_worker FROM scenarios WHERE username = %s AND scenario_status = 1"
+	cursor.execute(query,(username,))
+	scenarios = cursor.fetchall()
+	
+	# get kontainer
+	getContainers = "SELECT node_ip, container_id FROM containers WHERE node_ip = %s AND status = 1"
+	cursor.execute(getContainers,(ip,))
+	containers = cursor.fetchall()
+	
+	for scenario in scenarios:
+		scenid = scenario[0]
+		worker = scenario[1]
+		for container in containers:
+			host = container[0]
+			contid = container[1]
+			command_line = 'docker container exec %s node getdata/index.js %s %s %s %s' % (contid, scenid, contid, worker, host)
+			os.system(command_line)
+
+if __name__ == '__main__':
+	main()
+\end{lstlisting}
+
+\section*{Kode Script Penyimpan Data Kontainer} \label{scriptsh}
+
+\begin{lstlisting}[frame=single,tabsize=2,breaklines,caption={Isi berkas save\_containers.sh},label=containersh, captionpos=b, language=json]
+#!/bin/bash
+set -e
+
+SERVICE_NAME=$1;
+
+TASK_ID=$(docker service ps --filter 'desired-state=running' $SERVICE_NAME -q)
+NODE_ID=$(docker inspect --format '{{ .NodeID }}' $TASK_ID)
+CONTAINER_ID=$(docker inspect --format '{{ .Status.ContainerStatus.ContainerID }}' $TASK_ID)
+NODE_IP=$(docker inspect --format '{{ .Status.Addr }}' $NODE_ID)
+NODE_HOST=$(docker inspect --format '{{ .Description.Hostname }}' $NODE_ID)
+
+echo $TASK_ID | tr ' ' '\n' > 1.txt
+echo $NODE_ID | tr ' ' '\n' > 2.txt
+echo $CONTAINER_ID | tr ' ' '\n' > 3.txt
+echo $NODE_IP | tr ' ' '\n' > 4.txt
+echo $NODE_HOST | tr ' ' '\n' > 5.txt
+
+sed 's/[^ ][^ ]*/"&"/g' 1.txt > taskid.txt
+sed 's/[^ ][^ ]*/"&"/g' 2.txt > nodeid.txt
+sed 's/[^ ][^ ]*/"&"/g' 3.txt > conid.txt
+sed 's/[^ ][^ ]*/"&"/g' 4.txt > nodeip.txt
+sed 's/[^ ][^ ]*/"&"/g' 5.txt > nodehost.txt
+
+paste -d',' taskid.txt nodeid.txt conid.txt nodeip.txt nodehost.txt > data.txt
+
+awk '{new="INSERT INTO containers (task_id, node_id, container_id, node_ip, node_host) VALUES ("$1");"; print new}' data.txt > data.sql
+
+mysql -ucloudy -psembarang12 -h178.128.123.143 tugas_akhir_2019 -e "truncate table tugas_akhir_2019.containers"
+mysql -ucloudy -psembarang12 -h178.128.123.143 tugas_akhir_2019 < data.sql
+
+rm *.txt
+rm data.sql
 \end{lstlisting}
