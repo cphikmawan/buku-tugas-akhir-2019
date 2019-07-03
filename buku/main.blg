@@ -13,44 +13,44 @@ Database file #1: Zotero.bib
 -- See the "IEEEtran_bst_HOWTO.pdf" manual for usage information.
 
 Done.
-You've used 11 entries,
+You've used 12 entries,
             4063 wiz_defined-function locations,
-            884 strings with 8595 characters,
-and the built_in function-call counts, 5465 in all, are:
-= -- 423
-> -- 60
+            889 strings with 8698 characters,
+and the built_in function-call counts, 5820 in all, are:
+= -- 452
+> -- 61
 < -- 25
-+ -- 36
++ -- 37
 - -- 8
-* -- 263
-:= -- 886
-add.period$ -- 22
-call.type$ -- 11
-change.case$ -- 17
+* -- 280
+:= -- 949
+add.period$ -- 24
+call.type$ -- 12
+change.case$ -- 19
 chr.to.int$ -- 60
-cite$ -- 11
-duplicate$ -- 423
-empty$ -- 521
+cite$ -- 12
+duplicate$ -- 454
+empty$ -- 556
 format.name$ -- 10
-if$ -- 1235
+if$ -- 1313
 int.to.chr$ -- 0
-int.to.str$ -- 11
-missing$ -- 85
-newline$ -- 70
+int.to.str$ -- 12
+missing$ -- 92
+newline$ -- 75
 num.names$ -- 5
-pop$ -- 243
+pop$ -- 265
 preamble$ -- 1
 purify$ -- 0
 quote$ -- 2
-skip$ -- 424
+skip$ -- 452
 stack$ -- 0
-substring$ -- 164
-swap$ -- 271
+substring$ -- 167
+swap$ -- 287
 text.length$ -- 5
 text.prefix$ -- 0
 top$ -- 5
-type$ -- 11
+type$ -- 12
 warning$ -- 0
 while$ -- 17
-width$ -- 13
-write$ -- 127
+width$ -- 14
+write$ -- 137

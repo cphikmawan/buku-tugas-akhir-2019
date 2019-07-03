@@ -31,10 +31,11 @@ D.~Bernstein, ``Containers and cloud: From lxc to docker to kubernetes,'' in
   \url{https://docs.docker.com/get-started/part4/}. [Diakses: 24 Mei 2019].
 \BIBentrySTDinterwordspacing
 
-\bibitem{laraveframework}
-M.~Arif, A.~Dentha, dan H.~W.~S. Sindung, ``Designing internship monitoring
-  system web based with laravel framework,'' in \emph{2017 IEEE International
-  Conference on Communication, Networks and Satellite (Comnetsat)}, 2017.
+\bibitem{puppeteer}
+\BIBentryALTinterwordspacing
+``Puppeteer,'' 2019, 09 April 2019. [Daring]. Tersedia pada:
+  \url{https://pptr.dev/}. [Diakses: 09 April 2019].
+\BIBentrySTDinterwordspacing
 
 \bibitem{headless_browser}
 R.~Roemer, \emph{Backbone.js Testing}.\hskip 1em plus 0.5em minus 0.4em\relax
@@ -59,12 +60,6 @@ S.~Tilkov dan S.~Vinoski, ``Node.js: Using javascript to build high-performance
   network programs,'' in \emph{IEEE Internet Computing}, vol.~14, 2010, hal.
   80--83.
 
-\bibitem{puppeteer}
-\BIBentryALTinterwordspacing
-``Puppeteer,'' 2019, 09 April 2019. [Daring]. Tersedia pada:
-  \url{https://pptr.dev/}. [Diakses: 09 April 2019].
-\BIBentrySTDinterwordspacing
-
 \bibitem{docker}
 \BIBentryALTinterwordspacing
 ``What is docker?'' 2018, 01 Desember 2018. [Daring]. Tersedia pada:
@@ -82,6 +77,18 @@ S.~Tilkov dan S.~Vinoski, ``Node.js: Using javascript to build high-performance
 \BIBentryALTinterwordspacing
 ``Raft consensus in swarm mode,'' 2019, 24 Mei 2019. [Daring]. Tersedia pada:
   \url{https://docs.docker.com/engine/swarm/raft/}. [Diakses: 24 Mei 2019].
+\BIBentrySTDinterwordspacing
+
+\bibitem{laraveframework}
+M.~Arif, A.~Dentha, dan H.~W.~S. Sindung, ``Designing internship monitoring
+  system web based with laravel framework,'' in \emph{2017 IEEE International
+  Conference on Communication, Networks and Satellite (Comnetsat)}, 2017.
+
+\bibitem{python}
+\BIBentryALTinterwordspacing
+``What is python? executive summary,'' 2019, 20 Juni 2019. [Daring]. Tersedia
+  pada: \url{https://www.python.org/doc/essays/blurb/}. [Diakses: 20 Juni
+  2019].
 \BIBentrySTDinterwordspacing
 
 \end{thebibliography}

@@ -92,20 +92,17 @@ async function testPage(page, config, counter) {
 	);
 
 	let TraceResult = {
-		cssStart: cssTracing.start - navigationStart,
 		cssEnd: cssTracing.end - navigationStart,
 	}
 
 	let Metrics = extractDataFromPerformanceMetrics(
 		performanceMetrics,
-		'Timestamp',
 		'FirstMeaningfulPaint',
 	);
 
 	let Timing = extractDataFromPerformanceTiming(
 		performanceTiming,
 		'responseEnd',
-		'domInteractive',
 		'domContentLoadedEventEnd',
 		'loadEventEnd',
 	);
@@ -173,7 +170,6 @@ const extractDataFromTracing = (path, link) => new Promise(resolve => {
 	
 	fs.unlink(path, () => {
 		resolve({
-			start: resourceTracingStartTime,
 			end: resourceTracingEndTime,
 		});
 	});
@@ -190,7 +186,18 @@ module.exports = {
 \section*{Kode Sumber Basis Data MySQL} \label{mysql}
 	
 \begin{lstlisting}[frame=single,tabsize=2,breaklines,caption={Basis data MySQL},label=mysql, captionpos=b, language=json]
--- membuat tabel containers -> untuk menyimpan data kontainer
+CREATE TABLE `swarms` (
+	`id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
+	`created_at` timestamp NULL DEFAULT NULL,
+	`updated_at` timestamp NULL DEFAULT NULL,
+	`swarm_ip` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+	`swarm_username` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+	`swarm_password` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+	`is_used` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+	PRIMARY KEY (`id`),
+	UNIQUE KEY `swarms_swarm_ip_unique` (`swarm_ip`)
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
 CREATE TABLE `containers` (
 	`id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
 	`task_id` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
@@ -201,9 +208,83 @@ CREATE TABLE `containers` (
 	`status` smallint(6) NOT NULL DEFAULT '0',
 	`username` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '0',
 	PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=101 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- membuat tabel errors -> untuk menyimpan error console
+CREATE TABLE `users` (
+	`id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
+	`name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+	`email` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+	`username` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+	`email_verified_at` timestamp NULL DEFAULT NULL,
+	`password` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+	`remember_token` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+	`created_at` timestamp NULL DEFAULT NULL,
+	`updated_at` timestamp NULL DEFAULT NULL,
+	`request_test` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+	PRIMARY KEY (`id`),
+	UNIQUE KEY `users_email_unique` (`email`),
+	UNIQUE KEY `users_username_unique` (`username`)
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+CREATE TABLE `role_user` (
+	`id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
+	`created_at` timestamp NULL DEFAULT NULL,
+	`updated_at` timestamp NULL DEFAULT NULL,
+	`role_id` int(10) unsigned NOT NULL,
+	`user_id` int(10) unsigned NOT NULL,
+	PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+CREATE TABLE `roles` (
+	`id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
+	`created_at` timestamp NULL DEFAULT NULL,
+	`updated_at` timestamp NULL DEFAULT NULL,
+	`name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+	`description` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+	PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+CREATE TABLE `scenarios` (
+	`id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
+	`created_at` timestamp NULL DEFAULT NULL,
+	`updated_at` timestamp NULL DEFAULT NULL,
+	`scenario_id` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+	`username` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+	`scenario_method` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+	`scenario_link` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+	`scenario_worker` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+	`scenario_status` smallint(6) NOT NULL DEFAULT '0',
+	`scenario_button` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+	PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+CREATE TABLE `queues` (
+	`id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
+	`created_at` timestamp NULL DEFAULT NULL,
+	`updated_at` timestamp NULL DEFAULT NULL,
+	`username` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+	`worker` int(11) DEFAULT NULL,
+	`status` smallint(6) DEFAULT NULL,
+	PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+CREATE TABLE `results` (
+	`id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
+	`scenario_id` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+	`link` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+	`method` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+	`worker` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+	`username` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+	`host` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+	`response_end` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+	`dom_content_load` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+	`load_event_end` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+	`css_trace_end` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+	`first_meaningful` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+	`status` smallint(6) DEFAULT '0',
+	PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=126 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
 CREATE TABLE `errors` (
 	`id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
 	`scenario_id` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
@@ -216,10 +297,9 @@ CREATE TABLE `errors` (
 	`args` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
 	`location_url` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
 	PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=126 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- membuat tabel results -> untuk menyimpan hasil rata-rata perhitungan hasil pengujian
-CREATE TABLE `results` (
+CREATE TABLE `summary_results` (
 	`id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
 	`scenario_id` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
 	`link` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
@@ -228,77 +308,10 @@ CREATE TABLE `results` (
 	`username` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
 	`error` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
 	`response_end` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-	`dom_interactive` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
 	`dom_content_load` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
 	`load_event_end` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-	`css_trace_start` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
 	`css_trace_end` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
 	`first_meaningful` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-	`timestamp` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
 	PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
--- membuat tabel scenarios -> untuk menyimpan scenario pengujian
-CREATE TABLE `scenarios` (
-	`id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
-	`created_at` timestamp NULL DEFAULT NULL,
-	`updated_at` timestamp NULL DEFAULT NULL,
-	`scenario_id` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-	`username` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-	`scenario_method` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-	`scenario_link` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-	`scenario_worker` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-	`scenario_status` smallint(6) DEFAULT '0',
-	`scenario_button` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-	PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
--- membuat tabel swarms -> untuk menyimpan swarm node
-CREATE TABLE `swarms` (
-	`id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
-	`created_at` timestamp NULL DEFAULT NULL,
-	`updated_at` timestamp NULL DEFAULT NULL,
-	`swarm_ip` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-	`swarm_username` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-	`swarm_password` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-	`is_used` smallint(6) DEFAULT '0',
-	PRIMARY KEY (`id`),
-	UNIQUE KEY `swarms_swarm_ip_unique` (`swarm_ip`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
--- membuat tabel test -> untuk menyimpan hasil setiap pengujian
-CREATE TABLE `tests` (
-	`id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
-	`scenario_id` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-	`link` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-	`worker` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-	`username` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-	`host` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-	`response_end` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-	`dom_interactive` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-	`dom_content_load` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-	`load_event_end` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-	`css_trace_start` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-	`css_trace_end` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-	`first_meaningful` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-	`timestamp` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-	`status` smallint(6) DEFAULT '0',
-	PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
--- membuat tabel users -> menyimpan user
-CREATE TABLE `users` (
-	`id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
-	`name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-	`email` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-	`username` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-	`email_verified_at` timestamp NULL DEFAULT NULL,
-	`password` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-	`remember_token` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-	`created_at` timestamp NULL DEFAULT NULL,
-	`updated_at` timestamp NULL DEFAULT NULL,
-	PRIMARY KEY (`id`),
-	UNIQUE KEY `users_email_unique` (`email`),
-	UNIQUE KEY `users_username_unique` (`username`)
 ) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 \end{lstlisting}

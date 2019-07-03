@@ -27,6 +27,7 @@
 \contentsline {section}{\numberline {2.3}\textit {Docker}}{10}{section.2.3}
 \contentsline {subsection}{\numberline {2.3.1}\textit {Docker Swarm}}{11}{subsection.2.3.1}
 \contentsline {section}{\numberline {2.4}\textit {Laravel}}{13}{section.2.4}
+\contentsline {section}{\numberline {2.5}\textit {Python}}{13}{section.2.5}
 \contentsline {chapter}{\numberline {III}DESAIN DAN PERANCANGAN}{15}{chapter.3}
 \contentsline {section}{\numberline {3.1}Deskripsi Umum Sistem}{15}{section.3.1}
 \contentsline {section}{\numberline {3.2}Kasus Penggunaan}{16}{section.3.2}
@@ -41,7 +42,7 @@
 \contentsline {chapter}{\numberline {IV}IMPLEMENTASI}{25}{chapter.4}
 \contentsline {section}{\numberline {4.1}Lingkungan Implementasi}{25}{section.4.1}
 \contentsline {subsection}{\numberline {4.1.1}Perangkat Keras}{25}{subsection.4.1.1}
-\contentsline {subsection}{\numberline {4.1.2}Perangkat Lunak}{26}{subsection.4.1.2}
+\contentsline {subsection}{\numberline {4.1.2}Perangkat Lunak}{25}{subsection.4.1.2}
 \contentsline {section}{\numberline {4.2}Implementasi Load Generator}{26}{section.4.2}
 \contentsline {subsection}{\numberline {4.2.1}Implementasi Pembuatan Docker Image}{26}{subsection.4.2.1}
 \contentsline {subsection}{\numberline {4.2.2}Implementasi Pembuatan Lingkungan Kontainer}{28}{subsection.4.2.2}
@@ -51,24 +52,24 @@
 \contentsline {subsection}{\numberline {4.4.1}Implementasi Web Service}{34}{subsection.4.4.1}
 \contentsline {subsection}{\numberline {4.4.2}Implementasi Skema Basis Data}{36}{subsection.4.4.2}
 \contentsline {subsubsection}{\numberline {4.4.2.1}Tabel Swarms}{36}{subsubsection.4.4.2.1}
-\contentsline {subsubsection}{\numberline {4.4.2.2}Tabel Containers}{36}{subsubsection.4.4.2.2}
-\contentsline {subsubsection}{\numberline {4.4.2.3}Tabel Users}{36}{subsubsection.4.4.2.3}
-\contentsline {subsubsection}{\numberline {4.4.2.4}Tabel Scenarios}{37}{subsubsection.4.4.2.4}
-\contentsline {subsubsection}{\numberline {4.4.2.5}Tabel Queues}{37}{subsubsection.4.4.2.5}
-\contentsline {subsubsection}{\numberline {4.4.2.6}Tabel Results}{37}{subsubsection.4.4.2.6}
-\contentsline {subsubsection}{\numberline {4.4.2.7}Tabel Errors}{37}{subsubsection.4.4.2.7}
-\contentsline {subsubsection}{\numberline {4.4.2.8}Tabel Summary Results}{38}{subsubsection.4.4.2.8}
-\contentsline {subsection}{\numberline {4.4.3}Implementasi Task Queue}{38}{subsection.4.4.3}
-\contentsline {chapter}{\numberline {V}PENGUJIAN DAN EVALUASI}{39}{chapter.5}
-\contentsline {section}{\numberline {5.1}Lingkungan Uji Coba}{39}{section.5.1}
-\contentsline {section}{\numberline {5.2}Skenario Uji Coba}{40}{section.5.2}
-\contentsline {subsection}{\numberline {5.2.1}Skenario Uji Fungsionalitas}{41}{subsection.5.2.1}
-\contentsline {section}{\numberline {5.3}Hasil Uji Coba dan Evaluasi}{41}{section.5.3}
-\contentsline {subsection}{\numberline {5.3.1}Uji Fungsionalitas}{41}{subsection.5.3.1}
-\contentsline {chapter}{\numberline {VI}PENUTUP}{43}{chapter.6}
-\contentsline {section}{\numberline {6.1}Kesimpulan}{43}{section.6.1}
-\contentsline {section}{\numberline {6.2}Saran}{43}{section.6.2}
-\contentsline {chapter}{DAFTAR PUSTAKA}{45}{chapter*.15}
-\contentsline {chapter}{\numberline {A}INSTALASI PERANGKAT LUNAK}{47}{appendix.A}
-\contentsline {chapter}{\numberline {B}KODE SUMBER}{49}{appendix.B}
-\contentsline {chapter}{BIODATA PENULIS}{63}{appendix*.16}
+\contentsline {subsubsection}{\numberline {4.4.2.2}Tabel Containers}{37}{subsubsection.4.4.2.2}
+\contentsline {subsubsection}{\numberline {4.4.2.3}Tabel Users}{38}{subsubsection.4.4.2.3}
+\contentsline {subsubsection}{\numberline {4.4.2.4}Tabel Scenarios}{39}{subsubsection.4.4.2.4}
+\contentsline {subsubsection}{\numberline {4.4.2.5}Tabel Queues}{40}{subsubsection.4.4.2.5}
+\contentsline {subsubsection}{\numberline {4.4.2.6}Tabel Results}{40}{subsubsection.4.4.2.6}
+\contentsline {subsubsection}{\numberline {4.4.2.7}Tabel Errors}{42}{subsubsection.4.4.2.7}
+\contentsline {subsubsection}{\numberline {4.4.2.8}Tabel Summary Results}{43}{subsubsection.4.4.2.8}
+\contentsline {subsection}{\numberline {4.4.3}Implementasi Task Queue}{45}{subsection.4.4.3}
+\contentsline {chapter}{\numberline {V}PENGUJIAN DAN EVALUASI}{47}{chapter.5}
+\contentsline {section}{\numberline {5.1}Lingkungan Uji Coba}{47}{section.5.1}
+\contentsline {section}{\numberline {5.2}Skenario Uji Coba}{49}{section.5.2}
+\contentsline {subsection}{\numberline {5.2.1}Skenario Uji Fungsionalitas}{49}{subsection.5.2.1}
+\contentsline {section}{\numberline {5.3}Hasil Uji Coba dan Evaluasi}{49}{section.5.3}
+\contentsline {subsection}{\numberline {5.3.1}Uji Fungsionalitas}{49}{subsection.5.3.1}
+\contentsline {chapter}{\numberline {VI}PENUTUP}{51}{chapter.6}
+\contentsline {section}{\numberline {6.1}Kesimpulan}{51}{section.6.1}
+\contentsline {section}{\numberline {6.2}Saran}{51}{section.6.2}
+\contentsline {chapter}{DAFTAR PUSTAKA}{53}{chapter*.15}
+\contentsline {chapter}{\numberline {A}INSTALASI PERANGKAT LUNAK}{55}{appendix.A}
+\contentsline {chapter}{\numberline {B}KODE SUMBER}{57}{appendix.B}
+\contentsline {chapter}{BIODATA PENULIS}{71}{appendix*.16}

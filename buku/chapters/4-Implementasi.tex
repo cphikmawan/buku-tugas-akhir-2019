@@ -1,17 +1,17 @@
 \chapter{IMPLEMENTASI}
-	Bab ini membahas mengenai implementasi dari sistem yang sudah di desain dan dirancang pada bab sebelumnya. Pembahasan secara rinci akan dijelaskan pada setiap komponen yang ada yaitu load generator, pengambil data uji beban, web service dan task queue.
+	Bab ini membahas mengenai implementasi dari sistem yang sudah di desain dan dirancang pada bab sebelumnya. Pembahasan secara rinci akan dijelaskan pada setiap komponen yang ada yaitu load generator, pengambil data uji beban dan service controller yang meliputi web service, basis data dan task queue.
 	
 	\section{Lingkungan Implementasi}
-		Dalam mengimplementasikan sistem, digunakan beberapa perangkat pendukung sebagai berikut.
+		Dalam mengimplementasikan sistem pada tugas akhir ini, digunakan beberapa perangkat pendukung sebagai berikut.
 		
 		\subsection{Perangkat Keras}
 		Perangkat keras yang digunakan dalam pengembangan sistem adalah sebagai berikut:
 		\begin{enumerate}
 			\item Web service dan task queue, processor AMD FX-7600P Radeon R7, 12 Compute Cores 4C+8G dan RAM 8GB.
-			\item Node host docker swarm dengan IP 167.71.194.235, processor Intel(R) Xeon(R) CPU E5-2650 v4 @ 2.20GHz dan RAM 4GB.
-			\item Node host docker swarm dengan IP 165.22.55.82, processor Intel(R) Xeon(R) CPU E5-2650 v4 @ 2.20GHz dan RAM 4GB.
-			\item Node host docker swarm dengan IP 167.71.194.233, processor Intel(R) Xeon(R) CPU E5-2650 v4 @ 2.20GHz dan RAM 4GB.
-			\item Basis data MySQL dengan IP 178.128.123.143, processor Intel(R) Xeon(R) Gold 6140 CPU @ 2.30GHz dan RAM 1GB.
+			\item Node swarm dengan IP 167.71.194.235, processor Intel(R) Xeon(R) CPU E5-2650 v4@2.20GHz dan RAM 4GB.
+			\item Node swarm dengan IP 165.22.55.82, processor Intel(R) Xeon(R) CPU E5-2650 v4@2.20GHz dan RAM 4GB.
+			\item Node swarm dengan IP 167.71.194.233, processor Intel(R) Xeon(R) CPU E5-2650 v4@2.20GHz dan RAM 4GB.
+			\item Basis data MySQL dengan IP 178.128.123.143, processor Intel(R) Xeon(R) Gold 6140 CPU@2.30GHz dan RAM 1GB.
 		\end{enumerate}
 	
 		\subsection{Perangkat Lunak}
@@ -79,7 +79,7 @@
 				\end{lstlisting}
 				
 		\subsection{Implementasi Pembuatan Lingkungan Kontainer}
-			Kontainer akan dipasangkan pada suatu lingkungan yang bisa mengatur segala aktivitas kontainer, lingkungan yang akan dibangun pada sistem menggunakan alat orkestrasi yaitu Docker Swarm. Untuk mengimplementasikan Docker Swarm pada sistem ini, dibutuhkan satu node host sebagai manager node dan dua lainnya sebagai worker. Tahap pertama yang dilakukan yaitu menginisiasi salah satu node host yang akan digunakan sebagai manager node. Perintah inisiasi manager node terdapat pada Kode Sumber \ref{swarminit}. \\
+			Kontainer akan dipasangkan pada suatu lingkungan yang bisa mengatur segala aktivitas kontainer, lingkungan yang akan dibangun pada sistem menggunakan alat orkestrasi yaitu Docker Swarm. Untuk mengimplementasikan Docker Swarm pada sistem ini, dibutuhkan satu node host sebagai manager node dan dua lainnya sebagai worker. Tahap pertama yang dilakukan yaitu menginisiasi salah satu node host yang akan digunakan sebagai manager node. Perintah inisiasi manager node terdapat pada Kode Sumber \ref{swarminit}.
 			\begin{lstlisting}[frame=single,tabsize=2,breaklines,caption={Perintah untuk inisiasi manager node},label=swarminit, captionpos=b, language=json,numbers=none]
 	$ docker swarm init --advertise-addr [IP NODE]
 			\end{lstlisting}
@@ -97,9 +97,8 @@
 		\subsection{Implementasi Pemasangan Headless Chrome dan Puppeteer}
 			Headless Chrome dan Puppeteer akan dipasang pada masing-masing kontainer menggunakan Docker Image yang telah dibuat sebelumnya, untuk pemasangannya akan dilakukan dilingkungan Docker Swarm dan dilakukan pada manager node. Namun untuk implementasinya dibutuhkan beberapa persiapan dan konfigurasi yang harus dilakukan terlebih dahulu yaitu konfigurasi unduh Docker Image, konfigurasi membuat Docker Network, konfigurasi puppeteer.yml, konfigurasi deployment.
 			
-			\indent untuk mengunduh Docker Image menggunakan perintah pada Kode Sumber \ref{unduhimage} dan membuat Docker Network pada Kode Sumber \ref{createnetwork}. Sedangkan konfigurasi puppeteer.yml dapat dilihat di Kode Sumber \ref{puppyaml}
+			\indent Untuk mengunduh Docker Image dilakukan pada setiap node host menggunakan perintah pada Kode Sumber \ref{unduhimage} dan membuat Docker Network pada Kode Sumber \ref{createnetwork}. Sedangkan konfigurasi puppeteer.yml dapat dilihat di Kode Sumber \ref{puppyaml}
 			\begin{lstlisting}[frame=single,tabsize=2,breaklines,caption={Perintah untuk mengunduh Docker Image },label=unduhimage, captionpos=b, language=json,numbers=none]
-	# dijalankan pada setiap node host
 	$ docker image pull cphikmawan/ta2019:puppeteer
 			\end{lstlisting}
 			
@@ -141,7 +140,7 @@
 				name: swarm-network
 			\end{lstlisting}
 			
-			\indent Jika persiapan diatas sudah dilakukan, maka tahapan selanjutnya adalah konfigurasi deployment dengan menjalankan perintah yang ditunjukkan pada Kode Sumber \ref{pemasanganstack} di terminal manager node
+			\indent Tahap selanjutnya adalah konfigurasi deployment dengan menjalankan perintah yang ditunjukkan pada Kode Sumber \ref{pemasanganstack} di terminal manager node
 			\begin{lstlisting}[frame=single,tabsize=2,breaklines,caption={Perintah untuk pemasangan kontainer },label=pemasanganstack, captionpos=b, language=json,numbers=none]
 	$ docker stack deploy --compose-file=puppeteer.yml [nama_stack]
 			\end{lstlisting}
@@ -167,36 +166,39 @@
  	Variable Declaration
  	Data = Read Scenario File Configuration
  	
- 	TestPage Function:
- 		Call Helpers Function:
- 			Get Navigation Start
- 		Start Trace CSS Data
+ 	TESTPAGE FUNCTION:
+ 		CALL HELPERS FUNCTION:
+ 			GET Navigation Start
+ 		START Trace CSS Data
  		Trying to Accessing Website
- 		End Trace CSS Data
- 		Call Helpers Function:
- 			Get Extracted Performance Data
- 			Get Extracted CSS Tracing
- 			Send Extracted Data
+ 		END Trace CSS Data
+ 		CALL HELPERS FUNCTION:
+ 			GET Extracted Performance Data
+ 			GET Extracted CSS Tracing
+ 			RETURN Extracted Data
+ 	END TESTPAGE FUNCTION
  	
- 	Helpers Function:
- 		Get Navigation Start
- 			Send Navigation Start
+ 	HELPERS FUNCTION:
+ 		GET Navigation Start
+ 			RETURN Navigation Start
  		Extracted Performance Data = Performance Data * 1000 - Navigation Start
- 			Send Extracted Performance Data
+ 			RETURN Extracted Performance Data
  		Extracted CSS Tracing = CSS Tracing / 1000
- 			Send Extracted CSS Tracing 
+ 			RETURN Extracted CSS Tracing 
+ 	End Helpers Function
  	
- 	Main Function:
- 		Start Headless Browser
- 		Get Error Console
- 			Send Data to Database
- 		Try:
- 			Call TestPage Function(Data):
+ 	MAIN FUNCTION:
+ 		START Headless Browser
+ 		GET Error Console
+ 			RETURN Data to Database
+ 		TRY:
+ 			CALL TESTPAGE FUNCTION(Data):
  				Get Data From TestPage -> Save Data Uji Beban
- 			Get Page Screenshoot -> Save Screenshoot
- 		Catch Error:
- 			Get Error
- 			Get Page Screenshoot -> Save Screenshoot
+ 			GET Page Screenshoot -> Save Screenshoot
+ 		CATCH ERROR:
+ 			GET Error
+ 			GET Page Screenshoot -> Save Screenshoot
+ 	END MAIN FUNCTION
 	 	\end{lstlisting}
 	
 	\section{Implementasi Service Controller}
@@ -210,7 +212,9 @@
 				\item Instalasi Laravel versi 5.8
 				\item Instalasi MySQL
 			\end{enumerate}
-		
+			
+			\indent Web service akan menggunakan bahasa PHP dan kerangka kerja Laravel versi 5.8, sedangkan Composer berfungsi untuk memanajemen instalasi pustaka pada PHP dan untuk penyimpanan data yang digunakan pada sistem akan disimpan pada basis data MySQL. Web service berfungsi untuk memudahkan user melakukan uji beban pada suatu web. Tampilan antarmuka pengguna ditunjukkan pada Gambar \ref{gambarweb}.
+			
 			\begin{figure}[H]
 				\centering
 				\includegraphics[width=10cm,height=6cm]{Images/C-4/gambarweb.png}
@@ -218,12 +222,9 @@
 				\label{gambarweb}
 			\end{figure}
 			
-			\indent Web service akan menggunakan bahasa PHP dan kerangka kerja Laravel versi 5.8, sedangkan Composer berfungsi untuk memanajemen instalasi pustaka pada PHP dan untuk penyimpanan data yang digunakan pada sistem akan disimpan pada basis data MySQL. Web service berfungsi untuk memudahkan user melakukan uji beban pada suatu web. Tampilan antarmuka pengguna ditunjukkan pada Gambar \ref{gambarweb}. \\
-			
-			\indent Web service memiliki rute-rute HTTP yang akan digunakan oleh user ketika mengakses web sistem. Rute-rute tersebut ditunjukkan pada Tabel \ref{tabelruteweb}.
+			\indent Web service memiliki beberapa rute HTTP yang akan digunakan oleh user ketika mengakses web sistem. Rute-rute tersebut ditunjukkan pada Tabel \ref{tabelruteweb}.
 			\begin{longtable}{|p{0.05\textwidth}|p{0.25\textwidth}|p{0.30\textwidth}|p{0.30\textwidth}|}
-				\caption{Rute HTTP pada web service} \label{tabelruteweb} \\
-				\hline
+				\caption{Rute HTTP pada web service} \label{tabelruteweb} \\ \hline
 				\textbf{No} & \textbf{Rute} & \textbf{Metode} & \textbf{Aksi} \\ \hline
 				\endhead
 				\endfoot
@@ -248,93 +249,211 @@
 			Berdasarkan hasil perancangan basis data pada bab sebelumnya. Data yang dibutuhkan dan digunakan oleh sistem akan disimpan di dalam basis data MySQL. Data yang disimpan adalah data node host swarm, data kontainer, data pengguna, data skenario pengujian, data antrian request, data hasil pengujian, data error console, data rata-rata hasil pengujian.
 			
 			\subsubsection{Tabel Swarms}
-			\begin{longtable}{|p{0.05\textwidth}|p{0.25\textwidth}|p{0.30\textwidth}|p{0.30\textwidth}|}
-				\caption{Tabel swarms} \label{tabelruteweb} \\
-				\hline
-				\textbf{No} & \textbf{Kolom} & \textbf{Tipe} & \textbf{Keterangan} \\ \hline
-				\endhead
-				\endfoot
-				\endlastfoot
-				1 &  &  &  \\ \hline
-			\end{longtable}
+				Pada tabel swarms menyimpan data-data dari node host yang tergabung dilingkungan swarm. Berikut definisi tabel swarms pada Tabel \ref{tabelswarms}.
+				
+				\begin{longtable}{|p{0.05\textwidth}|p{0.30\textwidth}|p{0.20\textwidth}|p{0.35\textwidth}|}
+					\caption{Tabel swarms} \label{tabelswarms} \\
+					\hline
+					\textbf{No} & \textbf{Kolom} & \textbf{Tipe} & \textbf{Keterangan} \\ \hline
+					\endhead
+					\endfoot
+					\endlastfoot
+					1 & id & bigint(20) & Sebagai primary key, nilai awal adalah auto\_increment. \\ \hline
+					2 & swarm\_ip & varchar(255) & Menunjukkan IP dari node host \\ \hline
+					3 & swarm\_username & varchar(255) & Menunjukkan username dari node host \\ \hline
+					4 & swarm\_password & varchar(255) & Menunjukkan password dari node host \\ \hline
+					5 & is\_used & smallint(6) & Menunjukkan status dari node host \\ \hline
+				\end{longtable}
 		
 			\subsubsection{Tabel Containers}
-			\begin{longtable}{|p{0.05\textwidth}|p{0.25\textwidth}|p{0.30\textwidth}|p{0.30\textwidth}|}
-				\caption{Tabel containers} \label{tabelruteweb} \\
-				\hline
-				\textbf{No} & \textbf{Kolom} & \textbf{Tipe} & \textbf{Keterangan} \\ \hline
-				\endhead
-				\endfoot
-				\endlastfoot
-				1 &  &  &  \\ \hline
-			\end{longtable}
+				Padata tabel containers menyimpan data-data dari Docker Container yang akan digunakan sebagai load generator. Berikut definisi tabel containers pada Tabel \ref{tabelcontainers}.
+				
+				\begin{longtable}{|p{0.05\textwidth}|p{0.30\textwidth}|p{0.20\textwidth}|p{0.35\textwidth}|}
+					\caption{Tabel containers} \label{tabelcontainers} \\
+					\hline
+					\textbf{No} & \textbf{Kolom} & \textbf{Tipe} & \textbf{Keterangan} \\ \hline
+					\endhead
+					\endfoot
+					\endlastfoot
+					1 & id & bigint(20) & Sebagai primary key, nilai awal adalah auto\_increment \\ \hline
+					2 & task\_id & varchar(100) & Menunjukkan task id dari kontainer \\ \hline
+					3 & node\_id & varchar(100) & Menunjukkan node id tempat kontainer dipasang \\ \hline
+					4 & container\_id & varchar(100) & Menunjukkan id dari kontainer \\ \hline
+					5 & node\_ip & varchar(100) & Menunjukkan IP tempat kontainer dipasang \\ \hline
+					6 & node\_host & varchar(100) & Menunjukkan hostname tempat kontainer dipasang \\ \hline
+					7 & status & smallint(6) & Menunjukkan flag status dari container \\ \hline
+					8 & username & varchar(100) & Menunjukkan status kontainer yang sedang digunakan user \\ \hline
+				\end{longtable}
 		
 			\subsubsection{Tabel Users}
-			\begin{longtable}{|p{0.05\textwidth}|p{0.25\textwidth}|p{0.30\textwidth}|p{0.30\textwidth}|}
-				\caption{Tabel users} \label{tabelruteweb} \\
-				\hline
-				\textbf{No} & \textbf{Kolom} & \textbf{Tipe} & \textbf{Keterangan} \\ \hline
-				\endhead
-				\endfoot
-				\endlastfoot
-				1 &  &  &  \\ \hline
-			\end{longtable}
+				Pada tabel users menyimpan data-data pengguna web yang disediakan sistem. Berikut definisi tabel users pada Tabel \ref{tabelusers}. Data pengguna juga memiliki constraint dan disimpan pada Tabel role user \ref{tabelroleuser} dan Tabel roles \ref{tabelroles}.
+				
+				\begin{longtable}{|p{0.05\textwidth}|p{0.30\textwidth}|p{0.20\textwidth}|p{0.35\textwidth}|}
+					\caption{Tabel users} \label{tabelusers} \\
+					\hline
+					\textbf{No} & \textbf{Kolom} & \textbf{Tipe} & \textbf{Keterangan} \\ \hline
+					\endhead
+					\endfoot
+					\endlastfoot
+					1 & id & bigint(20) & Sebagai primary key, nilai awal adalah auto\_increment \\ \hline
+					2 & name & varchar(255) & Menunjukkan nama pengguna \\ \hline
+					3 & email & varchar(255) & Menunjukkan email pengguna \\ \hline
+					4 & username & varchar(255) & Menunjukkan username pengguna \\ \hline
+					5 & password & varchar(255) & Menunjukkan password pengguna \\ \hline
+				\end{longtable}
+			
+				\begin{longtable}{|p{0.05\textwidth}|p{0.30\textwidth}|p{0.20\textwidth}|p{0.35\textwidth}|}
+					\caption{Tabel role user} \label{tabelroleuser} \\
+					\hline
+					\textbf{No} & \textbf{Kolom} & \textbf{Tipe} & \textbf{Keterangan} \\ \hline
+					\endhead
+					\endfoot
+					\endlastfoot
+					1 & id & bigint(20) & Sebagai primary key, nilai awal adalah auto\_increment \\ \hline
+					2 & role\_id & int(10) & Menunjukkan id role pengguna \\ \hline
+					3 & user\_id & int(10) & Menunjukkan id pengguna \\ \hline
+				\end{longtable}
+				
+				\begin{longtable}{|p{0.05\textwidth}|p{0.30\textwidth}|p{0.20\textwidth}|p{0.35\textwidth}|}
+					\caption{Tabel roles} \label{tabelroles} \\
+					\hline
+					\textbf{No} & \textbf{Kolom} & \textbf{Tipe} & \textbf{Keterangan} \\ \hline
+					\endhead
+					\endfoot
+					\endlastfoot
+					1 & id & bigint(20) & Sebagai primary key, nilai awal adalah auto\_increment \\ \hline
+					2 & name & varchar(255) & Menunjukkan nama role \\ \hline
+					3 & description & varchar(255) & Menunjukkan deskripsi hak akses dari nama role \\ \hline
+				\end{longtable}
 		
 			\subsubsection{Tabel Scenarios}
-			\begin{longtable}{|p{0.05\textwidth}|p{0.25\textwidth}|p{0.30\textwidth}|p{0.30\textwidth}|}
-				\caption{Tabel scenarios} \label{tabelruteweb} \\
-				\hline
-				\textbf{No} & \textbf{Kolom} & \textbf{Tipe} & \textbf{Keterangan} \\ \hline
-				\endhead
-				\endfoot
-				\endlastfoot
-				1 &  &  &  \\ \hline
-			\end{longtable}
+				Pada tabel scenarios menyimpan data-data skenario yang telah dibuat oleh pengguna. Berikut definisi tabel scenarios pada Tabel \ref{tabelscenarios}.
+			
+				\begin{longtable}{|p{0.05\textwidth}|p{0.30\textwidth}|p{0.20\textwidth}|p{0.35\textwidth}|}
+					\caption{Tabel scenarios} \label{tabelscenarios} \\
+					\hline
+					\textbf{No} & \textbf{Kolom} & \textbf{Tipe} & \textbf{Keterangan} \\ \hline
+					\endhead
+					\endfoot
+					\endlastfoot
+					1 & id & bigint(20) & Sebagai primary key, nilai awal adalah auto\_increment \\ \hline
+					2 & scenario\_id & varchar(255) &  \\ \hline
+					3 & username & varchar(255) &  \\ \hline
+					4 & scenario\_method & varchar(255) &  \\ \hline
+					5 & scenario\_link & varchar(255) &  \\ \hline
+					6 & scenario\_worker & varchar(255) &  \\ \hline
+					7 & scenario\_status & smallint(6) &  \\ \hline
+				\end{longtable}
 		
 			\subsubsection{Tabel Queues}
-			\begin{longtable}{|p{0.05\textwidth}|p{0.25\textwidth}|p{0.30\textwidth}|p{0.30\textwidth}|}
-				\caption{Tabel queues} \label{tabelruteweb} \\
-				\hline
-				\textbf{No} & \textbf{Kolom} & \textbf{Tipe} & \textbf{Keterangan} \\ \hline
-				\endhead
-				\endfoot
-				\endlastfoot
-				1 &  &  &  \\ \hline
-			\end{longtable}
+				Pada tabel queues menyimpan data-data antrian request yang dilakukan oleh semua pengguna. Berikut definisi tabel queues pada Tabel \ref{tabelqueues}.
+			
+				\begin{longtable}{|p{0.05\textwidth}|p{0.30\textwidth}|p{0.20\textwidth}|p{0.35\textwidth}|}
+					\caption{Tabel queues} \label{tabelqueues} \\
+					\hline
+					\textbf{No} & \textbf{Kolom} & \textbf{Tipe} & \textbf{Keterangan} \\ \hline
+					\endhead
+					\endfoot
+					\endlastfoot
+					1 & id & bigint(20) & Sebagai primary key, nilai awal adalah auto\_increment \\ \hline
+					2 & created\_at & timestamp & Menunjukkan waktu pembuatan queue request oleh pengguna \\ \hline
+					3 & username & varchar(255) & Menunjukkan keterangan pengguna pembuat request \\ \hline
+					4 & worker & int(11) & Menunjukkan jumlah request yang diinginkan pengguna \\ \hline
+					5 & status & smallint(6) & Menunjukkan status dari queue, nilai awal adalah 0 \\ \hline
+				\end{longtable}
 		
 			\subsubsection{Tabel Results}
-			\begin{longtable}{|p{0.05\textwidth}|p{0.25\textwidth}|p{0.30\textwidth}|p{0.30\textwidth}|}
-				\caption{Tabel results} \label{tabelruteweb} \\
-				\hline
-				\textbf{No} & \textbf{Kolom} & \textbf{Tipe} & \textbf{Keterangan} \\ \hline
-				\endhead
-				\endfoot
-				\endlastfoot
-				1 &  &  &  \\ \hline
-			\end{longtable}
+				Pada tabel results menyimpan data-data hasil uji beban yang dilakukan oleh kontainer dan puppeteer. Berikut definisi tabel results pada Tabel \ref{tabelresults}.
+				
+				\begin{longtable}{|p{0.05\textwidth}|p{0.30\textwidth}|p{0.20\textwidth}|p{0.35\textwidth}|}
+					\caption{Tabel results} \label{tabelresults} \\
+					\hline
+					\textbf{No} & \textbf{Kolom} & \textbf{Tipe} & \textbf{Keterangan} \\ \hline
+					\endhead
+					\endfoot
+					\endlastfoot
+					1 & id & bigint(20) & Sebagai primary key, nilai awal adalah auto\_increment \\ \hline
+					2 & scenario\_id & varchar(255) & Menunjukkan skenario id sebagai foreign key \\ \hline
+					3 & link & varchar(255) & Menunjukkan link website yang diuji \\ \hline
+					4 & method & varchar(100) & Menunjukkan metode uji \\ \hline
+					5 & worker & varchar(255) & Menunjukkan jumlah request yang diinginkan pengguna \\ \hline
+					6 & username & varchar(100) & Menunjukkan keterangan pengguna pembuat request \\ \hline
+					7 & host & varchar(100) & Menunjukkan IP node host yang digunakan kontainer penguji \\ \hline
+					8 & response\_end & varchar(100) & Menunjukkan hasil uji response time dalam satuan detik \\ \hline
+					9 & dom\_content\_load & varchar(100) & Menunjukkan hasil uji waktu memuat DOM web dalam satuan detik \\ \hline
+					10 & load\_event\_end & varchar(100) & Menunjukkan hasil uji load time dalam satuan detik \\ \hline
+					11 & css\_trace\_end & varchar(100) & Menunjukkan hasil uji waktu memuat css time dalam satuan detik \\ \hline
+					12 & first\_meaningful & varchar(100) & Menunjukkan hasil uji waktu memuat konten utama dalam satuan detik \\ \hline
+					13 & status & smallint(6) & Menunjukkan status apakah untuk proses rata-rata, nilai awal adalah 0 \\ \hline
+				\end{longtable}
 		
 			\subsubsection{Tabel Errors}
-			\begin{longtable}{|p{0.05\textwidth}|p{0.25\textwidth}|p{0.30\textwidth}|p{0.30\textwidth}|}
-				\caption{Tabel errors} \label{tabelruteweb} \\
-				\hline
-				\textbf{No} & \textbf{Kolom} & \textbf{Tipe} & \textbf{Keterangan} \\ \hline
-				\endhead
-				\endfoot
-				\endlastfoot
-				1 &  &  &  \\ \hline
-			\end{longtable}
+				Pada tabel errors menyimpan data-data kegagalan yang terekam pada console browser ketika diakses didalam Headless Chrome. Berikut definisi tabel errors pada Tabel \ref{tabelerrors}.
+				
+				\begin{longtable}{|p{0.05\textwidth}|p{0.30\textwidth}|p{0.20\textwidth}|p{0.35\textwidth}|}
+					\caption{Tabel errors} \label{tabelerrors} \\
+					\hline
+					\textbf{No} & \textbf{Kolom} & \textbf{Tipe} & \textbf{Keterangan} \\ \hline
+					\endhead
+					\endfoot
+					\endlastfoot
+					1 & id & bigint(20) & Sebagai primary key, nilai awal adalah auto\_increment \\ \hline
+					2 & scenario\_id & varchar(255) & Menunjukkan skenario id sebagai foreign key \\ \hline
+					3 & link & varchar(255) & Menunjukkan link website yang diuji \\ \hline
+					4 & worker & varchar(255) & Menunjukkan jumlah request yang diinginkan pengguna \\ \hline
+					5 & username & varchar(100) & Menunjukkan keterangan pengguna pembuat request \\ \hline
+					6 & host & varchar(100) & Menunjukkan IP node host yang digunakan kontainer penguji \\ \hline
+					7 & type & varchar(100) & Menunjukkan type error \\ \hline
+					8 & text & varchar(255) & Menunjukkan keterangan error \\ \hline
+					9 & args & varchar(255) & Menunjukkan argumen error \\ \hline
+					10 & location\_url & varchar(255) & Menunjukkan lokasi url error \\ \hline
+				\end{longtable}
 		
 			\subsubsection{Tabel Summary Results}
-			\begin{longtable}{|p{0.05\textwidth}|p{0.25\textwidth}|p{0.30\textwidth}|p{0.30\textwidth}|}
-				\caption{Tabel summary results} \label{tabelruteweb} \\
-				\hline
-				\textbf{No} & \textbf{Kolom} & \textbf{Tipe} & \textbf{Keterangan} \\ \hline
-				\endhead
-				\endfoot
-				\endlastfoot
-				1 &  &  &  \\ \hline
-			\end{longtable}
+				Pada tabel summary\_results menyimpan data rata-rata dari hasil uji beban yang ada pada tabel results. Berikut definisi tabel summary\_results pada Tabel \ref{tabelsumresults}.
+			
+				\begin{longtable}{|p{0.05\textwidth}|p{0.30\textwidth}|p{0.20\textwidth}|p{0.35\textwidth}|}
+					\caption{Tabel summary results} \label{tabelsumresults} \\
+					\hline
+					\textbf{No} & \textbf{Kolom} & \textbf{Tipe} & \textbf{Keterangan} \\ \hline
+					\endhead
+					\endfoot
+					\endlastfoot
+					1 & id & bigint(20) & Sebagai primary key, nilai awal adalah auto\_increment \\ \hline
+					2 & scenario\_id & varchar(255) & Menunjukkan skenario id sebagai foreign key \\ \hline
+					3 & link & varchar(255) & Menunjukkan link website yang diuji \\ \hline
+					4 & method & varchar(100) & Menunjukkan metode uji \\ \hline
+					5 & worker & varchar(255) & Menunjukkan jumlah request yang diinginkan pengguna \\ \hline
+					6 & username & varchar(100) & Menunjukkan keterangan pengguna pembuat request \\ \hline
+					7 & error & varchar(100) & Menunjukkan presentase kegagalan saat dilakukan uji beban \\ \hline
+					8 & response\_end & varchar(100) & Menunjukkan rata-rata hasil uji response time dalam satuan detik \\ \hline
+					9 & dom\_content\_load & varchar(100) & Menunjukkan rata-rata hasil uji waktu memuat DOM web dalam satuan detik \\ \hline
+					10 & load\_event\_end & varchar(100) & Menunjukkan rata-rata hasil uji load time dalam satuan detik \\ \hline
+					11 & css\_trace\_end & varchar(100) & Menunjukkan rata-rata hasil uji waktu memuat css time dalam satuan detik \\ \hline
+					12 & first\_meaningful & varchar(100) & Menunjukkan rata-rata hasil uji waktu memuat konten utama dalam satuan detik \\ \hline
+				\end{longtable}
 			
 		\subsection{Implementasi Task Queue}
-			Task queue yang akan digunakan adalah.
+			Task queue akan digunakan untuk mengatur antrian request dari pengguna, pada tugas akhir ini implementasi task queue akan dipasang pada komputer yang sama dengan web service. Bahasa pemrograman yang akan digunakan untuk mengimplementasikan task queue adalah bahasa pemrograman Python, sedangkan untuk basis data akan terkoneksi dengan basis data MySQL yang terpasang pada server yang berbeda. Selain itu task queue akan dijalankan setiap 1 menit sekali pada crontab. Selama task queue berjalan algoritmenya akan selalu melakukan pengecekan apakah ada antrian yang bisa dieksekusi. Pseudocode untuk task queue tertera pada Kode Sumber \ref{taskqueue} dan untuk konfigurasi crontab pada Kode Sumber \ref{crontab}.
+			
+			\begin{lstlisting}[frame=single,tabsize=2,breaklines,caption={Konfigurasi docker-compose.yml },label=taskqueue, captionpos=b, language=json]
+	Connection
 	
+	Variable Declaration
+
+	DECLARE ADDITIONAL FUNCTION
+		Get Data Task Queue from MySQL <- LIMIT 1
+		RETURN data
+	
+	MAIN FUNCTION
+		Data = CALL ADDITIONAL FUNCTION
+		IF Data Not NULL
+			Do Task Queue Job
+		Else
+		 RETURN Null to Output File
+	END FUNCTION
+			\end{lstlisting}
+			
+			\begin{lstlisting}[frame=single,tabsize=2,breaklines,caption={Konfigurasi docker-compose.yml },label=crontab, captionpos=b, language=json]
+	* * * * * /usr/bin/python3 queue.py >> output.log 2>&1
+			\end{lstlisting}
