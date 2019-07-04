@@ -70,7 +70,7 @@
 				2 & /worker & Mengirimkan \textit{request} menuju rute \textit{web service} melalui \textit{browser} menggunakan metode \textit{POST} & \textit{Web service} berhasil menyimpan data \textit{worker} dan membuat antrian \textit{request} di dalam basis data  \\ \hline
 			\end{longtable}
 		
-		\subsubsection{Uji Fungsionalitas Penggunaan \textit{Task Queue} Terhadap \textit{Request User}}
+		\subsubsection{Uji Fungsionalitas Penggunaan \textit{Task Queue} Terhadap \textit{Request User}} \label{quuuueue}
 			\begin{figure}[H]
 				\centering
 				\includegraphics[width=10cm,height=7cm]{Images/C-5/taskqueue.png}
@@ -103,7 +103,7 @@
 			\end{longtable}
 		
 	\subsection{Skenario Uji Performa} \label{skenujiperforma}
-		Sistem \textit{load generator} dan pengambil data uji beban dibangun pada 3 buah \textit{node host} yang terpasang di lingkungan \textit{swarm}.  Sebelum dilakukan uji performa, dilakukan pemasangan \textit{load generator} yang diinisiasi pada terminal \textit{manager node}, kemudian \textit{manager node} akan mendistribusikan kontainer ke setiap \textit{node host} yang tergabung. Setelah selesai, data dari setiap kontainer akan disimpan di basis data. Uji coba akan dilakukan secara bertahap untuk membuat 500 kontainer, status awal kontainer sebelum diberikan \textit{request} akan \textit{sleep}. Setelah itu uji coba performa dilakukan untuk menguji performa sistem terhadap jumlah \textit{load generator} yang dikirimkan oleh pengguna. Pengujian akan dikirimkan oleh pengguna melalui \textit{web service} yang disediakan sistem. Jumlah \textit{load generator} yang akan diuji mulai dari 100, 200, 300, 400 dan 500. Hasil yang diharapkan dari pengujian performa sistem yaitu \textit{CPU Usage}, \textit{Memory} dan \textit{Disk Usage} yang digunakan pada setiap \textit{node host}. Arsitektur pengujian tertera pada Gambar \ref{ujiperforma}.
+		Sistem \textit{load generator} dan pengambil data uji beban dibangun pada 3 buah \textit{node host} yang terpasang di lingkungan \textit{swarm}.  Sebelum dilakukan uji performa, dilakukan pemasangan \textit{load generator} yang diinisiasi pada terminal \textit{manager node}, kemudian \textit{manager node} akan mendistribusikan kontainer ke setiap \textit{node host} yang tergabung. Setelah selesai, data dari setiap kontainer akan disimpan di basis data. Uji coba akan dilakukan secara bertahap untuk membuat 500 kontainer, status awal kontainer sebelum diberikan \textit{request} akan \textit{sleep}. Setelah itu uji coba performa dilakukan untuk menguji performa sistem terhadap jumlah \textit{load generator} yang dikirimkan oleh pengguna. Pengujian akan dikirimkan oleh pengguna melalui \textit{web service} yang disediakan sistem. Jumlah \textit{load generator} yang akan diuji mulai dari 100, 200, 300, 400 dan 500. Hasil yang diharapkan dari pengujian performa sistem yaitu \textit{CPU Usage}, \textit{Memory} dan \textit{Storage} yang digunakan pada setiap \textit{node host}. Arsitektur pengujian tertera pada Gambar \ref{ujiperforma}.
 		\begin{figure}[H]
 			\centering
 			\includegraphics[width=9cm,height=6cm]{Images/C-5/performa.png}
@@ -146,11 +146,39 @@
 				\end{longtable}
 				
 			\subsubsection{Uji Fungsionalitas Penggunaan \textit{Task Queue} Terhadap \textit{Request User}}
+				Uji coba ini akan dilakukan oleh 5 user yang melakukan request uji beban melalui \textit{web service} sesuai dengan penjelasan pada bab \ref{quuuueue}. Keterangan hasil uji yang dilakukan bisa dilihat pada Tabel \ref{quuuuueee}.
+				\begin{longtable}{|p{0.15\textwidth}|p{0.12\textwidth}|p{0.35\textwidth}|p{0.18\textwidth}|p{0.10\textwidth}|}
+					\caption{Hasil penggunaan \textit{task queue} terhadap \textit{request user}} \label{quuuuueee} \\
+					\hline
+					\textbf{Username} & \textbf{Jumlah} & \textbf{Link} & \textbf{Antrian ke} & \textbf{Hasil} \\ \hline
+					\endhead
+					\endfoot
+					\endlastfoot
+					user1 & 100 & https://dev.ppdbsda.net & 1 & OK \\ \hline
+					user2 & 200 & https://dev.ppdbsda.net & 2 & OK \\ \hline
+					user3 & 300 & https://dev.ppdbsda.net & 3 & OK \\ \hline
+					user4 & 400 & https://dev.ppdbsda.net & 4 & OK \\ \hline
+					user5 & 500 & https://dev.ppdbsda.net & 5 & OK \\ \hline
+				\end{longtable}
 				
 			\subsubsection{Uji Fungsionalitas Pengambil Data Uji Beban}
+				Uji coba ini akan dilakukan oleh \textit{Puppeteer} yang terpasang pada \textit{node host} di lingkungan \textit{swarm}. Skenario pengambil data uji beban sesuai dengan \textit{request task queue} pada Tabel \ref{quuuuueee}. Hasil dari pengujian ini dapat dilihat pada Tabel \ref{dataujibeban}.
+				\begin{longtable}{|p{0.15\textwidth}|p{0.15\textwidth}|p{0.12\textwidth}|p{0.15\textwidth}|p{0.18\textwidth}|p{0.13\textwidth}|}
+					\caption{Hasil pengambil data uji beban} \label{dataujibeban} \\
+					\hline
+					\textbf{Username} & \textbf{Response Time} & \textbf{CSS End} & \textbf{DOM Content Loaded} & \textbf{First Meaningful Pain} & \textbf{Load Time} \\ \hline
+					\endhead
+					\endfoot
+					\endlastfoot
+					user1 &  &  &  & & \\ \hline
+					user2 &  &  &  & & \\ \hline
+					user3 &  &  &  & & \\ \hline
+					user4 &  &  &  & & \\ \hline
+					user5 &  &  &  & & \\ \hline
+				\end{longtable}
 				
 			\subsubsection{Uji Fungsionalitas \textit{User} Melihat Hasil Uji Beban}
-				Uji coba ini dilakukan dengan mengakses sistem melalui rute yang telah ditentukan pada Tabel \ref{tabelujihasil}. Pengguna akan mengirim http request kepada web service yang telah
+				Uji coba ini dilakukan dengan mengakses sistem melalui rute yang telah ditentukan pada Tabel \ref{tabelujihasil}. Pengguna akan mengirim \textit{http request} kepada \textit{web service} yang telah
 				disediakan. Hasil uji coba seperti tertera pada Tabel \ref{tabelhasilujihasil}.
 				\begin{longtable}{|p{0.05\textwidth}|p{0.25\textwidth}|p{0.30\textwidth}|p{0.30\textwidth}|}
 					\caption{Skenario uji fungsionalitas \textit{user} melihat hasil uji beban} \label{tabelhasilujihasil} \\ \hline
@@ -165,23 +193,23 @@
 				
 
 		\subsection{Uji Performa}
-			Seperti yang dijelaskan pada bab \ref{skenujiperforma} pengujian performa akan dilakukan pada 3 node host yang terpasang di lingkungan swarm. Pertama akan dilakukan pembuatan load generator(worker) terlebih dahulu, kemudian akan dilakukan uji performa sistem terhadap request jumlah load generator dari pengguna.
+			Seperti yang dijelaskan pada bab \ref{skenujiperforma} pengujian performa akan dilakukan pada 3 \textit{node host} yang terpasang di lingkungan \textit{swarm}. Pertama akan dilakukan pembuatan \textit{load generator(worker)} terlebih dahulu, kemudian akan dilakukan uji performa sistem terhadap \textit{request} jumlah \textit{load generator} dari pengguna.
 			
 			\subsubsection{Uji Pembuatan \textit{Load Generator}}
-				Kondisi awal ketersediaan sumberdaya sebelum dilakukan pembuatan load generator pada masing-masing node host ditunjukkan pada Tabel \ref{suberdayaawalpembuatan}.
-				\begin{longtable}{|p{0.05\textwidth}|p{0.25\textwidth}|p{0.15\textwidth}|p{0.15\textwidth}|p{0.15\textwidth}|}
+				Kondisi awal ketersediaan sumberdaya sebelum dilakukan pembuatan \textit{load generator} pada masing-masing \textit{node host} ditunjukkan pada Tabel \ref{suberdayaawalpembuatan}.
+				\begin{longtable}{|p{0.05\textwidth}|p{0.25\textwidth}|p{0.14\textwidth}|p{0.17\textwidth}|p{0.14\textwidth}|}
 					\caption{Kondisi awal ketersediaan sumberdaya sebelum pembuatan} \label{suberdayaawalpembuatan} \\
 					\hline
-					\textbf{No} & \textbf{Hostname} & \textbf{CPU} & \textbf{RAM} & \textbf{Disk} \\ \hline
+					\textbf{No} & \textbf{Hostname} & \textbf{CPU} & \textbf{RAM} & \textbf{Storage} \\ \hline
 					\endhead
 					\endfoot
 					\endlastfoot
-					1 & CLOUD & & &  \\ \hline
-					2 & RAIN & & &  \\ \hline
-					3 & STORM & & &  \\ \hline
+					1 & CLOUD & 99,70\% & 287M/3.9G & 74/78G \\ \hline
+					2 & RAIN & 99,64\% & 256M/3.9G & 74/78G \\ \hline
+					3 & STORM & 99,69\% & 255M/3.9G & 74/78G \\ \hline
 				\end{longtable}
 			
-				Hasil distribusi kontainer ke setiap node host setelah dilakukan pembuatan load generator ditunjukkan pada Tabel \ref{jumlahkontainerpem}.
+				Hasil distribusi kontainer ke setiap \textit{node host} setelah dilakukan pembuatan \textit{load generator} ditunjukkan pada Tabel \ref{jumlahkontainerpem}.
 				\begin{longtable}{|p{0.05\textwidth}|p{0.30\textwidth}|p{0.15\textwidth}|p{0.15\textwidth}|p{0.15\textwidth}|}
 					\caption{Hasil distribusi kontainer setelah pembuatan} \label{jumlahkontainerpem} \\
 					\hline
@@ -189,45 +217,45 @@
 					\endhead
 					\endfoot
 					\endlastfoot
-					1 & 100 & & & \\ \hline
-					2 & 200 & & & \\ \hline
-					3 & 300 & & & \\ \hline
-					4 & 400 & & & \\ \hline
-					5 & 500 & & & \\ \hline
+					1 & 100 & 34 & 33 & 33 \\ \hline
+					2 & 200 & 66 & 67 & 67 \\ \hline
+					3 & 300 & 100 & 100 & 100 \\ \hline
+					4 & 400 & 132 & 134 & 134 \\ \hline
+					5 & 500 & 166 & 167 & 167 \\ \hline
 				\end{longtable}
 				
-				Hasil dari pengujian sistem untuk pembuatan load generator ditunjukkan pada Tabel \ref{suberdayasetpembuatan}.
-				\begin{longtable}{|p{0.05\textwidth}|p{0.25\textwidth}|p{0.15\textwidth}|p{0.15\textwidth}|p{0.15\textwidth}|}
+				Hasil dari pengujian sistem untuk pembuatan \textit{load generator} ditunjukkan pada Tabel \ref{suberdayasetpembuatan}.
+				\begin{longtable}{|p{0.05\textwidth}|p{0.25\textwidth}|p{0.14\textwidth}|p{0.17\textwidth}|p{0.14\textwidth}|}
 					\caption{Kondisi akhir ketersediaan sumberdaya setelah pembuatan} \label{suberdayasetpembuatan} \\
 					\hline
-					\textbf{No} & \textbf{Hostname} & \textbf{CPU} & \textbf{RAM} & \textbf{Disk} \\ \hline
+					\textbf{No} & \textbf{Hostname} & \textbf{CPU} & \textbf{RAM} & \textbf{Storage} \\ \hline
 					\endhead
 					\endfoot
 					\endlastfoot
-					1 & CLOUD & & &  \\ \hline
-					2 & RAIN & & &  \\ \hline
-					3 & STORM & & &  \\ \hline
+					1 & CLOUD & 97,9\% & 950M/3,9G & 74/78G \\ \hline
+					2 & RAIN & 97,9\% & 892M/3,9G & 74/78G \\ \hline
+					3 & STORM & 97,8\% & 889M/3,9G & 74/78G \\ \hline
 				\end{longtable}
 			
 			\subsubsection{Uji Performa Sistem Terhadap Request Jumlah \textit{Load Generator}}
-				Kondisi awal ketersediaan sumberdaya sebelum ada request jumlah load generator dari pengguna pada masing-masing node host ditunjukkan pada Tabel \ref{suberdayaawalperforma}.
-				\begin{longtable}{|p{0.05\textwidth}|p{0.25\textwidth}|p{0.15\textwidth}|p{0.15\textwidth}|p{0.15\textwidth}|}
+				Kondisi awal ketersediaan sumberdaya sebelum ada \textit{request} jumlah \textit{load generator} dari pengguna pada masing-masing \textit{node host} ditunjukkan pada Tabel \ref{suberdayaawalperforma}.
+				\begin{longtable}{|p{0.05\textwidth}|p{0.25\textwidth}|p{0.14\textwidth}|p{0.17\textwidth}|p{0.14\textwidth}|}
 					\caption{Kondisi awal ketersediaan sumberdaya sebelum pembuatan} \label{suberdayaawalperforma} \\
 					\hline
-					\textbf{No} & \textbf{Hostname} & \textbf{CPU} & \textbf{RAM} & \textbf{Disk} \\ \hline
+					\textbf{No} & \textbf{Hostname} & \textbf{CPU} & \textbf{RAM} & \textbf{Storage} \\ \hline
 					\endhead
 					\endfoot
 					\endlastfoot
-					1 & CLOUD & & &  \\ \hline
-					2 & RAIN & & &  \\ \hline
-					3 & STORM & & &  \\ \hline
+					1 & CLOUD & 97,9\% & 950M/3,9G & 74/78G \\ \hline
+					2 & RAIN & 97,9\% & 892M/3,9G & 74/78G \\ \hline
+					3 & STORM & 97,8\% & 889M/3,9G & 74/78G \\ \hline
 				\end{longtable}
 			
-				Hasil dari pengujian performa sistem untuk pembuatan load generator ditunjukkan pada Tabel \ref{sdhasilperforma}.
-				\begin{longtable}{|p{0.05\textwidth}|p{0.20\textwidth}|p{0.15\textwidth}|p{0.10\textwidth}|p{0.12\textwidth}|p{0.10\textwidth}|}
-					\caption{Kondisi ketersediaan sumberdaya ketika ada request} \label{sdhasilperforma} \\
+				Hasil dari pengujian performa sistem untuk pembuatan \textit{load generator} ditunjukkan pada Tabel \ref{sdhasilperforma}.
+				\begin{longtable}{|p{0.05\textwidth}|p{0.20\textwidth}|p{0.12\textwidth}|p{0.10\textwidth}|p{0.15\textwidth}|p{0.12\textwidth}|}
+					\caption{Kondisi ketersediaan sumberdaya ketika ada \textit{request}} \label{sdhasilperforma} \\
 					\hline
-					\textbf{No} & \textbf{Hostname} & \textbf{Jumlah} & \textbf{CPU} & \textbf{RAM} & \textbf{Disk} \\ \hline
+					\textbf{No} & \textbf{Hostname} & \textbf{Jumlah} & \textbf{CPU} & \textbf{RAM} & \textbf{Storage} \\ \hline
 					\endhead
 					\endfoot
 					\endlastfoot

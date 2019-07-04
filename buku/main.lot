@@ -35,12 +35,14 @@
 \contentsline {table}{\numberline {5.6}{\ignorespaces Skenario uji fungsionalitas \textit {user} mengelola skenario\relax }}{56}{table.5.6}
 \contentsline {table}{\numberline {5.6}{\ignorespaces Skenario uji fungsionalitas \textit {user} mengelola skenario\relax }}{57}{table.5.6}
 \contentsline {table}{\numberline {5.7}{\ignorespaces Skenario uji fungsionalitas \textit {user} mengirim request uji beban\relax }}{57}{table.5.7}
-\contentsline {table}{\numberline {5.8}{\ignorespaces Skenario uji fungsionalitas \textit {user} melihat hasil uji beban\relax }}{58}{table.5.8}
-\contentsline {table}{\numberline {5.9}{\ignorespaces Kondisi awal ketersediaan sumberdaya sebelum pembuatan\relax }}{59}{table.5.9}
-\contentsline {table}{\numberline {5.10}{\ignorespaces Hasil distribusi kontainer setelah pembuatan\relax }}{59}{table.5.10}
-\contentsline {table}{\numberline {5.11}{\ignorespaces Kondisi akhir ketersediaan sumberdaya setelah pembuatan\relax }}{59}{table.5.11}
-\contentsline {table}{\numberline {5.12}{\ignorespaces Kondisi awal ketersediaan sumberdaya sebelum pembuatan\relax }}{60}{table.5.12}
-\contentsline {table}{\numberline {5.13}{\ignorespaces Kondisi ketersediaan sumberdaya ketika ada request\relax }}{60}{table.5.13}
+\contentsline {table}{\numberline {5.8}{\ignorespaces Hasil penggunaan \textit {task queue} terhadap \textit {request user}\relax }}{58}{table.5.8}
+\contentsline {table}{\numberline {5.9}{\ignorespaces Hasil pengambil data uji beban\relax }}{58}{table.5.9}
+\contentsline {table}{\numberline {5.10}{\ignorespaces Skenario uji fungsionalitas \textit {user} melihat hasil uji beban\relax }}{59}{table.5.10}
+\contentsline {table}{\numberline {5.11}{\ignorespaces Kondisi awal ketersediaan sumberdaya sebelum pembuatan\relax }}{60}{table.5.11}
+\contentsline {table}{\numberline {5.12}{\ignorespaces Hasil distribusi kontainer setelah pembuatan\relax }}{60}{table.5.12}
+\contentsline {table}{\numberline {5.13}{\ignorespaces Kondisi akhir ketersediaan sumberdaya setelah pembuatan\relax }}{60}{table.5.13}
+\contentsline {table}{\numberline {5.14}{\ignorespaces Kondisi awal ketersediaan sumberdaya sebelum pembuatan\relax }}{61}{table.5.14}
+\contentsline {table}{\numberline {5.15}{\ignorespaces Kondisi ketersediaan sumberdaya ketika ada \textit {request}\relax }}{61}{table.5.15}
 \addvspace {10\p@ }
 \addvspace {10\p@ }
 \addvspace {10\p@ }

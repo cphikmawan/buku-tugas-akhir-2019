@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.14159265-2.6-0.99998 (TeX Live 2017/Debian) (preloaded format=xelatex 2019.5.22)  5 JUL 2019 00:49
+This is XeTeX, Version 3.14159265-2.6-0.99998 (TeX Live 2017/Debian) (preloaded format=xelatex 2019.5.22)  5 JUL 2019 02:54
 entering extended mode
  \write18 enabled.
  %&-line parsing enabled.
@@ -1971,76 +1971,223 @@ Overfull \hbox (20.69627pt too wide) in alignment at lines 143--146
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
  [57]
-Overfull \hbox (20.69627pt too wide) in alignment at lines 155--158
- [] [] [] [] 
+Overfull \hbox (4.6636pt too wide) in paragraph at lines 153--153
+[]|\TU/TimesNewRoman(0)/bx/n/10.95 Username| 
  []
 
 
-Overfull \hbox (20.69627pt too wide) in alignment at lines 158--159
- [] [] [] [] 
+Overfull \hbox (1.00937pt too wide) in paragraph at lines 153--153
+[]|\TU/TimesNewRoman(0)/bx/n/10.95 Jumlah| 
  []
 
 
-Overfull \hbox (20.69627pt too wide) in alignment at lines 159--160
- [] [] [] [] 
- []
-
-
-Overfull \hbox (20.69627pt too wide) in alignment at lines 160--164
- [] [] [] [] 
- []
-
-[58]
-Overfull \hbox (3.78368pt too wide) in alignment at lines 185--189
+Overfull \hbox (33.0918pt too wide) in alignment at lines 150--154
  [] [] [] [] [] 
  []
 
 
-Overfull \hbox (3.78368pt too wide) in alignment at lines 189--190
+Overfull \hbox (33.0918pt too wide) in alignment at lines 154--155
  [] [] [] [] [] 
  []
 
 
-Overfull \hbox (3.78368pt too wide) in alignment at lines 190--191
+Overfull \hbox (33.0918pt too wide) in alignment at lines 155--156
  [] [] [] [] [] 
  []
 
 
-Overfull \hbox (3.78368pt too wide) in alignment at lines 191--197
+Overfull \hbox (0.8176pt too wide) in paragraph at lines 157--157
+[]|\TU/TimesNewRoman(0)/m/n/10.95 https://dev.ppdbsda.net| 
+ []
+
+
+Overfull \hbox (0.8176pt too wide) in paragraph at lines 158--158
+[]|\TU/TimesNewRoman(0)/m/n/10.95 https://dev.ppdbsda.net| 
+ []
+
+
+Overfull \hbox (0.8176pt too wide) in paragraph at lines 159--159
+[]|\TU/TimesNewRoman(0)/m/n/10.95 https://dev.ppdbsda.net| 
+ []
+
+
+Overfull \hbox (0.8176pt too wide) in paragraph at lines 160--160
+[]|\TU/TimesNewRoman(0)/m/n/10.95 https://dev.ppdbsda.net| 
+ []
+
+
+Overfull \hbox (0.8176pt too wide) in paragraph at lines 161--161
+[]|\TU/TimesNewRoman(0)/m/n/10.95 https://dev.ppdbsda.net| 
+ []
+
+
+Overfull \hbox (33.0918pt too wide) in alignment at lines 156--162
  [] [] [] [] [] 
+ []
+
+
+Overfull \hbox (4.6636pt too wide) in paragraph at lines 169--169
+[]|\TU/TimesNewRoman(0)/bx/n/10.95 Username| 
+ []
+
+
+Overfull \hbox (0.94247pt too wide) in paragraph at lines 169--169
+[]|\TU/TimesNewRoman(0)/bx/n/10.95 Response
+ []
+
+
+Overfull \hbox (2.74986pt too wide) in paragraph at lines 169--169
+\TU/TimesNewRoman(0)/bx/n/10.95 Meaningful
+ []
+
+
+Overfull \hbox (39.6248pt too wide) in alignment at lines 166--170
+ [] [] [] [] [] [] 
+ []
+
+
+Overfull \hbox (39.6248pt too wide) in alignment at lines 170--171
+ [] [] [] [] [] [] 
+ []
+
+
+Overfull \hbox (39.6248pt too wide) in alignment at lines 171--172
+ [] [] [] [] [] [] 
+ []
+
+
+Overfull \hbox (39.6248pt too wide) in alignment at lines 172--178
+ [] [] [] [] [] [] 
+ []
+
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [58]
+Overfull \hbox (20.69627pt too wide) in alignment at lines 183--186
+ [] [] [] [] 
+ []
+
+
+Overfull \hbox (20.69627pt too wide) in alignment at lines 186--187
+ [] [] [] [] 
+ []
+
+
+Overfull \hbox (20.69627pt too wide) in alignment at lines 187--188
+ [] [] [] [] 
+ []
+
+
+Overfull \hbox (20.69627pt too wide) in alignment at lines 188--192
+ [] [] [] [] 
  []
 
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
  [59]
+Overfull \hbox (2.24821pt too wide) in paragraph at lines 207--207
+[]|\TU/TimesNewRoman(0)/m/n/10.95 287M/3.9G| 
+ []
+
+
+Overfull \hbox (2.24821pt too wide) in paragraph at lines 208--208
+[]|\TU/TimesNewRoman(0)/m/n/10.95 256M/3.9G| 
+ []
+
+
+Overfull \hbox (2.24821pt too wide) in paragraph at lines 209--209
+[]|\TU/TimesNewRoman(0)/m/n/10.95 255M/3.9G| 
+ []
+
+
+Overfull \hbox (3.78368pt too wide) in alignment at lines 213--217
+ [] [] [] [] [] 
+ []
+
+
+Overfull \hbox (3.78368pt too wide) in alignment at lines 217--218
+ [] [] [] [] [] 
+ []
+
+
+Overfull \hbox (3.78368pt too wide) in alignment at lines 218--219
+ [] [] [] [] [] 
+ []
+
+
+Overfull \hbox (3.78368pt too wide) in alignment at lines 219--225
+ [] [] [] [] [] 
+ []
+
+
+Overfull \hbox (2.24821pt too wide) in paragraph at lines 235--235
+[]|\TU/TimesNewRoman(0)/m/n/10.95 950M/3,9G| 
+ []
+
+
+Overfull \hbox (2.24821pt too wide) in paragraph at lines 236--236
+[]|\TU/TimesNewRoman(0)/m/n/10.95 892M/3,9G| 
+ []
+
+
+Overfull \hbox (2.24821pt too wide) in paragraph at lines 237--237
+[]|\TU/TimesNewRoman(0)/m/n/10.95 889M/3,9G| 
+ []
+
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [60]
+Overfull \hbox (2.24821pt too wide) in paragraph at lines 249--249
+[]|\TU/TimesNewRoman(0)/m/n/10.95 950M/3,9G| 
+ []
+
+
+Overfull \hbox (2.24821pt too wide) in paragraph at lines 250--250
+[]|\TU/TimesNewRoman(0)/m/n/10.95 892M/3,9G| 
+ []
+
+
+Overfull \hbox (2.24821pt too wide) in paragraph at lines 251--251
+[]|\TU/TimesNewRoman(0)/m/n/10.95 889M/3,9G| 
+ []
+
+
+Overfull \hbox (1.00937pt too wide) in paragraph at lines 258--258
+[]|\TU/TimesNewRoman(0)/bx/n/10.95 Jumlah| 
+ []
+
+
+Overfull \hbox (1.61221pt too wide) in paragraph at lines 258--258
+[]|\TU/TimesNewRoman(0)/bx/n/10.95 Storage| 
+ []
+
+
 Overfull \vbox (3.13019pt too high) has occurred while \output is active []
 
 
-[60]) (./chapters/6-Penutup.tex
+[61]) (./chapters/6-Penutup.tex [62
+
+]
 BAB VI.
-) (./main.bbl [61
+) (./main.bbl [63] [64
 
-] [62
-
-] [63]) (./chapters/7-Lampiran_A.tex [64]
+] [65]) (./chapters/7-Lampiran_A.tex [66]
 Lampiran A.
-[65
+[67
 
-] [66]
+] [68]
 Overfull \hbox (319.78906pt too wide) in paragraph at lines 54--60
 \TU/CourierNew(0)/m/n/10.95 '48e3236262b34d30969dca3c37281b3b4bbe3221bda826ac6a
 9a62d6444cdb0dcd0615698a5cbe587c3f0fe57a54d8f5')
  []
 
-) (./chapters/8-Lampiran_B.tex [67] [68
+) (./chapters/8-Lampiran_B.tex [69] [70
 
 ]
 Lampiran B.
-[69]
-Underfull \vbox (badness 10000) has occurred while \output is active []
-
- [70]
 [71]
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
@@ -2049,13 +2196,11 @@ Underfull \vbox (badness 10000) has occurred while \output is active []
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
  [74]
-Underfull \vbox (badness 7486) has occurred while \output is active []
-
- [75]
+[75]
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
  [76]
-Underfull \vbox (badness 10000) has occurred while \output is active []
+Underfull \vbox (badness 7486) has occurred while \output is active []
 
  [77]
 Underfull \vbox (badness 10000) has occurred while \output is active []
@@ -2070,13 +2215,13 @@ Underfull \vbox (badness 10000) has occurred while \output is active []
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
  [81]
-[82]
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [82]
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
  [83]
-Underfull \vbox (badness 10000) has occurred while \output is active []
-
- [84]
+[84]
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
  [85]
@@ -2092,11 +2237,17 @@ Underfull \vbox (badness 10000) has occurred while \output is active []
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
  [89]
-[90] [91]) [92]
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [90]
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [91]
+[92] [93]) [94]
 File: img/CPH.jpg Graphic file (type bmp)
 <img/CPH.jpg>
 Package atveryend Info: Empty hook `BeforeClearDocument' on input line 53.
- [93
+ [95
 
 
 ]
@@ -2110,12 +2261,12 @@ LaTeX Warning: There were multiply-defined labels.
 
  ) 
 Here is how much of TeX's memory you used:
- 25633 strings out of 493007
- 469489 string characters out of 6136719
- 735276 words of memory out of 5000000
- 29258 multiletter control sequences out of 15000+600000
+ 25638 strings out of 493007
+ 469539 string characters out of 6136719
+ 735718 words of memory out of 5000000
+ 29263 multiletter control sequences out of 15000+600000
  533643 words of font info for 66 fonts, out of 8000000 for 9000
  1348 hyphenation exceptions out of 8191
  46i,12n,67p,10439b,1773s stack positions out of 5000i,500n,10000p,200000b,80000s
 
-Output written on main.pdf (117 pages).
+Output written on main.pdf (119 pages).
