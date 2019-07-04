@@ -74,7 +74,7 @@
 			\begin{figure}[H]
 				\centering
 				\includegraphics[width=10cm,height=7cm]{Images/C-5/taskqueue.png}
-				\caption{Struktur diagram \textit{Puppeteer}}
+				\caption{Uji fungsionalitas penggunaan \textit{task queue} terhadap \textit{request user}}
 				\label{gambartaskqueue}
 			\end{figure}
 			Uji coba ini dilakukan dengan cara menjalankan \textit{script} yang menggunakan bahasa pemrograman \textit{Python} pada \textit{crontab} yang ada di \textit{linux} dan dijadwalkan setiap 1 menit. Setiap kali pengguna mengirim \textit{request} uji beban melalui web, akan disimpan di basis data \textit{MySQL}. Ketika ada daftar antrian yang ada di basis data \textit{MySQL}, \textit{script} akan mengeksekusi hanya satu \textit{request} yang memiliki \textit{timestamp} paling awal dari beberapa \textit{request} yang lain dan akan dilakukan pengujian terhadap skenario yang dikirim. Setelah pengujian skenario selesai, status akan diubah menjadi \textit{done} dan \textit{script} akan mengeksekusi \textit{request} yang lain satu-persatu. Pada pengujian ini akan dilakukan oleh 5 pengguna yang akan melakukan \textit{request} uji beban. Gambaran pengujian ditunjukkan pada Gambar \ref{gambartaskqueue}.
@@ -85,7 +85,7 @@
 			\begin{figure}[H]
 				\centering
 				\includegraphics[width=9cm,height=6cm]{Images/C-5/ambilhasiluji.png}
-				\caption{Struktur diagram \textit{Puppeteer}}
+				\caption{Uji fungsionalitas pengambil data uji beban}
 				\label{ambilhasiluji}
 			\end{figure}
 		
@@ -103,7 +103,13 @@
 			\end{longtable}
 		
 	\subsection{Skenario Uji Performa}
-		Sistem \textit{load generator} dan pengambil data uji beban dibangun pada 3 buah \textit{node host} yang terpasang di lingkungan \textit{swarm}.  Sebelum dilakukan uji performa, dilakukan pemasangan \textit{load generator} yang diinisiasi pada terminal \textit{manager node}, kemudian \textit{manager node} akan mendistribusikan kontainer ke setiap \textit{node host} yang tergabung. Setelah selesai, data dari setiap kontainer akan disimpan di basis data. Uji coba akan dilakukan secara bertahap untuk membuat 100, 200, 300, 400 dan 500 kontainer, status awal kontainer sebelum diberikan \textit{request} akan \textit{sleep}. Setelah itu uji coba performa dilakukan untuk menguji performa sistem terhadap jumlah \textit{load generator} yang dikirimkan oleh pengguna. Pengujian akan dikirimkan oleh pengguna melalui \textit{web service} yang disediakan sistem. Jumlah \textit{load generator} yang akan diuji mulai dari 100, 200, 300, 400 dan 500. Hasil yang diharapkan dari pengujian performa sistem yaitu \textit{CPU Usage}, \textit{Memory} dan \textit{Disk Usage} yang digunakan pada setiap \textit{node host}.
+		Sistem \textit{load generator} dan pengambil data uji beban dibangun pada 3 buah \textit{node host} yang terpasang di lingkungan \textit{swarm}.  Sebelum dilakukan uji performa, dilakukan pemasangan \textit{load generator} yang diinisiasi pada terminal \textit{manager node}, kemudian \textit{manager node} akan mendistribusikan kontainer ke setiap \textit{node host} yang tergabung. Setelah selesai, data dari setiap kontainer akan disimpan di basis data. Uji coba akan dilakukan secara bertahap untuk membuat 100, 200, 300, 400 dan 500 kontainer, status awal kontainer sebelum diberikan \textit{request} akan \textit{sleep}. Setelah itu uji coba performa dilakukan untuk menguji performa sistem terhadap jumlah \textit{load generator} yang dikirimkan oleh pengguna. Pengujian akan dikirimkan oleh pengguna melalui \textit{web service} yang disediakan sistem. Jumlah \textit{load generator} yang akan diuji mulai dari 100, 200, 300, 400 dan 500. Hasil yang diharapkan dari pengujian performa sistem yaitu \textit{CPU Usage}, \textit{Memory} dan \textit{Disk Usage} yang digunakan pada setiap \textit{node host}. Arsitektur pengujian tertera pada Gambar \ref{ujiperforma}.
+		\begin{figure}[H]
+			\centering
+			\includegraphics[width=9cm,height=6cm]{Images/C-5/performa.png}
+			\caption{Arsitektur uji performa}
+			\label{ujiperforma}
+		\end{figure}
 	
 	\section{Hasil Uji Coba dan Evaluasi}
 		Berikut dijelaskan hasil uji coba dan evaluasi berdasarkan skenario yang sudah dijelaskan pada bab \ref{skenarioujicoba}.

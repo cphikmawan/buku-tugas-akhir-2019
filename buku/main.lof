@@ -14,8 +14,9 @@
 \addvspace {10\p@ }
 \contentsline {figure}{\numberline {4.1}{\ignorespaces Tampilan web antarmuka pengguna\relax }}{34}{figure.caption.14}
 \addvspace {10\p@ }
-\contentsline {figure}{\numberline {5.1}{\ignorespaces Struktur diagram \textit {Puppeteer}\relax }}{52}{figure.caption.15}
-\contentsline {figure}{\numberline {5.2}{\ignorespaces Struktur diagram \textit {Puppeteer}\relax }}{53}{figure.caption.16}
+\contentsline {figure}{\numberline {5.1}{\ignorespaces Uji fungsionalitas penggunaan \textit {task queue} terhadap \textit {request user}\relax }}{52}{figure.caption.15}
+\contentsline {figure}{\numberline {5.2}{\ignorespaces Uji fungsionalitas pengambil data uji beban\relax }}{53}{figure.caption.16}
+\contentsline {figure}{\numberline {5.3}{\ignorespaces Arsitektur uji performa\relax }}{55}{figure.caption.17}
 \addvspace {10\p@ }
 \addvspace {10\p@ }
 \addvspace {10\p@ }
