@@ -234,14 +234,15 @@
 				3 & /login & POST & Melakukan \textit{login} \\ \hline
 				4 & /logout & GET & Melakukan \textit{logout} \\ \hline
 				5 & /skenario & GET & Melihat skenario \\ \hline
-				6 & /skenario & POST & Menambahkan skenario \\ \hline
-				7 & /skenario & DELETE & Menghapus skenario \\ \hline
-				8 & /worker & GET & Mengakses halaman \textit{worker} \\ \hline
-				9 & /worker & POST & Menambahkan jumlah \textit{worker(load generator)} dan data antrian \\ \hline
-				10 & /hasil/rata-rata & GET & Mendapatkan hasil pengujian \\ \hline
-				11 & /hasil/error-console & GET & Mendapatkan \textit{error console} web \\ \hline
-				12 & /hasil/images & GET & Melihat tangkapan layar web \\ \hline
-				13 & /antrian & GET & Melihat jumlah dan status antrian \\ \hline
+				6 & /skenario/create & GET & Mengakses halaman tambah skenario \\ \hline
+				7 & /skenario & POST & Menambahkan skenario \\ \hline
+				8 & /skenario/{id} & DELETE & Menghapus skenario \\ \hline
+				9 & /worker & GET & Mengakses halaman \textit{worker} \\ \hline
+				10 & /worker & POST & Menambahkan jumlah \textit{worker(load generator)} dan data antrian \\ \hline
+				11 & /hasil/rata-rata & GET & Mendapatkan hasil pengujian \\ \hline
+				12 & /hasil/error-console & GET & Mendapatkan \textit{error console} web \\ \hline
+				13 & /hasil/images & GET & Melihat tangkapan layar web \\ \hline
+				14 & /antrian & GET & Melihat jumlah dan status antrian \\ \hline
 				
 			\end{longtable}
 		
@@ -434,7 +435,7 @@
 				\end{longtable}
 			
 		\subsection{Implementasi \textit{Task Queue}}
-			\textit{Task queue} akan digunakan untuk mengatur antrian \textit{request} dari pengguna, pada tugas akhir ini implementasi \textit{task queue} akan dipasang pada komputer yang sama dengan \textit{web service}. Bahasa pemrograman yang akan digunakan untuk mengimplementasikan \textit{task queue} adalah bahasa pemrograman \textit{Python}, sedangkan untuk basis data akan terkoneksi dengan basis data \textit{MySQL} yang terpasang pada server yang berbeda. Selain itu \textit{task queue} akan dijalankan setiap 1 menit sekali pada \textit{crontab}. Selama \textit{task queue} berjalan algoritmenya akan selalu melakukan pengecekan apakah ada antrian yang bisa dieksekusi. \textit{Pseudocode} untuk \textit{task queue} tertera pada Kode Sumber \ref{pseudotaskqueue} dan untuk konfigurasi \textit{crontab} pada Kode Sumber \ref{crontab}.
+			\textit{Task queue} akan digunakan untuk mengatur antrian \textit{request} dari pengguna, pada tugas akhir ini implementasi \textit{task queue} akan dipasang pada komputer yang sama dengan \textit{web service}. Bahasa pemrograman yang akan digunakan untuk mengimplementasikan \textit{task queue} adalah bahasa pemrograman \textit{Python}, sedangkan untuk basis data akan terkoneksi dengan basis data \textit{MySQL} yang terpasang pada server yang berbeda. Selain itu \textit{task queue} akan dijalankan setiap 1 menit sekali pada \textit{crontab}. Selama \textit{task queue} berjalan algoritmenya akan selalu melakukan pengecekan apakah ada antrian yang bisa dieksekusi. \textit{Pseudocode} untuk \textit{task queue} tertera pada Kode Sumber \ref{pseudotaskqueue} dan untuk konfigurasi \textit{crontab} pada Kode Sumber \ref{crontab}. \\
 			
 			\begin{lstlisting}[frame=single,tabsize=2,breaklines,caption={\textit{Pseudocode task queue} },label=pseudotaskqueue, captionpos=b, language=json]
 	Connection

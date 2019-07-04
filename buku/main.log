@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.14159265-2.6-0.99998 (TeX Live 2017/Debian) (preloaded format=xelatex 2019.5.22)  4 JUL 2019 16:18
+This is XeTeX, Version 3.14159265-2.6-0.99998 (TeX Live 2017/Debian) (preloaded format=xelatex 2019.5.22)  4 JUL 2019 18:53
 entering extended mode
  \write18 enabled.
  %&-line parsing enabled.
@@ -1125,22 +1125,31 @@ Package: wrapfig 2003/01/31  v 3.6
 LaTeX Warning: Label `tabelusecase' multiply defined.
 
 
-LaTeX Warning: Label `tabelscenarios' multiply defined.
+LaTeX Warning: Label `tabelruteweb' multiply defined.
+
+
+LaTeX Warning: Label `tabelswarms' multiply defined.
+
+
+LaTeX Warning: Label `tabelcontainers' multiply defined.
+
+
+LaTeX Warning: Label `tabelqueues' multiply defined.
 
 
 LaTeX Warning: Label `tabelresults' multiply defined.
-
-
-LaTeX Warning: Label `tabelerrors' multiply defined.
-
-
-LaTeX Warning: Label `tabelsumresults' multiply defined.
 
 
 LaTeX Warning: Label `tabelsumresults' multiply defined.
 
 
 LaTeX Warning: Label `tabelspesifikasi' multiply defined.
+
+
+LaTeX Warning: Label `tabelujiskenario' multiply defined.
+
+
+LaTeX Warning: Label `tabelujirequest' multiply defined.
 
 
 LaTeX Warning: Label `mysql' multiply defined.
@@ -1586,20 +1595,12 @@ Overfull \hbox (20.69627pt too wide) in alignment at lines 230--231
  []
 
 
-Overfull \hbox (20.69627pt too wide) in alignment at lines 231--246
+Overfull \hbox (20.69627pt too wide) in alignment at lines 231--247
  [] [] [] [] 
  []
 
-[34]
-Underfull \vbox (badness 10000) has occurred while \output is active []
-
- [35]
-Overfull \hbox (20.69627pt too wide) in alignment at lines 254--258
- [] [] [] [] 
- []
-
-
-Overfull \hbox (20.69627pt too wide) in alignment at lines 258--259
+[34] [35]
+Overfull \hbox (20.69627pt too wide) in alignment at lines 255--259
  [] [] [] [] 
  []
 
@@ -1609,20 +1610,17 @@ Overfull \hbox (20.69627pt too wide) in alignment at lines 259--260
  []
 
 
-Overfull \hbox (20.69627pt too wide) in alignment at lines 260--266
+Overfull \hbox (20.69627pt too wide) in alignment at lines 260--261
  [] [] [] [] 
  []
 
 
-Underfull \vbox (badness 10000) has occurred while \output is active []
-
- [36]
-Overfull \hbox (20.69627pt too wide) in alignment at lines 271--275
+Overfull \hbox (20.69627pt too wide) in alignment at lines 261--267
  [] [] [] [] 
  []
 
-
-Overfull \hbox (20.69627pt too wide) in alignment at lines 275--276
+[36]
+Overfull \hbox (20.69627pt too wide) in alignment at lines 272--276
  [] [] [] [] 
  []
 
@@ -1632,20 +1630,17 @@ Overfull \hbox (20.69627pt too wide) in alignment at lines 276--277
  []
 
 
-Overfull \hbox (20.69627pt too wide) in alignment at lines 277--286
+Overfull \hbox (20.69627pt too wide) in alignment at lines 277--278
  [] [] [] [] 
  []
 
 
-Underfull \vbox (badness 10000) has occurred while \output is active []
-
- [37]
-Overfull \hbox (20.69627pt too wide) in alignment at lines 291--295
+Overfull \hbox (20.69627pt too wide) in alignment at lines 278--287
  [] [] [] [] 
  []
 
-
-Overfull \hbox (20.69627pt too wide) in alignment at lines 295--296
+[37]
+Overfull \hbox (20.69627pt too wide) in alignment at lines 292--296
  [] [] [] [] 
  []
 
@@ -1655,17 +1650,17 @@ Overfull \hbox (20.69627pt too wide) in alignment at lines 296--297
  []
 
 
-Overfull \hbox (20.69627pt too wide) in alignment at lines 297--303
+Overfull \hbox (20.69627pt too wide) in alignment at lines 297--298
  [] [] [] [] 
  []
 
 
-Overfull \hbox (20.69627pt too wide) in alignment at lines 305--309
+Overfull \hbox (20.69627pt too wide) in alignment at lines 298--304
  [] [] [] [] 
  []
 
 
-Overfull \hbox (20.69627pt too wide) in alignment at lines 309--310
+Overfull \hbox (20.69627pt too wide) in alignment at lines 306--310
  [] [] [] [] 
  []
 
@@ -1675,17 +1670,17 @@ Overfull \hbox (20.69627pt too wide) in alignment at lines 310--311
  []
 
 
-Overfull \hbox (20.69627pt too wide) in alignment at lines 311--315
+Overfull \hbox (20.69627pt too wide) in alignment at lines 311--312
  [] [] [] [] 
  []
 
 
-Overfull \hbox (20.69627pt too wide) in alignment at lines 317--321
+Overfull \hbox (20.69627pt too wide) in alignment at lines 312--316
  [] [] [] [] 
  []
 
-
-Overfull \hbox (20.69627pt too wide) in alignment at lines 321--322
+[38]
+Overfull \hbox (20.69627pt too wide) in alignment at lines 318--322
  [] [] [] [] 
  []
 
@@ -1695,17 +1690,17 @@ Overfull \hbox (20.69627pt too wide) in alignment at lines 322--323
  []
 
 
-Overfull \hbox (20.69627pt too wide) in alignment at lines 323--327
- [] [] [] [] 
- []
-
-[38]
-Overfull \hbox (20.69627pt too wide) in alignment at lines 332--336
+Overfull \hbox (20.69627pt too wide) in alignment at lines 323--324
  [] [] [] [] 
  []
 
 
-Overfull \hbox (20.69627pt too wide) in alignment at lines 336--337
+Overfull \hbox (20.69627pt too wide) in alignment at lines 324--328
+ [] [] [] [] 
+ []
+
+
+Overfull \hbox (20.69627pt too wide) in alignment at lines 333--337
  [] [] [] [] 
  []
 
@@ -1715,17 +1710,17 @@ Overfull \hbox (20.69627pt too wide) in alignment at lines 337--338
  []
 
 
-Overfull \hbox (20.69627pt too wide) in alignment at lines 338--346
+Overfull \hbox (20.69627pt too wide) in alignment at lines 338--339
+ [] [] [] [] 
+ []
+
+
+Overfull \hbox (20.69627pt too wide) in alignment at lines 339--347
  [] [] [] [] 
  []
 
 [39]
-Overfull \hbox (20.69627pt too wide) in alignment at lines 351--355
- [] [] [] [] 
- []
-
-
-Overfull \hbox (20.69627pt too wide) in alignment at lines 355--356
+Overfull \hbox (20.69627pt too wide) in alignment at lines 352--356
  [] [] [] [] 
  []
 
@@ -1735,20 +1730,17 @@ Overfull \hbox (20.69627pt too wide) in alignment at lines 356--357
  []
 
 
-Overfull \hbox (20.69627pt too wide) in alignment at lines 357--363
+Overfull \hbox (20.69627pt too wide) in alignment at lines 357--358
  [] [] [] [] 
  []
 
 
-Underfull \vbox (badness 10000) has occurred while \output is active []
-
- [40]
-Overfull \hbox (20.69627pt too wide) in alignment at lines 368--372
+Overfull \hbox (20.69627pt too wide) in alignment at lines 358--364
  [] [] [] [] 
  []
 
-
-Overfull \hbox (20.69627pt too wide) in alignment at lines 372--373
+[40]
+Overfull \hbox (20.69627pt too wide) in alignment at lines 369--373
  [] [] [] [] 
  []
 
@@ -1758,17 +1750,20 @@ Overfull \hbox (20.69627pt too wide) in alignment at lines 373--374
  []
 
 
-Overfull \hbox (20.69627pt too wide) in alignment at lines 374--388
+Overfull \hbox (20.69627pt too wide) in alignment at lines 374--375
+ [] [] [] [] 
+ []
+
+
+Overfull \hbox (20.69627pt too wide) in alignment at lines 375--389
  [] [] [] [] 
  []
 
 [41]
-Overfull \hbox (20.69627pt too wide) in alignment at lines 393--397
- [] [] [] [] 
- []
+Underfull \vbox (badness 10000) has occurred while \output is active []
 
-
-Overfull \hbox (20.69627pt too wide) in alignment at lines 397--398
+ [42]
+Overfull \hbox (20.69627pt too wide) in alignment at lines 394--398
  [] [] [] [] 
  []
 
@@ -1778,17 +1773,20 @@ Overfull \hbox (20.69627pt too wide) in alignment at lines 398--399
  []
 
 
-Overfull \hbox (20.69627pt too wide) in alignment at lines 399--410
- [] [] [] [] 
- []
-
-[42]
-Overfull \hbox (20.69627pt too wide) in alignment at lines 415--419
+Overfull \hbox (20.69627pt too wide) in alignment at lines 399--400
  [] [] [] [] 
  []
 
 
-Overfull \hbox (20.69627pt too wide) in alignment at lines 419--420
+Overfull \hbox (20.69627pt too wide) in alignment at lines 400--411
+ [] [] [] [] 
+ []
+
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [43]
+Overfull \hbox (20.69627pt too wide) in alignment at lines 416--420
  [] [] [] [] 
  []
 
@@ -1798,11 +1796,16 @@ Overfull \hbox (20.69627pt too wide) in alignment at lines 420--421
  []
 
 
-Overfull \hbox (20.69627pt too wide) in alignment at lines 421--434
+Overfull \hbox (20.69627pt too wide) in alignment at lines 421--422
  [] [] [] [] 
  []
 
-[43] [44] [45]) (./chapters/5-Pengujian_dan_Evaluasi.tex [46]
+
+Overfull \hbox (20.69627pt too wide) in alignment at lines 422--435
+ [] [] [] [] 
+ []
+
+[44] [45]) (./chapters/5-Pengujian_dan_Evaluasi.tex [46]
 BAB V.
 
 Overfull \hbox (20.69627pt too wide) in alignment at lines 6--10
@@ -1850,55 +1853,106 @@ Overfull \hbox (20.69627pt too wide) in alignment at lines 27--33
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
  [48]
-[49] [50]) (./chapters/6-Penutup.tex
+Overfull \hbox (20.69627pt too wide) in alignment at lines 49--52
+ [] [] [] [] 
+ []
+
+
+Overfull \hbox (20.69627pt too wide) in alignment at lines 52--53
+ [] [] [] [] 
+ []
+
+
+Overfull \hbox (20.69627pt too wide) in alignment at lines 53--54
+ [] [] [] [] 
+ []
+
+
+Overfull \hbox (20.69627pt too wide) in alignment at lines 54--59
+ [] [] [] [] 
+ []
+
+[49] [50]
+Overfull \hbox (20.69627pt too wide) in alignment at lines 63--66
+ [] [] [] [] 
+ []
+
+
+Overfull \hbox (20.69627pt too wide) in alignment at lines 66--67
+ [] [] [] [] 
+ []
+
+
+Overfull \hbox (20.69627pt too wide) in alignment at lines 67--68
+ [] [] [] [] 
+ []
+
+
+Overfull \hbox (20.69627pt too wide) in alignment at lines 68--71
+ [] [] [] [] 
+ []
+
+[51] [52]
+Overfull \hbox (20.69627pt too wide) in alignment at lines 81--84
+ [] [] [] [] 
+ []
+
+
+Overfull \hbox (20.69627pt too wide) in alignment at lines 84--85
+ [] [] [] [] 
+ []
+
+
+Overfull \hbox (20.69627pt too wide) in alignment at lines 85--86
+ [] [] [] [] 
+ []
+
+
+Overfull \hbox (20.69627pt too wide) in alignment at lines 86--90
+ [] [] [] [] 
+ []
+
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [53])
+(./chapters/6-Penutup.tex
 Underfull \vbox (badness 7486) has occurred while \output is active []
 
- [51]
-[52]
+ [54]
+[55] [56
+
+]
 BAB VI.
-) (./main.bbl [53
+) (./main.bbl [57] [58
 
-] [54
-
-] [55]) (./chapters/7-Lampiran_A.tex [56]
+] [59]) (./chapters/7-Lampiran_A.tex [60]
 Lampiran A.
-[57
+[61
 
-] [58]
+] [62]
 Overfull \hbox (319.78906pt too wide) in paragraph at lines 54--60
 \TU/CourierNew(0)/m/n/10.95 '48e3236262b34d30969dca3c37281b3b4bbe3221bda826ac6a
 9a62d6444cdb0dcd0615698a5cbe587c3f0fe57a54d8f5')
  []
 
-) (./chapters/8-Lampiran_B.tex [59] [60
+) (./chapters/8-Lampiran_B.tex [63] [64
 
 ]
 Lampiran B.
-[61]
-Underfull \vbox (badness 10000) has occurred while \output is active []
-
- [62]
-[63]
-Underfull \vbox (badness 10000) has occurred while \output is active []
-
- [64]
 [65]
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
  [66]
-Underfull \vbox (badness 7486) has occurred while \output is active []
-
- [67]
+[67]
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
  [68]
-Underfull \vbox (badness 10000) has occurred while \output is active []
-
- [69]
+[69]
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
  [70]
-Underfull \vbox (badness 10000) has occurred while \output is active []
+Underfull \vbox (badness 7486) has occurred while \output is active []
 
  [71]
 Underfull \vbox (badness 10000) has occurred while \output is active []
@@ -1907,7 +1961,9 @@ Underfull \vbox (badness 10000) has occurred while \output is active []
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
  [73]
-[74]
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [74]
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
  [75]
@@ -1917,9 +1973,7 @@ Underfull \vbox (badness 10000) has occurred while \output is active []
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
  [77]
-Underfull \vbox (badness 10000) has occurred while \output is active []
-
- [78]
+[78]
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
  [79]
@@ -1929,11 +1983,23 @@ Underfull \vbox (badness 10000) has occurred while \output is active []
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
  [81]
-[82] [83]) [84]
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [82]
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [83]
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [84]
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [85]
+[86] [87]) [88]
 File: img/CPH.jpg Graphic file (type bmp)
 <img/CPH.jpg>
 Package atveryend Info: Empty hook `BeforeClearDocument' on input line 53.
- [85
+ [89
 
 
 ]
@@ -1947,12 +2013,12 @@ LaTeX Warning: There were multiply-defined labels.
 
  ) 
 Here is how much of TeX's memory you used:
- 25594 strings out of 493007
- 468817 string characters out of 6136719
- 733242 words of memory out of 5000000
- 29223 multiletter control sequences out of 15000+600000
+ 25600 strings out of 493007
+ 468885 string characters out of 6136719
+ 733696 words of memory out of 5000000
+ 29229 multiletter control sequences out of 15000+600000
  533643 words of font info for 66 fonts, out of 8000000 for 9000
  1348 hyphenation exceptions out of 8191
  46i,12n,67p,10439b,1773s stack positions out of 5000i,500n,10000p,200000b,80000s
 
-Output written on main.pdf (109 pages).
+Output written on main.pdf (113 pages).
