@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.14159265-2.6-0.99998 (TeX Live 2017/Debian) (preloaded format=xelatex 2019.5.22)  4 JUL 2019 00:16
+This is XeTeX, Version 3.14159265-2.6-0.99998 (TeX Live 2017/Debian) (preloaded format=xelatex 2019.5.22)  4 JUL 2019 16:18
 entering extended mode
  \write18 enabled.
  %&-line parsing enabled.
@@ -1125,6 +1125,9 @@ Package: wrapfig 2003/01/31  v 3.6
 LaTeX Warning: Label `tabelusecase' multiply defined.
 
 
+LaTeX Warning: Label `tabelscenarios' multiply defined.
+
+
 LaTeX Warning: Label `tabelresults' multiply defined.
 
 
@@ -1141,9 +1144,6 @@ LaTeX Warning: Label `tabelspesifikasi' multiply defined.
 
 
 LaTeX Warning: Label `mysql' multiply defined.
-
-
-LaTeX Warning: Label `taskqueue' multiply defined.
 
 )
 \openout1 = `main.aux'.
@@ -1499,7 +1499,11 @@ Package Fancyhdr Warning: \headheight is too small (12.0pt):
  We now make it that large for the rest of the document.
  This may cause the page layout to be inconsistent, however.
 
-[2] [3] [4] [5]) (./chapters/2-Tinjauan_Pustaka.tex [6]
+[2]
+Underfull \vbox (badness 1142) has occurred while \output is active []
+
+ [3]
+[4] [5]) (./chapters/2-Tinjauan_Pustaka.tex [6]
 BAB II.
 LaTeX Font Info:    Font shape `TU/TimesNewRoman(0)/bx/it' will be
 (Font)              scaled to size 11.27493pt on input line 2.
@@ -1715,10 +1719,7 @@ Overfull \hbox (20.69627pt too wide) in alignment at lines 338--346
  [] [] [] [] 
  []
 
-
-Underfull \vbox (badness 10000) has occurred while \output is active []
-
- [39]
+[39]
 Overfull \hbox (20.69627pt too wide) in alignment at lines 351--355
  [] [] [] [] 
  []
@@ -1739,6 +1740,9 @@ Overfull \hbox (20.69627pt too wide) in alignment at lines 357--363
  []
 
 
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [40]
 Overfull \hbox (20.69627pt too wide) in alignment at lines 368--372
  [] [] [] [] 
  []
@@ -1758,7 +1762,7 @@ Overfull \hbox (20.69627pt too wide) in alignment at lines 374--388
  [] [] [] [] 
  []
 
-[40] [41]
+[41]
 Overfull \hbox (20.69627pt too wide) in alignment at lines 393--397
  [] [] [] [] 
  []
@@ -1846,30 +1850,30 @@ Overfull \hbox (20.69627pt too wide) in alignment at lines 27--33
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
  [48]
-[49]) (./chapters/6-Penutup.tex [50]
+[49] [50]) (./chapters/6-Penutup.tex
+Underfull \vbox (badness 7486) has occurred while \output is active []
+
+ [51]
+[52]
 BAB VI.
-) (./main.bbl [51
+) (./main.bbl [53
 
-] [52
+] [54
 
-] [53]) (./chapters/7-Lampiran_A.tex [54]
+] [55]) (./chapters/7-Lampiran_A.tex [56]
 Lampiran A.
-[55
+[57
 
-] [56]
+] [58]
 Overfull \hbox (319.78906pt too wide) in paragraph at lines 54--60
 \TU/CourierNew(0)/m/n/10.95 '48e3236262b34d30969dca3c37281b3b4bbe3221bda826ac6a
 9a62d6444cdb0dcd0615698a5cbe587c3f0fe57a54d8f5')
  []
 
-) (./chapters/8-Lampiran_B.tex [57] [58
+) (./chapters/8-Lampiran_B.tex [59] [60
 
 ]
 Lampiran B.
-[59]
-Underfull \vbox (badness 10000) has occurred while \output is active []
-
- [60]
 [61]
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
@@ -1878,13 +1882,11 @@ Underfull \vbox (badness 10000) has occurred while \output is active []
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
  [64]
-Underfull \vbox (badness 7486) has occurred while \output is active []
-
- [65]
+[65]
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
  [66]
-Underfull \vbox (badness 10000) has occurred while \output is active []
+Underfull \vbox (badness 7486) has occurred while \output is active []
 
  [67]
 Underfull \vbox (badness 10000) has occurred while \output is active []
@@ -1899,13 +1901,13 @@ Underfull \vbox (badness 10000) has occurred while \output is active []
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
  [71]
-[72]
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [72]
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
  [73]
-Underfull \vbox (badness 10000) has occurred while \output is active []
-
- [74]
+[74]
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
  [75]
@@ -1921,11 +1923,17 @@ Underfull \vbox (badness 10000) has occurred while \output is active []
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
  [79]
-[80] [81]) [82]
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [80]
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [81]
+[82] [83]) [84]
 File: img/CPH.jpg Graphic file (type bmp)
 <img/CPH.jpg>
 Package atveryend Info: Empty hook `BeforeClearDocument' on input line 53.
- [83
+ [85
 
 
 ]
@@ -1939,12 +1947,12 @@ LaTeX Warning: There were multiply-defined labels.
 
  ) 
 Here is how much of TeX's memory you used:
- 25593 strings out of 493007
- 468800 string characters out of 6136719
- 733117 words of memory out of 5000000
- 29222 multiletter control sequences out of 15000+600000
+ 25594 strings out of 493007
+ 468817 string characters out of 6136719
+ 733242 words of memory out of 5000000
+ 29223 multiletter control sequences out of 15000+600000
  533643 words of font info for 66 fonts, out of 8000000 for 9000
  1348 hyphenation exceptions out of 8191
  46i,12n,67p,10439b,1773s stack positions out of 5000i,500n,10000p,200000b,80000s
 
-Output written on main.pdf (107 pages).
+Output written on main.pdf (109 pages).

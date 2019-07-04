@@ -2,7 +2,7 @@
 	Pada bab ini akan dibahas uji coba dan evaluasi dari sistem yang dibuat. Sistem akan diuji coba fungsionalitasnya dengan menjalankan skenario pengujian performa pada web. Uji coba dilakukan untuk mengetahui kinerja sistem dengan lingkungan uji coba yang ditentukan.
 	
 	\section{Lingkungan Uji Coba}
-		Lingkungan Uji coba sistem ini terdiri dari beberapa komponen yaitu web service, server basis data, server manager node, dua server worker. Server yang digunakan sistem menggunakan layanan Virtual Priate Server dari DigitalOcean, sedangkan web service akan dibangun di komputer penulis. Spesifikasi untuk setiap komponen ditunjukkan pada Tabel \ref{tabelspesifikasi}.
+		Lingkungan Uji coba sistem ini terdiri dari beberapa komponen yaitu \textit{web service dan task queue}, server basis data, server \textit{manager node}, dua server \textit{worker}. Server yang digunakan sistem menggunakan layanan \textit{Virtual Private Server} dari DigitalOcean, sedangkan \textit{web service} dan \textit{task queue} akan dibangun di komputer penulis. Spesifikasi untuk setiap komponen ditunjukkan pada Tabel \ref{tabelspesifikasi}.
 		\begin{longtable}{|p{0.05\textwidth}|p{0.25\textwidth}|p{0.30\textwidth}|p{0.30\textwidth}|}
 			\caption{Spesifikasi komponen} \label{tabelspesifikasi} \\
 			\hline
@@ -10,61 +10,91 @@
 			\endhead
 			\endfoot
 			\endlastfoot
-			1 & Web Service \& Task Queue & Processor AMD FX-7600P Radeon R7, 4 Core, 8GB RAM, 250GB SSD & Ubuntu 18.04 LTS, Laravel 5.8, Python 3.6 \\ \hline
+			1 & \textit{Web Service} \& \textit{Task Queue} & \textit{Processor} AMD FX-7600P Radeon R7, 4 Core, 8GB RAM, 250GB SSD & Ubuntu 18.04 LTS, Laravel 5.8, Python 3.6 \\ \hline
 			2 & Basis Data & 1 Core Processor, 1GB RAM, 20GB SSD & Ubuntu 18.04 LTS, MySQL 5.7 \\ \hline
-			3 & Manager Node & 2 Core Processor, 4GB RAM, 80GB SSD & Ubuntu 18.04 LTS, Python 3.6, Docker 18.09.6, Node.js 8.15, NPM 6.4.1, Chrome, Puppeteer 0.12.0, MySQL Client 5.7 \\ \hline
-			4 & Worker 1 & 2 Core Processor, 4GB RAM, 80GB SSD & Ubuntu 18.04 LTS, Python 3.6, Docker 18.09.6, Node.js 8.15, NPM 6.4.1, Chrome, Puppeteer 0.12.0, MySQL Client 5.7 \\ \hline
-			5 & Worker 2 & 2 Core Processor, 4GB RAM, 80GB SSD & Ubuntu 18.04 LTS, Python 3.6, Docker 18.09.6, Node.js 8.15, NPM 6.4.1, Chrome, Puppeteer 0.12.0, MySQL Client 5.7 \\ \hline
+			3 & \textit{Manager Node} & 2 \textit{Core Processor}, 4GB RAM, 80GB SSD & Ubuntu 18.04 LTS, Python 3.6, Docker 18.09.6, Node.js 8.15, NPM 6.4.1, Chrome, Puppeteer 0.12.0, MySQL Client 5.7 \\ \hline
+			4 & \textit{Worker} 1 & 2 \textit{Core Processor}, 4GB RAM, 80GB SSD & Ubuntu 18.04 LTS, Python 3.6, Docker 18.09.6, Node.js 8.15, NPM 6.4.1, Chrome, Puppeteer 0.12.0, MySQL Client 5.7 \\ \hline
+			5 & \textit{Worker} 2 & 2 \textit{Core Processor}, 4GB RAM, 80GB SSD & Ubuntu 18.04 LTS, Python 3.6, Docker 18.09.6, Node.js 8.15, NPM 6.4.1, Chrome, Puppeteer 0.12.0, MySQL Client 5.7 \\ \hline
 		\end{longtable}
 	
-		\indent Untuk akses ke setiap komponen, digunakan IP publik yang disediakan untuk masing-masing komponen. Detail ditunjukkan pada Tabel \ref{ipserver}.
+		\indent Untuk akses ke setiap komponen, digunakan \textit{ip} publik yang disediakan untuk masing-masing komponen. Detail ditunjukkan pada Tabel \ref{ipserver}.
 		\begin{longtable}{|p{0.05\textwidth}|p{0.25\textwidth}|p{0.30\textwidth}|p{0.30\textwidth}|}
-			\caption{IP dan hostname server} \label{ipserver} \\
+			\caption{\textit{IP} dan \textit{hostname} server} \label{ipserver} \\
 			\hline
 			\textbf{No} & \textbf{Komponen} & \textbf{IP} & \textbf{Hostname} \\ \hline
 			\endhead
 			\endfoot
 			\endlastfoot
-			1 & Web Service & 10.151.253.110 & night \\ \hline
+			1 & \textit{Web Service} \& \textit{Task Queue} & 10.151.253.110 & night \\ \hline
 			2 & Basis Data & 178.128.123.143 & NIGHT \\ \hline
-			3 & Manager Node & 167.71.194.235 & CLOUD \\ \hline
-			4 & Worker Node 1 & 165.22.55.82 & RAIN \\ \hline
-			5 & Worker Node 2 & 167.71.194.233 & STORM \\ \hline
+			3 & \textit{Manager Node} & 167.71.194.235 & CLOUD \\ \hline
+			4 & \textit{Worker Node} 1 & 165.22.55.82 & RAIN \\ \hline
+			5 & \textit{Worker Node} 2 & 167.71.194.233 & STORM \\ \hline
 		\end{longtable}
 	
 	\section{Skenario Uji Coba} \label{skenarioujicoba}
-		Uji coba ini dilakukan untuk menguji apakah fungsionalitas yang diidentifikasikan terhadap kebutuhan sistem benar-benar telah diimplementasikan dan bekerja seperti yang seharusnya. Pengujian yang dilakukan didasarkan pada fungsionalitas yang disajikan sistem.
+		Uji coba ini dilakukan untuk menguji apakah fungsionalitas yang diidentifikasikan terhadap kebutuhan sistem benar-benar telah diimplementasikan dan bekerja seperti yang seharusnya. Skenario pengujian dibedakan menjadi 2 bagian yaitu:
+		\begin{itemize}
+			\item \textbf{Uji Fungsionalitas} \\
+				Pengujian yang dilakukan didasarkan pada fungsionalitas yang disajikan sistem.
+			\item \textbf{Uji Performa} \\
+				Pengujian ini dilakukan untuk mengetahui seberapa banyak \textit{load generator} yang bisa diatasi oleh sistem.
+		\end{itemize} 
 		
 	\subsection{Skenario Uji Fungsionalitas}
-		Uji fungsionalitas dibagi menjadi beberapa bagian yaitu pembuatan load generator docker container, user mengelola skenario melalui web, user mengirim request uji beban melalui web, penggunaan task queue, pengambilan data uji beban dan user melihat hasil uji beban melalui web.
+		Uji fungsionalitas dibagi menjadi beberapa bagian antara lain yaitu \textit{user} mengelola skenario melalui web, \textit{user} mengirim request uji beban melalui web, penggunaan \textit{task queue} terhadap \textit{request user}, pengambil data uji beban, \textit{user} melihat hasil uji beban melalui web.
 		
-		\subsubsection{Uji Fungsionalitas Pembuatan Load Generator Docker Container}
+		\subsubsection{Uji Fungsionalitas \textit{User} Mengelola Skenario Melalui Web}
+			Uji coba ini dilakukan dengan mengakses sistem melalui rute \texttt{/skenario}. Pengguna akan mengirimkan \textit{http request} kepada \textit{web service} yang telah disediakan. Rancangan pengujian dan hasil yang diharapkan ditunjukkan pada Tabel.
+			\begin{longtable}{|p{0.05\textwidth}|p{0.25\textwidth}|p{0.30\textwidth}|p{0.30\textwidth}|}
+				\caption{Rute \textit{HTTP} pada \textit{web service}} \label{tabelruteweb} \\ \hline
+				\textbf{No} & \textbf{Rute} & \textbf{Metode} & \textbf{Aksi} \\ \hline
+				\endhead
+				\endfoot
+				\endlastfoot
+				1 & / & GET & Mengakses halaman \textit{home} \\ \hline
+				2 & /login & GET & Mengakses halaman \textit{login} \\ \hline
+				3 & /login & POST & Melakukan \textit{login} \\ \hline
+				4 & /logout & GET & Melakukan \textit{logout} \\ \hline
+				5 & /skenario & GET & Melihat skenario \\ \hline
+				6 & /skenario & POST & Menambahkan skenario \\ \hline
+				7 & /skenario & DELETE & Menghapus skenario \\ \hline
+				8 & /worker & GET & Mengakses halaman \textit{worker} \\ \hline
+				9 & /worker & POST & Menambahkan jumlah \textit{worker(load generator)} dan data antrian \\ \hline
+				10 & /hasil/rata-rata & GET & Mendapatkan hasil pengujian \\ \hline
+				11 & /hasil/error-console & GET & Mendapatkan \textit{error console} web \\ \hline
+				12 & /hasil/images & GET & Melihat tangkapan layar web \\ \hline
+				13 & /antrian & GET & Melihat jumlah dan status antrian \\ \hline
+				
+			\end{longtable}
 		
-		\subsubsection{Uji Fungsionalitas User Mengelola Skenario Melalui Web}
-			Dilakukan pengelolaan skenario oleh user pada waktu me
+		\subsubsection{Uji Fungsionalitas \textit{User} Mengirim Request Uji Beban Melalui Web}
+			Uji coba ini dilakukan dengan mengakses sistem melalui rute \texttt{/worker}. Pengguna akan mengirimkan \textit{http request} kepada \textit{web service} yang telah disediakan. Rancangan pengujian dan hasil yang diharapkan ditunjukkan pada Tabel.
 		
-		\subsubsection{Uji Fungsionalitas User Mengirim Request Uji Beban Melalui Web}
-		
-		\subsubsection{Uji Fungsionalitas Penggunaan Task Queue Terhadap Request}
+		\subsubsection{Uji Fungsionalitas Penggunaan \textit{Task Queue} Terhadap \textit{Request User}}
+			Uji coba ini dilakukan dengan cara menjalankan \textit{script} yang menggunakan bahasa pemrograman \textit{Python} pada \textit{crontab} yang ada di \textit{linux} dan dijadwalkan setiap 1 menit. Setiap kali pengguna mengirim \textit{request} uji beban melalui web, akan disimpan di basis data \textit{MySQL}. Ketika ada daftar antrian yang ada di basis data \textit{MySQL}, \textit{script} akan mengeksekusi hanya satu \textit{request} dari beberapa \textit{request} yang dibuat terlebih dahulu dan akan dilakukan pengujian terhadap skenario yang dikirim. Setelah pengujian skenario selesai, status akan diubah menjadi 2(\textit{done}) dan \textit{script} akan mengeksekusi \textit{request} yang lain satu-persatu. Pada pengujian ini akan dilakukan oleh 3 pengguna yang akan melakukan \textit{request} uji beban. Gambaran pengujian ditunjukkan pada Gambar.
 		
 		\subsubsection{Uji Fungsionalitas Pengambil Data Uji Beban}
+			Uji coba ini dilakukan dengan cara menjalankan \textit{script puppeteer} pada setiap kontainer. \textit{script puppeteer} akan dijalankan ketika ada \textit{request} dari pengguna melalui \textit{web service} yang disediakan sistem. Gambaran pengujian ditunjukkan pada Gambar.
 		
-		\subsubsection{Uji Fungsionalitas User Melihat Hasil Uji Beban Melalui Web}
+		\subsubsection{Uji Fungsionalitas \textit{User} Melihat Hasil Uji Beban Melalui Web}
+			Uji coba ini dilakukan dengan mengakses sistem melalui rute \texttt{/hasil}. Pengguna akan mengirimkan \textit{http request} kepada \textit{web service} yang telah disediakan. Rancangan pengujian dan hasil yang diharapkan ditunjukkan pada Tabel.
+		
+	\subsection{Skenario Uji Performa}
+		Sistem \textit{load generator} dan pengambil data uji beban dibangun pada 3 buah \textit{node host} yang terpasang di lingkungan \textit{swarm}.  Sebelum dilakukan uji performa, dilakukan pemasangan \textit{load generator} yang diinisiasi pada terminal \textit{manager node}, kemudian \textit{manager node} akan mendistribusikan kontainer ke setiap \textit{node host} yang tergabung. Setelah selesai, data dari setiap kontainer akan disimpan di basis data. Uji coba akan dilakukan secara bertahap untuk membuat 100, 200, 300, 400 dan 500 kontainer, status awal kontainer sebelum diberikan \textit{request} akan \textit{sleep}. Setelah itu uji coba performa dilakukan untuk menguji performa sistem terhadap jumlah \textit{load generator} yang dikirimkan oleh pengguna. Pengujian akan dikirimkan oleh pengguna melalui \textit{web service} yang disediakan sistem. Jumlah \textit{load generator} yang akan diuji mulai dari 100, 200, 300, 400 dan 500. Performa sistem yang akan dibutuhkan datanya yaitu \textit{CPU Usage}, \textit{Memory} dan \textit{Disk Usage} yang digunakan pada setiap \textit{node host}. Gambaran pengujian tertera pada Gambar.
+		
+	
 	
 	\section{Hasil Uji Coba dan Evaluasi}
 		Berikut dijelaskan hasil uji coba dan evaluasi berdasarkan skenario yang sudah dijelaskan pada bab \ref{skenarioujicoba}.
 		
-	\subsection{Uji Fungsionalitas}
-		Berikut dijelaskan hasil pengujian fungsionalitas pada sistem yang sudah dibangun.
-	
-		\subsubsection{Uji Fungsionalitas Pembuatan Load Generator Docker Container}
-		
-		\subsubsection{Uji Fungsionalitas User Mengelola Skenario Melalui Web}
-		
-		\subsubsection{Uji Fungsionalitas User Mengirim Request Uji Beban Melalui Web}
-		
-		\subsubsection{Uji Fungsionalitas Penggunaan Task Queue Terhadap Request}
-		
-		\subsubsection{Uji Fungsionalitas Pengambil Data Uji Beban}
-		
-		\subsubsection{Uji Fungsionalitas User Melihat Hasil Uji Beban Melalui Web}
+		\subsection{Uji Fungsionalitas}
+			Berikut dijelaskan hasil pengujian fungsionalitas pada sistem yang sudah dibangun.
+			
+			\subsubsection{Uji Fungsionalitas \textit{User} Melihat Hasil Uji Beban Melalui Web}
+			\subsubsection{Uji Fungsionalitas \textit{User} Mengelola Skenario Melalui Web}
+			\subsubsection{Uji Fungsionalitas \textit{User} Mengirim Request Uji Beban Melalui Web}
+			\subsubsection{Uji Fungsionalitas Penggunaan \textit{Task Queue} Terhadap \textit{Request User}}
+			\subsubsection{Uji Fungsionalitas Pengambil Data Uji Beban}
+
+		\subsection{Uji Performa}

@@ -33,55 +33,55 @@
 \contentsline {section}{\numberline {3.2}Kasus Penggunaan}{16}{section.3.2}
 \contentsline {section}{\numberline {3.3}Arsitektur Sistem}{18}{section.3.3}
 \contentsline {subsection}{\numberline {3.3.1}Desain Umum Sistem}{19}{subsection.3.3.1}
-\contentsline {subsection}{\numberline {3.3.2}Perancangan Load Generator}{20}{subsection.3.3.2}
+\contentsline {subsection}{\numberline {3.3.2}Perancangan \textit {Load Generator}}{20}{subsection.3.3.2}
 \contentsline {subsection}{\numberline {3.3.3}Perancangan Pengambil Data Uji Beban}{21}{subsection.3.3.3}
-\contentsline {subsection}{\numberline {3.3.4}Perancangan Service Controller}{22}{subsection.3.3.4}
-\contentsline {subsubsection}{\numberline {3.3.4.1}Desain Web Service}{22}{subsubsection.3.3.4.1}
+\contentsline {subsection}{\numberline {3.3.4}Perancangan \textit {Service Controller}}{22}{subsection.3.3.4}
+\contentsline {subsubsection}{\numberline {3.3.4.1}Desain \textit {Web Service}}{22}{subsubsection.3.3.4.1}
 \contentsline {subsubsection}{\numberline {3.3.4.2}Desain Basis Data}{23}{subsubsection.3.3.4.2}
-\contentsline {subsubsection}{\numberline {3.3.4.3}Desain Penggunaan Task Queue}{24}{subsubsection.3.3.4.3}
+\contentsline {subsubsection}{\numberline {3.3.4.3}Desain Penggunaan \textit {Task Queue}}{24}{subsubsection.3.3.4.3}
 \contentsline {chapter}{\numberline {IV}IMPLEMENTASI}{25}{chapter.4}
 \contentsline {section}{\numberline {4.1}Lingkungan Implementasi}{25}{section.4.1}
 \contentsline {subsection}{\numberline {4.1.1}Perangkat Keras}{25}{subsection.4.1.1}
 \contentsline {subsection}{\numberline {4.1.2}Perangkat Lunak}{25}{subsection.4.1.2}
-\contentsline {section}{\numberline {4.2}Implementasi Load Generator}{26}{section.4.2}
-\contentsline {subsection}{\numberline {4.2.1}Implementasi Pembuatan Docker Image}{26}{subsection.4.2.1}
+\contentsline {section}{\numberline {4.2}Implementasi \textit {Load Generator}}{26}{section.4.2}
+\contentsline {subsection}{\numberline {4.2.1}Implementasi Pembuatan \textit {Docker Image}}{26}{subsection.4.2.1}
 \contentsline {subsection}{\numberline {4.2.2}Implementasi Pembuatan Lingkungan Kontainer}{28}{subsection.4.2.2}
-\contentsline {subsection}{\numberline {4.2.3}Implementasi Pemasangan Headless Chrome dan Puppeteer}{29}{subsection.4.2.3}
+\contentsline {subsection}{\numberline {4.2.3}Implementasi Pemasangan \textit {Headless Chrome} dan \textit {Puppeteer}}{29}{subsection.4.2.3}
 \contentsline {section}{\numberline {4.3}Implementasi Pengambil Data Uji Beban}{31}{section.4.3}
-\contentsline {section}{\numberline {4.4}Implementasi Service Controller}{33}{section.4.4}
-\contentsline {subsection}{\numberline {4.4.1}Implementasi Web Service}{34}{subsection.4.4.1}
+\contentsline {section}{\numberline {4.4}Implementasi \textit {Service Controller}}{33}{section.4.4}
+\contentsline {subsection}{\numberline {4.4.1}Implementasi \textit {Web Service}}{34}{subsection.4.4.1}
 \contentsline {subsection}{\numberline {4.4.2}Implementasi Skema Basis Data}{36}{subsection.4.4.2}
-\contentsline {subsubsection}{\numberline {4.4.2.1}Tabel Swarms}{36}{subsubsection.4.4.2.1}
-\contentsline {subsubsection}{\numberline {4.4.2.2}Tabel Containers}{37}{subsubsection.4.4.2.2}
-\contentsline {subsubsection}{\numberline {4.4.2.3}Tabel Users}{38}{subsubsection.4.4.2.3}
-\contentsline {subsubsection}{\numberline {4.4.2.4}Tabel Scenarios}{39}{subsubsection.4.4.2.4}
-\contentsline {subsubsection}{\numberline {4.4.2.5}Tabel Queues}{40}{subsubsection.4.4.2.5}
-\contentsline {subsubsection}{\numberline {4.4.2.6}Tabel Results}{40}{subsubsection.4.4.2.6}
-\contentsline {subsubsection}{\numberline {4.4.2.7}Tabel Errors}{42}{subsubsection.4.4.2.7}
-\contentsline {subsubsection}{\numberline {4.4.2.8}Tabel Summary Results}{43}{subsubsection.4.4.2.8}
-\contentsline {subsection}{\numberline {4.4.3}Implementasi Task Queue}{45}{subsection.4.4.3}
+\contentsline {subsubsection}{\numberline {4.4.2.1}Tabel \textit {Swarms}}{36}{subsubsection.4.4.2.1}
+\contentsline {subsubsection}{\numberline {4.4.2.2}Tabel \textit {Containers}}{37}{subsubsection.4.4.2.2}
+\contentsline {subsubsection}{\numberline {4.4.2.3}Tabel \textit {Users}}{38}{subsubsection.4.4.2.3}
+\contentsline {subsubsection}{\numberline {4.4.2.4}Tabel \textit {Scenarios}}{39}{subsubsection.4.4.2.4}
+\contentsline {subsubsection}{\numberline {4.4.2.5}Tabel \textit {Queues}}{40}{subsubsection.4.4.2.5}
+\contentsline {subsubsection}{\numberline {4.4.2.6}Tabel \textit {Results}}{41}{subsubsection.4.4.2.6}
+\contentsline {subsubsection}{\numberline {4.4.2.7}Tabel \textit {Errors}}{42}{subsubsection.4.4.2.7}
+\contentsline {subsubsection}{\numberline {4.4.2.8}Tabel \textit {Summary Results}}{43}{subsubsection.4.4.2.8}
+\contentsline {subsection}{\numberline {4.4.3}Implementasi \textit {Task Queue}}{45}{subsection.4.4.3}
 \contentsline {chapter}{\numberline {V}PENGUJIAN DAN EVALUASI}{47}{chapter.5}
 \contentsline {section}{\numberline {5.1}Lingkungan Uji Coba}{47}{section.5.1}
 \contentsline {section}{\numberline {5.2}Skenario Uji Coba}{49}{section.5.2}
 \contentsline {subsection}{\numberline {5.2.1}Skenario Uji Fungsionalitas}{49}{subsection.5.2.1}
-\contentsline {subsubsection}{\numberline {5.2.1.1}Uji Fungsionalitas Pembuatan Load Generator Docker Container}{49}{subsubsection.5.2.1.1}
-\contentsline {subsubsection}{\numberline {5.2.1.2}Uji Fungsionalitas User Mengelola Skenario Melalui Web}{49}{subsubsection.5.2.1.2}
-\contentsline {subsubsection}{\numberline {5.2.1.3}Uji Fungsionalitas User Mengirim Request Uji Beban Melalui Web}{49}{subsubsection.5.2.1.3}
-\contentsline {subsubsection}{\numberline {5.2.1.4}Uji Fungsionalitas Penggunaan Task Queue Terhadap Request}{49}{subsubsection.5.2.1.4}
-\contentsline {subsubsection}{\numberline {5.2.1.5}Uji Fungsionalitas Pengambil Data Uji Beban}{49}{subsubsection.5.2.1.5}
-\contentsline {subsubsection}{\numberline {5.2.1.6}Uji Fungsionalitas User Melihat Hasil Uji Beban Melalui Web}{49}{subsubsection.5.2.1.6}
-\contentsline {section}{\numberline {5.3}Hasil Uji Coba dan Evaluasi}{49}{section.5.3}
-\contentsline {subsection}{\numberline {5.3.1}Uji Fungsionalitas}{50}{subsection.5.3.1}
-\contentsline {subsubsection}{\numberline {5.3.1.1}Uji Fungsionalitas Pembuatan Load Generator Docker Container}{50}{subsubsection.5.3.1.1}
-\contentsline {subsubsection}{\numberline {5.3.1.2}Uji Fungsionalitas User Mengelola Skenario Melalui Web}{50}{subsubsection.5.3.1.2}
-\contentsline {subsubsection}{\numberline {5.3.1.3}Uji Fungsionalitas User Mengirim Request Uji Beban Melalui Web}{50}{subsubsection.5.3.1.3}
-\contentsline {subsubsection}{\numberline {5.3.1.4}Uji Fungsionalitas Penggunaan Task Queue Terhadap Request}{50}{subsubsection.5.3.1.4}
-\contentsline {subsubsection}{\numberline {5.3.1.5}Uji Fungsionalitas Pengambil Data Uji Beban}{50}{subsubsection.5.3.1.5}
-\contentsline {subsubsection}{\numberline {5.3.1.6}Uji Fungsionalitas User Melihat Hasil Uji Beban Melalui Web}{50}{subsubsection.5.3.1.6}
-\contentsline {chapter}{\numberline {VI}PENUTUP}{51}{chapter.6}
-\contentsline {section}{\numberline {6.1}Kesimpulan}{51}{section.6.1}
-\contentsline {section}{\numberline {6.2}Saran}{51}{section.6.2}
-\contentsline {chapter}{DAFTAR PUSTAKA}{53}{chapter*.15}
-\contentsline {chapter}{\numberline {A}INSTALASI PERANGKAT LUNAK}{55}{appendix.A}
-\contentsline {chapter}{\numberline {B}KODE SUMBER}{59}{appendix.B}
-\contentsline {chapter}{BIODATA PENULIS}{83}{appendix*.16}
+\contentsline {subsubsection}{\numberline {5.2.1.1}Uji Fungsionalitas \textit {User} Mengelola Skenario Melalui Web}{49}{subsubsection.5.2.1.1}
+\contentsline {subsubsection}{\numberline {5.2.1.2}Uji Fungsionalitas \textit {User} Mengirim Request Uji Beban Melalui Web}{49}{subsubsection.5.2.1.2}
+\contentsline {subsubsection}{\numberline {5.2.1.3}Uji Fungsionalitas Penggunaan \textit {Task Queue} Terhadap \textit {Request User}}{50}{subsubsection.5.2.1.3}
+\contentsline {subsubsection}{\numberline {5.2.1.4}Uji Fungsionalitas Pengambil Data Uji Beban}{50}{subsubsection.5.2.1.4}
+\contentsline {subsubsection}{\numberline {5.2.1.5}Uji Fungsionalitas \textit {User} Melihat Hasil Uji Beban Melalui Web}{50}{subsubsection.5.2.1.5}
+\contentsline {subsection}{\numberline {5.2.2}Skenario Uji Performa}{51}{subsection.5.2.2}
+\contentsline {section}{\numberline {5.3}Hasil Uji Coba dan Evaluasi}{51}{section.5.3}
+\contentsline {subsection}{\numberline {5.3.1}Uji Fungsionalitas}{51}{subsection.5.3.1}
+\contentsline {subsubsection}{\numberline {5.3.1.1}Uji Fungsionalitas \textit {User} Melihat Hasil Uji Beban Melalui Web}{52}{subsubsection.5.3.1.1}
+\contentsline {subsubsection}{\numberline {5.3.1.2}Uji Fungsionalitas \textit {User} Mengelola Skenario Melalui Web}{52}{subsubsection.5.3.1.2}
+\contentsline {subsubsection}{\numberline {5.3.1.3}Uji Fungsionalitas \textit {User} Mengirim Request Uji Beban Melalui Web}{52}{subsubsection.5.3.1.3}
+\contentsline {subsubsection}{\numberline {5.3.1.4}Uji Fungsionalitas Penggunaan \textit {Task Queue} Terhadap \textit {Request User}}{52}{subsubsection.5.3.1.4}
+\contentsline {subsubsection}{\numberline {5.3.1.5}Uji Fungsionalitas Pengambil Data Uji Beban}{52}{subsubsection.5.3.1.5}
+\contentsline {subsection}{\numberline {5.3.2}Uji Performa}{52}{subsection.5.3.2}
+\contentsline {chapter}{\numberline {VI}PENUTUP}{53}{chapter.6}
+\contentsline {section}{\numberline {6.1}Kesimpulan}{53}{section.6.1}
+\contentsline {section}{\numberline {6.2}Saran}{53}{section.6.2}
+\contentsline {chapter}{DAFTAR PUSTAKA}{55}{chapter*.15}
+\contentsline {chapter}{\numberline {A}INSTALASI PERANGKAT LUNAK}{57}{appendix.A}
+\contentsline {chapter}{\numberline {B}KODE SUMBER}{61}{appendix.B}
+\contentsline {chapter}{BIODATA PENULIS}{85}{appendix*.16}
