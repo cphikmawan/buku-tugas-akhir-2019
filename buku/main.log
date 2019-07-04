@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.14159265-2.6-0.99998 (TeX Live 2017/Debian) (preloaded format=xelatex 2019.5.22)  4 JUL 2019 19:45
+This is XeTeX, Version 3.14159265-2.6-0.99998 (TeX Live 2017/Debian) (preloaded format=xelatex 2019.5.22)  4 JUL 2019 20:59
 entering extended mode
  \write18 enabled.
  %&-line parsing enabled.
@@ -1152,6 +1152,9 @@ LaTeX Warning: Label `tabelujiskenario' multiply defined.
 LaTeX Warning: Label `tabelujirequest' multiply defined.
 
 
+LaTeX Warning: Label `tabelhasilujihasil' multiply defined.
+
+
 LaTeX Warning: Label `mysql' multiply defined.
 
 )
@@ -1892,97 +1895,103 @@ Overfull \hbox (20.69627pt too wide) in alignment at lines 68--71
  [] [] [] [] 
  []
 
-[51] [52]
-Overfull \hbox (20.69627pt too wide) in alignment at lines 81--84
- [] [] [] [] 
- []
-
-
-Overfull \hbox (20.69627pt too wide) in alignment at lines 84--85
- [] [] [] [] 
- []
-
-
-Overfull \hbox (20.69627pt too wide) in alignment at lines 85--86
- [] [] [] [] 
- []
-
-
-Overfull \hbox (20.69627pt too wide) in alignment at lines 86--90
- [] [] [] [] 
- []
-
-
-Underfull \vbox (badness 10000) has occurred while \output is active []
-
+[51]
+File: Images/C-5/taskqueue.png Graphic file (type bmp)
+<Images/C-5/taskqueue.png>
+ [52]
+File: Images/C-5/ambilhasiluji.png Graphic file (type bmp)
+<Images/C-5/ambilhasiluji.png>
  [53]
-Overfull \hbox (20.69627pt too wide) in alignment at lines 106--109
+Overfull \hbox (20.69627pt too wide) in alignment at lines 94--97
  [] [] [] [] 
  []
 
 
-Overfull \hbox (20.69627pt too wide) in alignment at lines 109--110
+Overfull \hbox (20.69627pt too wide) in alignment at lines 97--98
  [] [] [] [] 
  []
 
 
-Overfull \hbox (20.69627pt too wide) in alignment at lines 110--111
+Overfull \hbox (20.69627pt too wide) in alignment at lines 98--99
  [] [] [] [] 
  []
 
 
-Overfull \hbox (20.69627pt too wide) in alignment at lines 111--116
+Overfull \hbox (20.69627pt too wide) in alignment at lines 99--103
  [] [] [] [] 
  []
 
-[54]
+
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
- [55]
-Overfull \hbox (20.69627pt too wide) in alignment at lines 121--124
+ [54]
+Overfull \hbox (20.69627pt too wide) in alignment at lines 117--120
  [] [] [] [] 
  []
 
 
-Overfull \hbox (20.69627pt too wide) in alignment at lines 124--125
+Overfull \hbox (20.69627pt too wide) in alignment at lines 120--121
  [] [] [] [] 
  []
 
 
-Overfull \hbox (20.69627pt too wide) in alignment at lines 125--126
+Overfull \hbox (20.69627pt too wide) in alignment at lines 121--122
  [] [] [] [] 
  []
 
 
-Overfull \hbox (20.69627pt too wide) in alignment at lines 126--129
+Overfull \hbox (20.69627pt too wide) in alignment at lines 122--127
+ [] [] [] [] 
+ []
+
+[55]
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [56]
+Overfull \hbox (20.69627pt too wide) in alignment at lines 132--135
  [] [] [] [] 
  []
 
 
-Overfull \hbox (20.69627pt too wide) in alignment at lines 138--141
+Overfull \hbox (20.69627pt too wide) in alignment at lines 135--136
  [] [] [] [] 
  []
 
 
-Overfull \hbox (20.69627pt too wide) in alignment at lines 141--142
+Overfull \hbox (20.69627pt too wide) in alignment at lines 136--137
  [] [] [] [] 
  []
 
 
-Overfull \hbox (20.69627pt too wide) in alignment at lines 142--143
+Overfull \hbox (20.69627pt too wide) in alignment at lines 137--140
  [] [] [] [] 
  []
 
 
-Overfull \hbox (20.69627pt too wide) in alignment at lines 143--147
+Overfull \hbox (20.69627pt too wide) in alignment at lines 149--152
  [] [] [] [] 
  []
 
-[56]) (./chapters/6-Penutup.tex [57] [58
 
-]
+Overfull \hbox (20.69627pt too wide) in alignment at lines 152--153
+ [] [] [] [] 
+ []
+
+
+Overfull \hbox (20.69627pt too wide) in alignment at lines 153--154
+ [] [] [] [] 
+ []
+
+
+Overfull \hbox (20.69627pt too wide) in alignment at lines 154--158
+ [] [] [] [] 
+ []
+
+[57]) (./chapters/6-Penutup.tex [58]
 BAB VI.
-) (./main.bbl [59] [60
+) (./main.bbl [59
+
+] [60
 
 ] [61]) (./chapters/7-Lampiran_A.tex [62]
 Lampiran A.
@@ -2071,10 +2080,10 @@ LaTeX Warning: There were multiply-defined labels.
 
  ) 
 Here is how much of TeX's memory you used:
- 25606 strings out of 493007
- 468969 string characters out of 6136719
- 734150 words of memory out of 5000000
- 29235 multiletter control sequences out of 15000+600000
+ 25617 strings out of 493007
+ 469224 string characters out of 6136719
+ 734278 words of memory out of 5000000
+ 29243 multiletter control sequences out of 15000+600000
  533643 words of font info for 66 fonts, out of 8000000 for 9000
  1348 hyphenation exceptions out of 8191
  46i,12n,67p,10439b,1773s stack positions out of 5000i,500n,10000p,200000b,80000s

@@ -71,10 +71,23 @@
 			\end{longtable}
 		
 		\subsubsection{Uji Fungsionalitas Penggunaan \textit{Task Queue} Terhadap \textit{Request User}}
-			Uji coba ini dilakukan dengan cara menjalankan \textit{script} yang menggunakan bahasa pemrograman \textit{Python} pada \textit{crontab} yang ada di \textit{linux} dan dijadwalkan setiap 1 menit. Setiap kali pengguna mengirim \textit{request} uji beban melalui web, akan disimpan di basis data \textit{MySQL}. Ketika ada daftar antrian yang ada di basis data \textit{MySQL}, \textit{script} akan mengeksekusi hanya satu \textit{request} yang memiliki \textit{timestamp} paling awal dari beberapa \textit{request} yang lain dan akan dilakukan pengujian terhadap skenario yang dikirim. Setelah pengujian skenario selesai, status akan diubah menjadi \textit{done} dan \textit{script} akan mengeksekusi \textit{request} yang lain satu-persatu. Pada pengujian ini akan dilakukan oleh 5 pengguna yang akan melakukan \textit{request} uji beban. Gambaran pengujian ditunjukkan pada Gambar.
+			\begin{figure}[H]
+				\centering
+				\includegraphics[width=10cm,height=7cm]{Images/C-5/taskqueue.png}
+				\caption{Struktur diagram \textit{Puppeteer}}
+				\label{gambartaskqueue}
+			\end{figure}
+			Uji coba ini dilakukan dengan cara menjalankan \textit{script} yang menggunakan bahasa pemrograman \textit{Python} pada \textit{crontab} yang ada di \textit{linux} dan dijadwalkan setiap 1 menit. Setiap kali pengguna mengirim \textit{request} uji beban melalui web, akan disimpan di basis data \textit{MySQL}. Ketika ada daftar antrian yang ada di basis data \textit{MySQL}, \textit{script} akan mengeksekusi hanya satu \textit{request} yang memiliki \textit{timestamp} paling awal dari beberapa \textit{request} yang lain dan akan dilakukan pengujian terhadap skenario yang dikirim. Setelah pengujian skenario selesai, status akan diubah menjadi \textit{done} dan \textit{script} akan mengeksekusi \textit{request} yang lain satu-persatu. Pada pengujian ini akan dilakukan oleh 5 pengguna yang akan melakukan \textit{request} uji beban. Gambaran pengujian ditunjukkan pada Gambar \ref{gambartaskqueue}.
+			
 		
 		\subsubsection{Uji Fungsionalitas Pengambil Data Uji Beban}
-			Uji coba ini dilakukan dengan cara menjalankan \textit{script puppeteer} pada setiap kontainer. \textit{script puppeteer} akan dijalankan ketika ada \textit{request} dari pengguna melalui \textit{web service} yang disediakan sistem. Gambaran pengujian ditunjukkan pada Gambar.
+			Uji coba ini dilakukan dengan cara menjalankan \textit{script puppeteer} pada setiap kontainer. \textit{script puppeteer} akan dijalankan ketika ada \textit{request} dari pengguna melalui \textit{web service} yang disediakan sistem. Gambaran pengujian ditunjukkan pada Gambar \ref{ambilhasiluji}.
+			\begin{figure}[H]
+				\centering
+				\includegraphics[width=9cm,height=6cm]{Images/C-5/ambilhasiluji.png}
+				\caption{Struktur diagram \textit{Puppeteer}}
+				\label{ambilhasiluji}
+			\end{figure}
 		
 		\subsubsection{Uji Fungsionalitas \textit{User} Melihat Hasil Uji Beban}
 			Uji coba ini dilakukan dengan mengakses sistem melalui rute \texttt{/hasil}. Pengguna akan mengirimkan \textit{http request} kepada \textit{web service} yang telah disediakan. Rancangan pengujian dan hasil yang diharapkan ditunjukkan pada Tabel \ref{tabelujihasil}.
@@ -90,9 +103,7 @@
 			\end{longtable}
 		
 	\subsection{Skenario Uji Performa}
-		Sistem \textit{load generator} dan pengambil data uji beban dibangun pada 3 buah \textit{node host} yang terpasang di lingkungan \textit{swarm}.  Sebelum dilakukan uji performa, dilakukan pemasangan \textit{load generator} yang diinisiasi pada terminal \textit{manager node}, kemudian \textit{manager node} akan mendistribusikan kontainer ke setiap \textit{node host} yang tergabung. Setelah selesai, data dari setiap kontainer akan disimpan di basis data. Uji coba akan dilakukan secara bertahap untuk membuat 100, 200, 300, 400 dan 500 kontainer, status awal kontainer sebelum diberikan \textit{request} akan \textit{sleep}. Setelah itu uji coba performa dilakukan untuk menguji performa sistem terhadap jumlah \textit{load generator} yang dikirimkan oleh pengguna. Pengujian akan dikirimkan oleh pengguna melalui \textit{web service} yang disediakan sistem. Jumlah \textit{load generator} yang akan diuji mulai dari 100, 200, 300, 400 dan 500. Hasil yang diharapkan dari pengujian performa sistem yaitu \textit{CPU Usage}, \textit{Memory} dan \textit{Disk Usage} yang digunakan pada setiap \textit{node host}. Gambaran pengujian tertera pada Gambar.
-		
-	
+		Sistem \textit{load generator} dan pengambil data uji beban dibangun pada 3 buah \textit{node host} yang terpasang di lingkungan \textit{swarm}.  Sebelum dilakukan uji performa, dilakukan pemasangan \textit{load generator} yang diinisiasi pada terminal \textit{manager node}, kemudian \textit{manager node} akan mendistribusikan kontainer ke setiap \textit{node host} yang tergabung. Setelah selesai, data dari setiap kontainer akan disimpan di basis data. Uji coba akan dilakukan secara bertahap untuk membuat 100, 200, 300, 400 dan 500 kontainer, status awal kontainer sebelum diberikan \textit{request} akan \textit{sleep}. Setelah itu uji coba performa dilakukan untuk menguji performa sistem terhadap jumlah \textit{load generator} yang dikirimkan oleh pengguna. Pengujian akan dikirimkan oleh pengguna melalui \textit{web service} yang disediakan sistem. Jumlah \textit{load generator} yang akan diuji mulai dari 100, 200, 300, 400 dan 500. Hasil yang diharapkan dari pengujian performa sistem yaitu \textit{CPU Usage}, \textit{Memory} dan \textit{Disk Usage} yang digunakan pada setiap \textit{node host}.
 	
 	\section{Hasil Uji Coba dan Evaluasi}
 		Berikut dijelaskan hasil uji coba dan evaluasi berdasarkan skenario yang sudah dijelaskan pada bab \ref{skenarioujicoba}.
