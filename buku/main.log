@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.14159265-2.6-0.99998 (TeX Live 2017/Debian) (preloaded format=xelatex 2019.5.22)  5 JUL 2019 02:54
+This is XeTeX, Version 3.14159265-2.6-0.99998 (TeX Live 2017/Debian) (preloaded format=xelatex 2019.5.22)  5 JUL 2019 04:36
 entering extended mode
  \write18 enabled.
  %&-line parsing enabled.
@@ -1155,6 +1155,9 @@ LaTeX Warning: Label `tabelujirequest' multiply defined.
 LaTeX Warning: Label `tabelhasilujiskenario' multiply defined.
 
 
+LaTeX Warning: Label `sdhasilperforma' multiply defined.
+
+
 LaTeX Warning: Label `mysql' multiply defined.
 
 )
@@ -2165,6 +2168,56 @@ Overfull \hbox (1.61221pt too wide) in paragraph at lines 258--258
  []
 
 
+Overfull \hbox (5.05412pt too wide) in paragraph at lines 265--265
+[]|\TU/TimesNewRoman(0)/m/n/10.95 1.36M/3.9G| 
+ []
+
+
+Overfull \hbox (5.05412pt too wide) in paragraph at lines 266--266
+[]|\TU/TimesNewRoman(0)/m/n/10.95 1.39M/3.9G| 
+ []
+
+
+Overfull \hbox (5.05412pt too wide) in paragraph at lines 267--267
+[]|\TU/TimesNewRoman(0)/m/n/10.95 1.02M/3.9G| 
+ []
+
+
+Overfull \hbox (5.05412pt too wide) in paragraph at lines 268--268
+[]|\TU/TimesNewRoman(0)/m/n/10.95 1.18M/3.9G| 
+ []
+
+
+Overfull \hbox (5.05412pt too wide) in paragraph at lines 270--270
+[]|\TU/TimesNewRoman(0)/m/n/10.95 1.33M/3.9G| 
+ []
+
+
+Overfull \hbox (5.05412pt too wide) in paragraph at lines 272--272
+[]|\TU/TimesNewRoman(0)/m/n/10.95 1.05M/3.9G| 
+ []
+
+
+Overfull \hbox (5.05412pt too wide) in paragraph at lines 273--273
+[]|\TU/TimesNewRoman(0)/m/n/10.95 1.12M/3.9G| 
+ []
+
+
+Overfull \hbox (5.05412pt too wide) in paragraph at lines 274--274
+[]|\TU/TimesNewRoman(0)/m/n/10.95 1.19M/3.9G| 
+ []
+
+
+Overfull \hbox (5.05412pt too wide) in paragraph at lines 275--275
+[]|\TU/TimesNewRoman(0)/m/n/10.95 1.38M/3.9G| 
+ []
+
+
+Overfull \hbox (5.05412pt too wide) in paragraph at lines 276--276
+[]|\TU/TimesNewRoman(0)/m/n/10.95 1.45M/3.9G| 
+ []
+
+
 Overfull \vbox (3.13019pt too high) has occurred while \output is active []
 
 
@@ -2263,7 +2316,7 @@ LaTeX Warning: There were multiply-defined labels.
 Here is how much of TeX's memory you used:
  25638 strings out of 493007
  469539 string characters out of 6136719
- 735718 words of memory out of 5000000
+ 735706 words of memory out of 5000000
  29263 multiletter control sequences out of 15000+600000
  533643 words of font info for 66 fonts, out of 8000000 for 9000
  1348 hyphenation exceptions out of 8191
