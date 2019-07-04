@@ -1,11 +1,11 @@
 \babel@toc {bahasa}{}
 \contentsline {chapter}{ABSTRAK}{vii}{Doc-Start}
-\contentsline {chapter}{ABSTRACT}{viii}{Doc-Start}
-\contentsline {chapter}{Kata Pengantar}{ix}{chapter*.1}
-\contentsline {chapter}{DAFTAR ISI}{xiii}{chapter*.2}
-\contentsline {chapter}{DAFTAR TABEL}{xvii}{chapter*.3}
-\contentsline {chapter}{DAFTAR GAMBAR}{xix}{chapter*.4}
-\contentsline {chapter}{DAFTAR KODE SUMBER}{xxi}{chapter*.5}
+\contentsline {chapter}{ABSTRACT}{ix}{Doc-Start}
+\contentsline {chapter}{Kata Pengantar}{xi}{chapter*.1}
+\contentsline {chapter}{DAFTAR ISI}{xv}{chapter*.2}
+\contentsline {chapter}{DAFTAR TABEL}{xix}{chapter*.3}
+\contentsline {chapter}{DAFTAR GAMBAR}{xxi}{chapter*.4}
+\contentsline {chapter}{DAFTAR KODE SUMBER}{xxiii}{chapter*.5}
 \contentsline {chapter}{\numberline {I}PENDAHULUAN}{1}{chapter.1}
 \contentsline {section}{\numberline {1.1}Latar Belakang}{1}{section.1.1}
 \contentsline {section}{\numberline {1.2}Rumusan Masalah}{2}{section.1.2}
@@ -82,7 +82,7 @@
 \contentsline {subsubsection}{\numberline {5.3.2.2}Uji Performa Sistem Terhadap Request Jumlah \textit {Load Generator}}{61}{subsubsection.5.3.2.2}
 \contentsline {chapter}{\numberline {VI}PENUTUP}{63}{chapter.6}
 \contentsline {section}{\numberline {6.1}Kesimpulan}{63}{section.6.1}
-\contentsline {section}{\numberline {6.2}Saran}{63}{section.6.2}
+\contentsline {section}{\numberline {6.2}Saran}{64}{section.6.2}
 \contentsline {chapter}{DAFTAR PUSTAKA}{65}{chapter*.18}
 \contentsline {chapter}{\numberline {A}INSTALASI PERANGKAT LUNAK}{67}{appendix.A}
 \contentsline {chapter}{\numberline {B}KODE SUMBER}{71}{appendix.B}

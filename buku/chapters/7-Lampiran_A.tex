@@ -1,7 +1,7 @@
 \chapter{INSTALASI PERANGKAT LUNAK}
 
-\section*{Instalasi Docker}
-	Untuk melakukan instalasi Docker, dilakukan seperti langkah-langkah berikut:
+\section*{Instalasi \textit{Docker}}
+	Untuk melakukan instalasi \textit{Docker}, dilakukan seperti langkah-langkah berikut:
 \begin{lstlisting}[frame=single,tabsize=2,breaklines,caption={Perintah instalasi Docker },label=instalasidocker, captionpos=b, language=json,numbers=none]
 $ sudo apt-get -y install \
 apt-transport-https \
@@ -21,14 +21,14 @@ $ sudo apt-get update
 $ sudo apt-get install docker-ce docker-ce-cli containerd.io
 \end{lstlisting}
 	
-	Setelah menjalankan perintah pada kode sumber \ref{instalasidocker}. Jalankan perintah berikut agar Docker bisa dijalankan sebagai Non-Root User.
+	Setelah menjalankan perintah pada kode sumber \ref{instalasidocker}. Jalankan perintah berikut agar \textit{Docker} bisa dijalankan sebagai \textit{Non-Root User}.
 \begin{lstlisting}[frame=single,tabsize=2,breaklines,caption={Perintah mengubah hak User },label=nonrootuser, captionpos=b, language=json,numbers=none]
 $ sudo groupadd docker
 $ sudo usermod -aG docker $USER
 \end{lstlisting}
 
-\section*{Instalasi Docker Compose}
-Docker Compose digunakan untuk automasi dalam menjalankan Dockerfile dan berperan untuk pembuatan Docker Image. Instalasi Docker Compose dapat dilihat pada kode sumber \ref{dockercomposeinstall}.
+\section*{Instalasi \textit{Docker Compose}}
+\textit{Docker Compose} digunakan untuk automasi dalam menjalankan \textit{Dockerfile} dan berperan untuk pembuatan Docker Image. Instalasi \textit{Docker Compose} dapat dilihat pada kode sumber \ref{dockercomposeinstall}.
 
 \begin{lstlisting}[frame=single,tabsize=2,breaklines,caption={Perintah instalasi Docker Compose},label=dockercomposeinstall, captionpos=b, language=json,numbers=none]
 $ sudo curl -L "https://github.com/docker/compose/releases/download/1.24.0/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
@@ -38,8 +38,8 @@ $ sudo chmod +x /usr/local/bin/docker-compose
 $ sudo ln -s /usr/local/bin/docker-compose /usr/bin/docker-compose
 \end{lstlisting}
 
-\section*{Instalasi Linux Package}
-Beberapa package yang dibutuhkan dalam pembuatan sistem.
+\section*{Instalasi \textit{Linux Package}}
+Beberapa \textit{package} yang dibutuhkan dalam pembuatan sistem.
 \begin{itemize}
 	\item Node.js \\
 		\texttt{\$ sudo apt install nodejs}\\
