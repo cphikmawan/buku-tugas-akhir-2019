@@ -224,7 +224,7 @@
 					5 & 500 & 166 & 167 & 167 \\ \hline
 				\end{longtable}
 				
-				Hasil dari pengujian sistem untuk pembuatan \textit{load generator} ditunjukkan pada Tabel \ref{suberdayasetpembuatan}.
+				Hasil akhir dari pengujian sistem untuk pembuatan \textit{load generator} ditunjukkan pada Tabel \ref{suberdayasetpembuatan} serta grafik  kondisi akhir \textit{CPU} pada Gambar \ref{pembuatancpu} dan kondisi akhir \textit{RAM} pada Gambar \ref{pembuatanram}.
 				\begin{longtable}{|p{0.05\textwidth}|p{0.25\textwidth}|p{0.14\textwidth}|p{0.17\textwidth}|p{0.14\textwidth}|}
 					\caption{Kondisi akhir ketersediaan sumberdaya setelah pembuatan} \label{suberdayasetpembuatan} \\
 					\hline
@@ -236,6 +236,20 @@
 					2 & RAIN & 97,9\% & 892M/3,9G & 74/78G \\ \hline
 					3 & STORM & 97,8\% & 889M/3,9G & 74/78G \\ \hline
 				\end{longtable}
+			
+				\begin{figure}[H]
+					\centering
+					\includegraphics[width=10cm,height=6cm]{Images/C-5/pembuatancpu.PNG}
+					\caption{Kondisi akhir ketersediaan sumberdaya \textit{CPU} setelah pembuatan}
+					\label{pembuatancpu}
+				\end{figure}
+			
+				\begin{figure}[H]
+					\centering
+					\includegraphics[width=10cm,height=6cm]{Images/C-5/pembuatanram.PNG}
+					\caption{Kondisi akhir ketersediaan sumberdaya \textit{RAM} setelah pembuatan}
+					\label{pembuatanram}
+				\end{figure}
 			
 			\subsubsection{Uji Performa Sistem Terhadap Request Jumlah \textit{Load Generator}}
 				Kondisi awal ketersediaan sumberdaya sebelum ada \textit{request} jumlah \textit{load generator} dari pengguna pada masing-masing \textit{node host} ditunjukkan pada Tabel \ref{suberdayaawalperforma}.
@@ -251,7 +265,7 @@
 					3 & STORM & 97,8\% & 889M/3,9G & 74/78G \\ \hline
 				\end{longtable}
 			
-				Hasil dari pengujian performa sistem untuk pembuatan \textit{load generator} ditunjukkan pada Tabel \ref{sdhasilperforma}.
+				Hasil akhir ketersediaan sumberdaya ditunjukkan pada Tabel \ref{sdhasilperforma}, serta grafik ketersediaan CPU pada Gambar \ref{performacpu} dan ketersediaan RAM pada Gambar \ref{performaram}.
 				\begin{longtable}{|p{0.05\textwidth}|p{0.18\textwidth}|p{0.12\textwidth}|p{0.10\textwidth}|p{0.17\textwidth}|p{0.12\textwidth}|}
 					\caption{Kondisi ketersediaan sumberdaya ketika ada \textit{request}} \label{sdhasilperforma} \\
 					\hline
@@ -275,4 +289,20 @@
 					&& 400 & 55.1\% & 1.38M/3.9G & 74/78G \\ \cline{3-6}
 					&& 500 & 50.4\% & 1.45M/3.9G & 74/78G \\ \hline
 				\end{longtable}
+			
+				\begin{figure}[H]
+					\centering
+					\includegraphics[width=10cm,height=5.5cm]{Images/C-5/performacpu.PNG}
+					\caption{Kondisi ketersediaan sumberdaya \textit{CPU} setelah ada \textit{request}}
+					\label{performacpu}
+				\end{figure}
+				
+				\begin{figure}[H]
+					\centering
+					\includegraphics[width=10cm,height=5.5cm]{Images/C-5/performaram.PNG}
+					\caption{Kondisi ketersediaan sumberdaya \textit{RAM} setelah ada \textit{request}}
+					\label{performaram}
+				\end{figure}
+			
+				
 			
