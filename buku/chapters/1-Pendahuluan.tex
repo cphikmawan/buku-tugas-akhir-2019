@@ -1,12 +1,12 @@
 \chapter{PENDAHULUAN}
-	Pada bab ini akan dipaparkan mengenai garis besar Tugas Akhir yang meliputi latar belakang, tujuan, rumusan dan batasan permasalahan, metodologi pembuatan Tugas Akhir, dan sistematika penulisan.
+	Pada bab ini akan dipaparkan mengenai garis besar tugas akhir yang meliputi latar belakang, tujuan, rumusan dan batasan permasalahan, metodologi pembuatan tugas akhir, dan sistematika penulisan.
         
 	\section{Latar Belakang}
 		Saat ini pengembangan aplikasi berbasis web sangat banyak dilakukan. Dalam pengembangan web, akan diperlukan uji beban yang dilakukan pada web yang dikembangkan sebelum diluncurkan ke tahap produksi. Salah satu teknik uji beban adalah \textit{Headless Testing}, salah satu \textit{browser} yang menggunakan teknik ini adalah \textit{Headless Chrome}. Teknik ini menyediakan akses kontrol seperti \textit{browser} pada umumnya untuk mendapatkan data dokumen uji beban, hanya saja teknik ini berjalan secara \textit{headless} atau tanpa menampilkan antarmuka pengguna. Dikarenakan berjalan secara \textit{headless}, maka untuk melakukan pengambilan data dokumen uji beban dilakukan menggunakan baris perintah atau \textit{CLI(Command Line Interface)}.
 		
-		\indent Pengembang aplikasi web tentu saja membutuhkan teknik untuk uji beban, namun dalam melakukan uji beban dibutuhkan \textit{resource user} untuk mengakses web dan waktu yang cukup lama karena dilakukan secara manual. Oleh karena itu, dibutuhkan suatu sistem yang dapat melakukan automasi untuk uji beban web, membuat \textit{load generator} yang digunakan sebagai \textit{resource user} dan dapat mempersingkat waktu uji beban.
+		\indent Pengembang aplikasi web tentu saja membutuhkan teknik untuk uji beban, namun dalam melakukan uji beban dibutuhkan \textit{resource user} untuk mengakses web dan waktu yang cukup lama karena dilakukan secara manual. Oleh karena itu, dibutuhkan suatu sistem yang dapat melakukan otomasi untuk uji beban web, membuat \textit{load generator} yang digunakan sebagai \textit{resource user} dan dapat mempersingkat waktu uji beban.
 		
-		\indent Pada tugas akhir ini, akan dibangun sebuah sistem uji beban menggunakan teknik secara \textit{headless} yang akan memanfaatkan \textit{Headless Chrome} sebagai \textit{tester} dan membuat \textit{load generator} yang memanfaatkan infrastruktur \textit{Docker} sebagai \textit{resource user}, serta automasi pengambilan data dari \textit{tester} menggunakan pustaka \textit{Node} yaitu \textit{Puppeteer}\cite{puppeteer}.
+		\indent Pada tugas akhir ini, akan dibangun sebuah sistem uji beban menggunakan teknik secara \textit{headless} yang akan memanfaatkan \textit{Headless Chrome} sebagai \textit{tester} dan membuat \textit{load generator} yang memanfaatkan infrastruktur \textit{Docker} sebagai \textit{resource user}, serta otomasi pengambilan data dari \textit{tester} menggunakan pustaka \textit{Node} yaitu \textit{Puppeteer}\cite{puppeteer}.
 
 	\section{Rumusan Masalah}
        	Rumusan masalah yang diangkat dalam tugas akhir ini dapat dipaparkan sebagai berikut :
@@ -32,16 +32,17 @@
        	\begin{enumerate}
        		\item Membuat sistem manajemen pengujian aplikasi secara \textit{headless} menggunakan \textit{Headless Chrome}.
        		\item Membuat sistem agar \textit{Docker} bisa menjadi \textit{load generator} untuk pengujian.
-       		\item Mengimplementasikan pengujian menggunakan skenario yang sudah disiapkan.
        		\item Membuat sistem untuk menampilkan laporan uji beban pada web.
+       		\item Membuat sistem yang dapat mengelola permintaan layanan uji beban dari \textit{multiuser} berupa antrian.
        	\end{enumerate}
         
 	\section{Manfaat}
 		Manfaat dari pembuatan tugas akhir ini yaitu:
 		\begin{enumerate}
 			\item Mempelajari penggunaan \textit{Headless Browser} untuk pengujian suatu aplikasi yaitu \textit{Headless Chrome}
+			\item Mempelajadi penggunaan \textit{Docker} sebagai \textit{load generator} untuk melakukan uji beban.
+			\item Mengetahui performa uji beban suatu aplikasi web.
 			\item Meminimalisir adanya kegagalan web saat dimuat ketika sudah diluncurkan.
-			\item Mengetahui performa \textit{load} suatu aplikasi web.
 		\end{enumerate}
 	
 	\section{Metodologi}
@@ -64,7 +65,7 @@
 		\subsection{Implementasi Perangkat Lunak}
 			Pada tahap ini dilakukan implementasi atau realisasi dari hasil analisis dan perancangan arsitektur yang sudah dibuat sebelumnya, sehingga menjadi sebuah infrastruktur yang sesuai dengan apa yang direncanakan. 
 		\subsection{Pengujian dan Evaluasi}
-			Pada tahap ini dilakukan pengujian untuk mengukur performa web dan kegagalan saat dimuat menggunakan arsitektur sistem yang sudah dibuat menggunakan infrastruktur \textit{Docker}. Beberapa performa yang diukur pada pengujian antara lain, \textit{load time}, \textit{response time}, \textit{firstmeaningfulpain}, \textit{css tracing}, \textit{domcontentloadevent} dan \textit{dominteractive} dalam satuan \textit{ms(millisecond)} serta \textit{error console}. Setelah dilakukan uji coba, maka dilakukan evaluasi terhadap kinerja arsitektur sistem yang telah diimplementasikan dengan harapan bisa diperbaiki ketika ada pengembangan ke depannya.
+			Pada tahap ini dilakukan pengujian untuk mengukur performa web dan kegagalan saat dimuat menggunakan arsitektur sistem yang sudah dibuat menggunakan infrastruktur \textit{Docker}. Beberapa performa yang diukur pada pengujian antara lain, \textit{load time}, \textit{response time}, \textit{firstmeaningfulpain}, \textit{css tracing} dan \textit{domcontentloadevent} dalam satuan \textit{ms(millisecond)} serta \textit{error console}. Setelah dilakukan uji coba, maka dilakukan evaluasi terhadap kinerja arsitektur sistem yang telah diimplementasikan dengan harapan bisa diperbaiki ketika ada pengembangan ke depannya.
 		\subsection{Penyusunan Buku Tugas Akhir}
 			Pada tahap ini dilakukan penyusunan buku tugas akhir yang berisikan dokumentasi yang mencakup teori, konsep, implementasi dan hasil pengerjaan tugas akhir.
 	
@@ -74,7 +75,7 @@
 			\item Bab I. Pendahuluan\\
 				Bab ini berisi penjelasan mengenai latar belakang, rumusan masalah, batasan masalah, tujuan, manfaat, metodologi dan sistematika penulisan dari pembuatan tugas akhir.
 			\item Bab II. Tinjauan Pustaka\\
-				Bab ini berisi kajian teori atau penjelasan metode, algoritme, \textit{library} dan \textit{tools} yang digunakan dalam penyusunan tugas akhir ini. Kajian teori yang dimaksud berisi tentang penjelasan singkat mengenai \textit{Headless Browser}, \textit{Headless Chrome}, \textit{Puppeteer}, \textit{NodeJS}, \textit{Docker}, \textit{Docker Swarm} dan \textit{Laravel}.
+				Bab ini berisi kajian teori atau penjelasan metode, algoritme, \textit{library} dan \textit{tools} yang digunakan dalam penyusunan tugas akhir ini. Kajian teori yang dimaksud berisi tentang penjelasan singkat mengenai \textit{Headless Browser}, \textit{Headless Chrome}, \textit{Puppeteer}, \textit{NodeJS}, \textit{Docker}, \textit{Docker Swarm}, \textit{Laravel} dan \textit{Python}.
 			\item Bab III. Desain dan Perancangan\\
 				Bab ini berisi mengenai analisis dan perancangan arsitektur sistem yang akan diimplementasikan pada tugas akhir ini.
 			\item Bab IV. Implementasi\\

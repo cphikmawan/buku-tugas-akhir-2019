@@ -3,7 +3,7 @@
 		\textit{Headless Browser} merupakan jenis perangkat lunak yang dapat mengakses halaman web, namun tidak menampilkan antarmuka pengguna. Seperti peramban pada umumnya, \textit{Headless Browser} juga memiliki kemampuan yang sama, hanya saja menyisakan mesin dan lingkungan \textit{javascript}. Oleh karena itu \textit{Headless Browser} hanya bisa diakses menggunakan baris perintah atau \textit{CLI(Command Line Interface)}\cite{headless_browser}. Beberapa \textit{Headless Browser} yaitu \textit{Headless Chrome}, \textit{Selenium WebDriver} dan \textit{Firefox Headless Mode}. Salah satu \textit{Headless Browser} yang akan digunakan pada Tugas Akhir ini adalah \textit{Headless Chrome}, karena \textit{Headless Chrome} memiliki fitur khusus yang bisa ditemukan pada bagian \textit{performance}. \textit{Headless Chrome} juga memiliki fitur umum seperti \textit{Headless Browser} yang lain. Beberapa fitur umumnya yaitu\cite{headless_browser_2}:
 		
 		\begin{enumerate}
-			\item Memudahkan untuk melakukan pengujian secara otomatis(automasi).
+			\item Memudahkan untuk melakukan pengujian secara otomatis.
 			\item Bisa dijalankan di server, mode \textit{headless} tidak membutuhkan antarmuka pengguna.
 			\item Membuat dokumen atau file seperti PDF dan Screenshot.
 			\item \textit{Debugging}.\\
@@ -18,7 +18,7 @@
 		
 		\subsection{\textit{Puppeteer}}
 			\textit{Puppeteer} adalah sebuah pustaka dari \textit{Node} yang memiliki kemampuan yang mumpuni untuk memberikan layanan \textit{API} yang berfungsi untuk mengontrol layanan dari \textit{Chrome} atau \textit{Chromium}. Selain itu, kemampuan kontrol \textit{Puppeteer} sangat memungkinkan untuk akses pada protokol \textit{Devtools Protocol} yang saat ini dikembangkan oleh tim \textit{Google Developer}, dimana protokol tersebut memiliki kemampuan yang cukup berguna yaitu sebagai \textit{tools instrument}, \textit{inspect}, \textit{debug}, dan \textit{profile chrome}.\cite{puppeteer} \\
-			\indent Dibandingkan dengan \textit{PhantomJS} yang sudah tidak dikembangkan lagi, \textit{Puppeteer} masih dikembangkan secara berkala. Begitupun fitur-fitur yang disediakan \textit{Puppeteer} sangat mumpuni untuk melakukan beberapa pengujian terhadap web yaitu melakukan pengambilan gambar ataupun pdf, automasi, pengujian antarmuka pengguna, \textit{keyboard input}, \textit{timeline trace} untuk mendapatkan performa dan ekstensi pada \textit{Chrome}. Untuk lebih jelasnya struktur diagram \textit{Puppeteer} ditunjukkan pada Gambar \ref{puppeteeroverview}.
+			\indent Dibandingkan dengan \textit{PhantomJS} yang sudah tidak dikembangkan lagi, \textit{Puppeteer} masih dikembangkan secara berkala. Begitupun fitur-fitur yang disediakan \textit{Puppeteer} sangat mumpuni untuk melakukan beberapa pengujian terhadap web yaitu melakukan pengambilan gambar ataupun pdf, otomasi, pengujian antarmuka pengguna, \textit{keyboard input}, \textit{timeline trace} untuk mendapatkan performa dan ekstensi pada \textit{Chrome}. Untuk lebih jelasnya struktur diagram \textit{Puppeteer} ditunjukkan pada Gambar \ref{puppeteeroverview}.
 			\begin{figure}[H]
 				\centering
 				\includegraphics[width=9cm,height=10cm]{Images/C-2/puppeteeroverview.jpg}
@@ -35,7 +35,7 @@
 		
 		\indent Setiap \textit{Dockerfile} adalah kombinasi beberapa perintah yang dibuat menjadi menjadi satu atau \textit{script} yang bisa dijalankan secara otomatis sebagai \textit{Docker Images} utama atau untuk membuat \textit{Docker Images} yang baru\cite{docker}\cite{docker_2}. \textit{Docker} juga menyediakan layanan untuk mengunduh dan mengupload \textit{Docker images} melalui \texttt{https://hub.docker.com/}. Untuk melihat perbedaan antara kontainer dan \textit{VM(Virtual Machine)} dapat dilihat pada Gambar \ref{containervm}.
 	
-		\indent Pada tugas akhir ini, \textit{Docker Container} akan digunakan sebagai pengguna untuk mengakses web yang akan diuji, dan bisa diumpamakan sebagai pengguna asli untuk automasi pengujiannya. \\
+		\indent Pada tugas akhir ini, \textit{Docker Container} akan digunakan sebagai pengguna untuk mengakses web yang akan diuji, dan bisa diumpamakan sebagai pengguna asli untuk otomasi pengujiannya. \\
 		
 		\begin{figure}[H]
 			\centering
