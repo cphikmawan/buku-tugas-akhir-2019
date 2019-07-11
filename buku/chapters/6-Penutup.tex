@@ -4,10 +4,10 @@
 	\section{Kesimpulan}
         Dari proses perencangan, implementasi dan pengujian terhadap sistem, dapat diambil beberapa kesimpulan berikut:
         \begin{enumerate}
-        	\item Sistem dapat membuat \textit{tester} menggunakan \textit{Headless Chrome}, dengan cara memadukan \textit{Headless Chrome} dengan sebuah \textit{API} yang bisa menjadi pengambil uji beban pada \textit{browser}, yaitu \textit{Puppeteer}.
-        	\item Sistem dapat menggunakan \textit{Docker} sebagai \textit{load generator}, dengan cara membuat sebuah \textit{Docker Image} yang sudah terpasang \textit{Node.js}, \textit{Chrome} dan \textit{Puppeteer} di dalamnya.
-        	\item Sistem menyajikan laporan uji beban pada \textit{web service} dalam bentuk tabel. Laporan yang disajikan juga menampilkan \textit{error console} yang terekam pada \textit{browser}, serta tangkapan layar web yang diuji.
-        	\item Dalam menangani layanan pengujian \textit{multiuser}, digunakan sebuah \textit{task scheduler crontab} yang menjalankan \textit{script Python} setiap satu menit dan melakukan pengecekan secara berkala.
+        	\item Dalam pengembangan web, uji beban dapat dilakukan menggunakan \textit{Headless Chrome} sebagai \textit{tester}, yang dipadukan dengan \textit{API} pengambil uji beban yaitu \textit{Puppeteer}.
+     		\item Load generator yang digunakan sebagai resource user dapat diimplementasikan oleh Docker. Docker dipasang menggunakan Docker Image yang sudah diinstalasi \textit{Node.js} dan \textit{Puppeteer} didalamnya.
+        	\item Data Laporan uji beban didapatkan menggunakan \textit{Puppeteer} dan disajikan pada web dalam bentuk tabel dengan data inti yaitu \textit{Response End}, \textit{CSS Tracing End}, \textit{Dom Content Loaded}, \textit{First Meaningful Paint} dan \textit{Load Event End}. Laporan yang disajikan juga menampilkan \textit{error console} yang terekam pada \textit{browser} dan tangkapan layar web yang diuji.
+        	\item Dalam menangani layanan uji beban yang dikirimkan oleh pengembang web, sistem menggunakan sebuah \textit{task scheduler crontab} yang menjalankan \textit{script Python} setiap satu menit dan melakukan pengecekan secara berkala.
         \end{enumerate}
         
 	\section{Saran}
@@ -16,5 +16,5 @@
 			\item Sistem sudah bisa membuat sebuah \textit{tester} dan \textit{load generator}, namun masih memiliki kendala terhadap penggunaan \textit{CPU} dan \textit{RAM} ketika menjalankan \textit{Headless Chrome} secara bersama, oleh karena itu pengembang bisa menambahkan sistem untuk melakukan \textit{multithreading} ketika \textit{load generator} dijalankan bersama, untuk saat ini sistem hanya membatasi penggunaan \textit{load generator}.
 			\item \textit{Headless Chrome} dan \textit{Puppeteer} tergolong tools yang baru, namun perkembangannya sangat cepat. Untuk kedepannya pengembang bisa memadukan \textit{Headless Chrome} dan \textit{Puppeteer} dengan \textit{tools load test} yang lain misalnya \textit{K6}, \textit{Jmeter Rest API}, \textit{Selenium} atau \textit{Firefox Headless Mode}.
 			\item Untuk menangani permintaan jumlah \textit{load generator} yang tinggi, server yang digunakan harus diperbanyak agar dapat menunjang sistem untuk melayani uji beban.
-			\item Sistem dapat melakukan uji beban dengan metode \textit{GET}, oleh karena itu bisa dikembangkan untuk melayani uji beban menggunakan metode yang lain misalnya \textit{POST}. Serta pengembang juga bisa mempercantik tampilan antarmuka pengguna agar lebih nyaman untuk digunakan.
+			\item Sistem dapat melakukan uji beban dengan metode \textit{GET} dan dapat menghasilkan beberapa laporan uji beban, kedepannya bisa dikembangkan untuk uji beban menggunakan metode \textit{POST}. Serta pengembang juga bisa mempercantik tampilan antarmuka pengguna agar lebih nyaman untuk digunakan.
 		\end{itemize}

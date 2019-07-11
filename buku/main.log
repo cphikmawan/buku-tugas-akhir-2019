@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.14159265-2.6-0.99998 (TeX Live 2017/Debian) (preloaded format=xelatex 2019.5.22)  10 JUL 2019 21:08
+This is XeTeX, Version 3.14159265-2.6-0.99998 (TeX Live 2017/Debian) (preloaded format=xelatex 2019.5.22)  11 JUL 2019 23:36
 entering extended mode
  \write18 enabled.
  %&-line parsing enabled.
@@ -2033,6 +2033,11 @@ Overfull \hbox (0.94247pt too wide) in paragraph at lines 169--169
  []
 
 
+Overfull \hbox (2.0342pt too wide) in paragraph at lines 169--169
+\TU/TimesNewRoman(0)/bx/n/10.95 Tracing
+ []
+
+
 Overfull \hbox (2.74986pt too wide) in paragraph at lines 169--169
 \TU/TimesNewRoman(0)/bx/n/10.95 Meaningful
  []
@@ -2229,7 +2234,11 @@ File: Images/C-5/performaram.PNG Graphic file (type bmp)
 
 ]
 BAB VI.
-[65]) (./main.bbl [66] [67
+
+Underfull \vbox (badness 5862) has occurred while \output is active []
+
+ [65])
+(./main.bbl [66] [67
 
 ]) (./chapters/7-Lampiran_A.tex [68]
 Lampiran A.

@@ -38,7 +38,7 @@
 		\end{enumerate}
 			
 		\subsection{Implementasi Pembuatan \textit{Docker Image}}
-			\textit{Docker Image} digunakan untuk menjalankan kontainer, pada tugas akhir ini \textit{Docker Image} akan dibuat terlebih dahulu agar bisa digunakan untuk menjalankan \textit{Puppeteer} dan \textit{Headless Chrome}. Namun untuk membuat \textit{Docker Image} diperlukan beberapa tahapan yaitu konfigurasi \texttt{Dockerfile}, pemasangan \textit{Docker Compose} dapat dilihat pada Kode Sumber \ref{dockercomposeinstall} dan konfigurasi \texttt{docker-compsoe.yml} dan unggah \textit{Docker Image} ke \textit{Docker Hub}.
+			\textit{Docker Image} digunakan untuk menjalankan kontainer, pada tugas akhir ini \textit{Docker Image} akan dibuat terlebih dahulu agar bisa digunakan untuk menjalankan \textit{Puppeteer} dan \textit{Headless Chrome}. Namun untuk membuat \textit{Docker Image} diperlukan beberapa tahapan yaitu konfigurasi \texttt{Dockerfile}, pemasangan \textit{Docker Compose} dapat dilihat pada Kode Sumber \ref{dockercomposeinstall} dan konfigurasi \texttt{docker-compose.yml} dan unggah \textit{Docker Image} ke \textit{Docker Hub}.
 			
 			\indent Konfigurasi \texttt{Dockerfile} dapat dilihat pada Kode Sumber \ref{dockerimage}, sedangkan konfigurasi \texttt{docker-compose.yml} dapat dilihat pada Kode Sumber \ref{dockercompose}.
 				\begin{lstlisting}[frame=single,tabsize=2,breaklines,caption={Konfigurasi \textit{Dockerfile} },label=dockerimage, captionpos=b, language=json]
@@ -150,14 +150,14 @@
 		\begin{enumerate}
 			\item \textit{Response End} \\
 				Atribut ini menunjukkan waktu setelah \textit{user} menerima \textit{byte} terakhir dari dokumen sebelum koneksi transportasi ditutup.
-			\item \textit{DOM Content Loaded} \\
-				Atribut ini menunjukkan waktu setelah dokumen sudah diterima oleh \textit{user}.
-			\item \textit{Load Event End} \\
-				Atribut ini mengembalikan waktu ketika memuat dokumen selesai.
 			\item \textit{CSS Tracing End} \\
 				Atribut ini menunjukkan waktu dari ekstraksi akhir file \textit{CSS} dimuat.
-			\item \textit{First Meaningfulpain} \\
-				Atribut ini adalah atribut khusus yang ada pada \textit{Chrome} yang menunjukkan bahwa segala konten halaman yang dimuat sudah ditampilkan di layar. \\
+			\item \textit{DOM Content Loaded} \\
+				Atribut ini menunjukkan waktu setelah dokumen sudah diterima oleh \textit{user}.
+			\item \textit{First Meaningful Paint} \\
+				Atribut ini adalah atribut khusus yang ada pada \textit{Chrome} yang menunjukkan bahwa segala konten halaman yang dimuat sudah ditampilkan di layar.
+			\item \textit{Load Event End} \\
+				Atribut ini mengembalikan waktu ketika memuat dokumen selesai. \\
 		\end{enumerate}
 	 
 	 	\indent Selain data uji beban diatas, \textit{Puppeteer} juga digunakan untuk mengambil sebuah tangkapan layar sesuai skenario yang dikirimkan oleh pengguna dan mengambil data saat terjadi kegagalan saat memuat \textit{assets} yang tertulis pada \textit{console browser}. Adapun \textit{pseudocode} untuk melakukan pengambilan data uji beban dapat dilihat pada Kode Sumber \ref{pseudocodepupp}.
