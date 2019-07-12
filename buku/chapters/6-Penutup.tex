@@ -13,8 +13,8 @@
 	\section{Saran}
 		Berikut beberapa saran yang diberikan untuk pengembangan lebih lanjut:
 		\begin{itemize}
-			\item Sistem sudah bisa membuat sebuah \textit{tester} dan \textit{load generator}, namun masih memiliki kendala terhadap penggunaan \textit{CPU} dan \textit{RAM} ketika menjalankan \textit{Headless Chrome} secara bersama, oleh karena itu pengembang bisa menambahkan sistem untuk melakukan \textit{multithreading} ketika \textit{load generator} dijalankan bersama, untuk saat ini sistem hanya membatasi penggunaan \textit{load generator}.
-			\item \textit{Headless Chrome} dan \textit{Puppeteer} tergolong tools yang baru, namun perkembangannya sangat cepat. Untuk kedepannya pengembang bisa memadukan \textit{Headless Chrome} dan \textit{Puppeteer} dengan \textit{tools load test} yang lain misalnya \textit{K6}, \textit{Jmeter Rest API}, \textit{Selenium} atau \textit{Firefox Headless Mode}.
-			\item Untuk menangani permintaan jumlah \textit{load generator} yang tinggi, server yang digunakan harus diperbanyak agar dapat menunjang sistem untuk melayani uji beban.
-			\item Sistem dapat melakukan uji beban dengan metode \textit{GET} dan dapat menghasilkan beberapa laporan uji beban, kedepannya bisa dikembangkan untuk uji beban menggunakan metode \textit{POST}. Serta pengembang juga bisa mempercantik tampilan antarmuka pengguna agar lebih nyaman untuk digunakan.
+			\item Melakukan optimasi terhadap penggunaan \textit{CPU} dan \textit{RAM} supaya hasil uji lebih baik, misalnya menggunakan \textit{multithreading} untuk mengatur proses ketika dijalankan.
+			\item Memadukan \textit{Headless Chrome} dan \textit{Puppeteer} dengan \textit{tools load test} yang lain misalnya \textit{K6}, \textit{Jmeter Rest API}, \textit{Selenium Web Driver} atau \textit{Firefox Headless Mode} untuk mendapatkan data uji beban.
+			\item Untuk menangani permintaan jumlah \textit{load generator} yang tinggi, server yang digunakan harus dilakukan \textit{scaling} secara horizontal maupun vertikal, supaya dapat menunjang sistem untuk melayani uji beban.
+			\item Pengembang bisa mempercantik tampilan antarmuka pengguna agar lebih nyaman untuk digunakan dan mengoptimasi layanan uji beban pada metode \textit{POST}.
 		\end{itemize}
