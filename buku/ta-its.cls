@@ -296,7 +296,7 @@
         Dosen Pembimbing II\\*%
     	\pembimbingDua
     }{} \\*[32pt]%
-    JURUSAN \MakeUppercase{\jurusan} \\*%
+    DEPARTEMEN \MakeUppercase{\jurusan} \\*%
     Fakultas \fakultas \\*%
     Institut Teknologi Sepuluh Nopember \\*%
     Surabaya, \tahun \\*%
@@ -319,7 +319,7 @@
         Dosen Pembimbing II\\*%
     	\pembimbingDua
     }{} \\*[10pt]%
-    JURUSAN \MakeUppercase{\jurusan} \\*%
+    DEPARTEMEN \MakeUppercase{\jurusan} \\*%
     Fakultas \fakultas \\*%
     Institut Teknologi Sepuluh Nopember \\*%
     Surabaya, \tahun \\*%
@@ -335,15 +335,15 @@
     {\large\textbf{\MakeUppercase{\judulEnglish}}} \\*[32pt]%
     \MakeUppercase{\penulis} \\*%
     NRP \nrp \\*[10pt]%
-    Supervisor I\\*%
+    First Advisor\\*%
     \pembimbingSatu \\*[10pt]%
     \ifdef{\pembimbingDua}{
-        Supervisor II\\*%
+        Second Advisor\\*%
     	\pembimbingDua
     }{} \\*[10pt]%
-    Department of \MakeUppercase{\jurusanEnglish} \\*%
+    DEPARTMENT OF \MakeUppercase{\jurusanEnglish} \\*%
     Faculty of \fakultasEnglish \\*%
-    Institut Teknologi Sepuluh Nopember \\*%
+    Sepuluh Nopember Institute of Technology \\*%
     Surabaya, \tahun \\*%
     \AddToShipoutPictureBG*{\includegraphics[width=\paperwidth,height=\paperheight]{img/sampulWhite.png}}%
     \rmfamily%
@@ -361,11 +361,11 @@
     	\textbf{\large{LEMBAR PENGESAHAN}} \\*[10pt]%
         \textbf{\MakeUppercase{\judul}} \\*[10pt]%
         \textbf{\MakeUppercase{TUGAS AKHIR}} \\*%
-        Diajukan Guna Memenuhi Salah Satu Syarat \\*%
+        Diajukan Untuk Memenuhi Salah Satu Syarat \\*%
         Memperoleh Gelar \gelar \\*%
         pada \\*%
         Bidang Studi \bidangStudi \\*%
-        Program Studi \prodi  Jurusan \jurusan \\*%
+        Program Studi \prodi Departemen \jurusan \\*%
         Fakultas \fakultas \\*%
         Institut Teknologi Sepuluh Nopember \\*[10pt]%
         Oleh : \\*%
@@ -374,7 +374,7 @@
     \end{centering}%
 
     {\noindent Disetujui oleh Dosen Pembimbing Tugas Akhir :}\\*[15pt]         
-    \pembimbingSatu \hfill \hfill ........................ \\ NIP: \nipPembimbingSatu \hfill \hfill (Pembimbing 1) \\*[15pt]%
+    \pembimbingSatu \hfill \hfill ..................... \\ NIP: \nipPembimbingSatu \hfill \hfill (Pembimbing 1) \\*[15pt]%
     %
     \ifdef{\pembimbingDua}{{\noindent \pembimbingDua  \hfill \hfill .........................}  \\ NIP: \nipPembimbingDua \hfill \hfill (Pembimbing 2) \\*[20pt]}{}%
 
@@ -397,7 +397,7 @@
 \noindent\begin{tabular}{>{\bfseries}ll>{\bfseries}p{6.5cm}}
 Nama  & :& \MakeUppercase{\penulis} \\
 NRP & :& \nrp \\
-Jurusan  & :& \jurusan \fakultasSingkatan \\
+Departemen  & :& \jurusan \fakultasSingkatan \\
 Pembimbing I  & :& \pembimbingSatu
 \ifdef{\pembimbingDua}{\\Pembimbing II  & :& \pembimbingDua}{}
 \end{tabular}
@@ -418,9 +418,9 @@ Pembimbing I  & :& \pembimbingSatu
 \noindent\begin{tabular}{>{\bfseries}ll>{\bfseries}p{6.5cm}}
 Name  & :& \MakeUppercase{\penulis} \\
 NRP & :& \nrp \\
-Major  & :& \jurusanEnglish \fakultasSingkatan \\
-Supervisor I  & :& \pembimbingSatu 
-\ifdef{\pembimbingDua}{\\Supervisor II  & :& \pembimbingDua}{}
+Department  & :& \jurusanEnglish \fakultasSingkatan \\
+First Advisor  & :& \pembimbingSatu 
+\ifdef{\pembimbingDua}{\\Second Advisor  & :& \pembimbingDua}{}
 \end{tabular}
 \\*[20pt]
 \begin{centering}

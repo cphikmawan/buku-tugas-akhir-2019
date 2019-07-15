@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.14159265-2.6-0.99998 (TeX Live 2017/Debian) (preloaded format=xelatex 2019.5.22)  13 JUL 2019 02:48
+This is XeTeX, Version 3.14159265-2.6-0.99998 (TeX Live 2017/Debian) (preloaded format=xelatex 2019.5.22)  15 JUL 2019 15:30
 entering extended mode
  \write18 enabled.
  %&-line parsing enabled.
@@ -1445,6 +1445,8 @@ LaTeX Font Info:    Font shape `TU/TimesNewRoman(0)/bx/n' will be
 (Font)              scaled to size 11.22368pt on input line 16.
 LaTeX Font Info:    Font shape `TU/TimesNewRoman(0)/bx/n' will be
 (Font)              scaled to size 12.29993pt on input line 16.
+LaTeX Font Info:    Font shape `TU/TimesNewRoman(0)/bx/it' will be
+(Font)              scaled to size 11.22368pt on input line 16.
  [5] [6
 
 ] (./chapters/0-Abstrak.tex
@@ -1463,10 +1465,12 @@ Overfull \hbox (3.65033pt too wide) in paragraph at lines 1--1
  []  
  []
 
-[7]
-LaTeX Font Info:    Font shape `TU/TimesNewRoman(0)/bx/it' will be
-(Font)              scaled to size 11.22368pt on input line 8.
- [8]) (./chapters/0-Kata_Pengantar.tex [9] [10]
+[7] [8]
+Overfull \hbox (6.14388pt too wide) in paragraph at lines 11--11
+ []  
+ []
+
+) (./chapters/0-Kata_Pengantar.tex [9] [10]
 LaTeX Font Info:    Font shape `TU/TimesNewRoman(0)/bx/n' will be
 (Font)              scaled to size 11.27493pt on input line 1.
  [11
@@ -2327,11 +2331,11 @@ LaTeX Warning: There were multiply-defined labels.
 
  ) 
 Here is how much of TeX's memory you used:
- 25659 strings out of 493007
- 470029 string characters out of 6136719
- 736092 words of memory out of 5000000
- 29279 multiletter control sequences out of 15000+600000
- 533643 words of font info for 66 fonts, out of 8000000 for 9000
+ 25661 strings out of 493007
+ 470100 string characters out of 6136719
+ 736164 words of memory out of 5000000
+ 29280 multiletter control sequences out of 15000+600000
+ 533651 words of font info for 67 fonts, out of 8000000 for 9000
  1348 hyphenation exceptions out of 8191
  46i,12n,67p,10439b,1773s stack positions out of 5000i,500n,10000p,200000b,80000s
 
