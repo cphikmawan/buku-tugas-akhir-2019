@@ -38,7 +38,7 @@
 			\item \textbf{Uji Fungsionalitas} \\
 				Pengujian yang dilakukan didasarkan pada fungsionalitas yang disajikan sistem.
 			\item \textbf{Uji Performa} \\
-				Pengujian ini dilakukan untuk mengetahui seberapa banyak \textit{load generator} yang bisa diatasi oleh sistem.
+				Pengujian ini dilakukan untuk mengetahui ketersediaan atau penggunaan sumberdaya \textit{CPU} dan \textit{RAM} terhadap jumlah \textit{load generator} yang dipasang pada sistem.
 		\end{itemize} 
 		
 	\subsection{Skenario Uji Fungsionalitas}
@@ -48,7 +48,7 @@
 			Uji coba ini dilakukan dengan mengakses sistem melalui rute \texttt{/skenario}. Pengguna akan mengirimkan \textit{http request} kepada \textit{web service} yang telah disediakan. Rancangan pengujian dan hasil yang diharapkan ditunjukkan pada Tabel \ref{tabelujiskenario}.
 			\begin{longtable}{|p{0.05\textwidth}|p{0.25\textwidth}|p{0.30\textwidth}|p{0.30\textwidth}|}
 				\caption{Skenario uji fungsionalitas \textit{user} mengelola skenario} \label{tabelujiskenario} \\ \hline
-				\textbf{No} & \textbf{Rute} & \textbf{Uji Coba} & \textbf{Hasil \& Harapan} \\ \hline
+				\textbf{No} & \textbf{Rute} & \textbf{Uji Coba} & \textbf{Harapan} \\ \hline
 				\endhead
 				\endfoot
 				\endlastfoot
@@ -62,7 +62,7 @@
 			Uji coba ini dilakukan dengan mengakses sistem melalui rute \texttt{/worker}. Pengguna akan mengirimkan \textit{http request} kepada \textit{web service} yang telah disediakan. Rancangan pengujian dan hasil yang diharapkan ditunjukkan pada Tabel \ref{tabelujirequest}.
 			\begin{longtable}{|p{0.05\textwidth}|p{0.25\textwidth}|p{0.30\textwidth}|p{0.30\textwidth}|}
 				\caption{Skenario uji fungsionalitas \textit{user} mengirim request uji beban} \label{tabelujirequest} \\ \hline
-				\textbf{No} & \textbf{Rute} & \textbf{Uji Coba} & \textbf{Hasil \& Harapan} \\ \hline
+				\textbf{No} & \textbf{Rute} & \textbf{Uji Coba} & \textbf{Harapan} \\ \hline
 				\endhead
 				\endfoot
 				\endlastfoot
@@ -93,7 +93,7 @@
 			Uji coba ini dilakukan dengan mengakses sistem melalui rute \texttt{/hasil}. Pengguna akan mengirimkan \textit{http request} kepada \textit{web service} yang telah disediakan. Rancangan pengujian dan hasil yang diharapkan ditunjukkan pada Tabel \ref{tabelujihasil}.
 			\begin{longtable}{|p{0.05\textwidth}|p{0.25\textwidth}|p{0.30\textwidth}|p{0.30\textwidth}|}
 				\caption{Skenario uji fungsionalitas \textit{user} melihat hasil uji beban} \label{tabelujihasil} \\ \hline
-				\textbf{No} & \textbf{Rute} & \textbf{Uji Coba} & \textbf{Hasil \& Harapan} \\ \hline
+				\textbf{No} & \textbf{Rute} & \textbf{Uji Coba} & \textbf{Harapan} \\ \hline
 				\endhead
 				\endfoot
 				\endlastfoot
@@ -103,7 +103,7 @@
 			\end{longtable}
 		
 	\subsection{Skenario Uji Performa} \label{skenujiperforma}
-		Sistem \textit{load generator} dan pengambil data uji beban dibangun pada 3 buah \textit{node host} yang terpasang di lingkungan \textit{swarm}.  Sebelum dilakukan uji performa, dilakukan pemasangan \textit{load generator} yang diinisiasi pada terminal \textit{manager node}, kemudian \textit{manager node} akan mendistribusikan kontainer ke setiap \textit{node host} yang tergabung. Setelah selesai, data dari setiap kontainer akan disimpan di basis data. Uji coba akan dilakukan secara bertahap untuk membuat 500 kontainer, status awal kontainer sebelum diberikan \textit{request} akan \textit{sleep}. Setelah itu uji coba performa dilakukan untuk menguji performa sistem terhadap jumlah \textit{load generator} yang dikirimkan oleh pengguna. Pengujian akan dikirimkan oleh pengguna melalui \textit{web service} yang disediakan sistem. Jumlah \textit{load generator} yang akan diuji mulai dari 100, 200, 300, 400 dan 500. Hasil yang diharapkan dari pengujian performa sistem yaitu \textit{CPU Usage}, \textit{Memory} dan \textit{Storage} yang digunakan pada setiap \textit{node host}. Arsitektur pengujian tertera pada Gambar \ref{ujiperforma}.
+		Sistem \textit{load generator} dan pengambil data uji beban dibangun pada 3 buah \textit{node host} yang terpasang di lingkungan \textit{swarm}.  Sebelum dilakukan uji performa, dilakukan pemasangan \textit{load generator} yang diinisiasi pada terminal \textit{manager node}, kemudian \textit{manager node} akan mendistribusikan kontainer ke setiap \textit{node host} yang tergabung. Setelah selesai, data dari setiap kontainer akan disimpan di basis data. Uji coba akan dilakukan secara bertahap untuk membuat 500 kontainer, status awal kontainer sebelum diberikan \textit{request} akan \textit{sleep}. Setelah itu uji coba performa dilakukan untuk menguji performa sistem terhadap jumlah \textit{load generator} yang dikirimkan oleh pengguna. Pengujian akan dikirimkan oleh pengguna melalui \textit{web service} yang disediakan sistem. Jumlah \textit{load generator} yang akan diuji mulai dari 100, 200, 300, 400 dan 500. Hasil yang diharapkan dari pengujian performa sistem yaitu \textit{CPU} dan \textit{Memory} yang digunakan pada setiap \textit{node host}. Arsitektur pengujian tertera pada Gambar \ref{ujiperforma}.
 		\begin{figure}[H]
 			\centering
 			\includegraphics[width=9cm,height=6cm]{Images/C-5/performa.png}
@@ -120,29 +120,29 @@
 			\subsubsection{Uji Fungsionalitas \textit{User} Mengelola Skenario}
 				Uji coba ini dilakukan dengan mengakses sistem melalui rute yang telah ditentukan pada Tabel \ref{tabelujiskenario}. Pengguna akan mengirim http request kepada web service yang telah
 				disediakan. Hasil uji coba seperti tertera pada Tabel \ref{tabelhasilujiskenario}.
-				\begin{longtable}{|p{0.05\textwidth}|p{0.25\textwidth}|p{0.30\textwidth}|p{0.30\textwidth}|}
+				\begin{longtable}{|p{0.05\textwidth}|p{0.25\textwidth}|p{0.40\textwidth}|p{0.12 \textwidth}|}
 					\caption{Skenario uji fungsionalitas \textit{user} mengelola skenario} \label{tabelhasilujiskenario} \\ \hline
-					\textbf{No} & \textbf{Rute} & \textbf{Uji Coba} & \textbf{Hasil \& Harapan} \\ \hline
+					\textbf{No} & \textbf{Rute} & \textbf{Harapan} & \textbf{Hasil} \\ \hline
 					\endhead
 					\endfoot
 					\endlastfoot
-					1 & /skenario & Mengirimkan \textit{request} menuju rute \textit{web service} melalui \textit{browser} & Berhasil \\ \hline
-					2 & /skenario/create & Mengirimkan \textit{request} menuju rute \textit{web service} melalui \textit{browser} & Berhasil \\ \hline
-					3 & /skenario & Mengirimkan \textit{request} pembuatan skenario menuju rute \textit{web service} melalui \textit{browser} menggunakan metode \textit{POST} & Berhasil \\ \hline
-					4 & /skenario/\{id\} & Mengirimkan \textit{request} untuk menghapus skenario menuju rute \textit{web service} melalui \textit{browser} menggunakan metode \textit{POST} & Berhasil \\ \hline
+					1 & /skenario & \textit{Request} berhasil diterima oleh \textit{web service}, kemudian \textit{web service} mengirimkan umpan balik berupa data skenario dari pengguna yang ditampilkan di \textit{browser} & OK \\ \hline
+					2 & /skenario/create & \textit{Request} berhasil diterima oleh \textit{web service} dan halaman untuk membuat skenario ditampilkan di \textit{browser}  & OK \\ \hline
+					3 & /skenario & \textit{Web service} berhasil menyimpan data skenario di basis data dan di setiap \textit{node host} dalam bentuk file konfig & OK \\ \hline
+					4 & /skenario/\{id\} &\textit{Web service} berhasil menghapus data skenario di basis data dan di setiap \textit{node host} & OK \\ \hline
 				\end{longtable}
 				
 			\subsubsection{Uji Fungsionalitas \textit{User} Mengirim Request Uji Beban}
 				Uji coba ini dilakukan dengan mengakses sistem melalui rute yang telah ditentukan pada Tabel \ref{tabelujirequest}. Pengguna akan mengirim http request kepada web service yang telah
 				disediakan. Hasil uji coba seperti tertera pada Tabel \ref{tabelhasilujirequest}.
-				\begin{longtable}{|p{0.05\textwidth}|p{0.25\textwidth}|p{0.30\textwidth}|p{0.30\textwidth}|}
+				\begin{longtable}{|p{0.05\textwidth}|p{0.25\textwidth}|p{0.40\textwidth}|p{0.12 \textwidth}|}
 					\caption{Skenario uji fungsionalitas \textit{user} mengirim request uji beban} \label{tabelhasilujirequest} \\ \hline
-					\textbf{No} & \textbf{Rute} & \textbf{Uji Coba} & \textbf{Hasil \& Harapan} \\ \hline
+					\textbf{No} & \textbf{Rute} & \textbf{Harapan} & \textbf{Hasil} \\ \hline
 					\endhead
 					\endfoot
 					\endlastfoot
-					1 & /worker & Mengirimkan \textit{request} menuju rute \textit{web service} melalui \textit{browser} & Berhasil \\ \hline
-					2 & /worker & Mengirimkan \textit{request} menuju rute \textit{web service} melalui \textit{browser} menggunakan metode \textit{POST} & Berhasil \\ \hline
+					1 & /worker & \textit{Request} berhasil diterima oleh \textit{web service}, kemudian \textit{web service} menampilkan halaman untuk mengatur jumlah \textit{worker(load generator)} di \textit{browser} & OK \\ \hline
+					2 & /worker & \textit{Web service} berhasil menyimpan data \textit{worker} dan membuat antrian \textit{request} di dalam basis data & OK \\ \hline
 				\end{longtable}
 				
 			\subsubsection{Uji Fungsionalitas Penggunaan \textit{Task Queue} Terhadap \textit{Request User}}
@@ -180,36 +180,64 @@
 			\subsubsection{Uji Fungsionalitas \textit{User} Melihat Hasil Uji Beban}
 				Uji coba ini dilakukan dengan mengakses sistem melalui rute yang telah ditentukan pada Tabel \ref{tabelujihasil}. Pengguna akan mengirim \textit{http request} kepada \textit{web service} yang telah
 				disediakan. Hasil uji coba seperti tertera pada Tabel \ref{tabelhasilujihasil}.
-				\begin{longtable}{|p{0.05\textwidth}|p{0.25\textwidth}|p{0.30\textwidth}|p{0.30\textwidth}|}
+				\begin{longtable}{|p{0.05\textwidth}|p{0.25\textwidth}|p{0.40\textwidth}|p{0.12 \textwidth}|}
 					\caption{Skenario uji fungsionalitas \textit{user} melihat hasil uji beban} \label{tabelhasilujihasil} \\ \hline
-					\textbf{No} & \textbf{Rute} & \textbf{Uji Coba} & \textbf{Hasil \& Harapan} \\ \hline
+					\textbf{No} & \textbf{Rute} & \textbf{Uji Coba} & \textbf{Hasil} \\ \hline
 					\endhead
 					\endfoot
 					\endlastfoot
-					1 & /hasil/rata-rata & Mengirimkan \textit{request} menuju rute \textit{web service} melalui \textit{browser} & Berhasil \\ \hline
-					2 & /hasil/error-console & Mengirimkan \textit{request} menuju rute \textit{web service} melalui \textit{browser} & Berhasil \\ \hline
-					3 & /hasil/images & Mengirimkan \textit{request} menuju rute \textit{web service} melalui \textit{browser} & Berhasil \\ \hline
+					1 & /hasil/rata-rata & \textit{Request} berhasil diterima oleh \textit{web service}, kemudian \textit{web service} menampilkan hasil perhitungan rata-rata untuk hasil uji beban & OK \\ \hline
+					2 & /hasil/error-console & \textit{Request} berhasil diterima oleh \textit{web service}, kemudian \textit{web service} menampilkan daftar \textit{error console} yang terekam pada \textit{browser} & OK \\ \hline
+					3 & /hasil/images & \textit{Request} berhasil diterima oleh \textit{web service}, kemudian \textit{web service} menampilkan hasil tangkapan layar web yang diuji pada \textit{browser} & OK \\ \hline
 				\end{longtable}
 				
 
 		\subsection{Uji Performa}
-			Seperti yang dijelaskan pada bab \ref{skenujiperforma} pengujian performa akan dilakukan pada 3 \textit{node host} yang terpasang di lingkungan \textit{swarm}. Pertama akan dilakukan pembuatan \textit{load generator(worker)} terlebih dahulu, kemudian akan dilakukan uji performa sistem terhadap \textit{request} jumlah \textit{load generator} dari pengguna.
+			Seperti yang dijelaskan pada bab \ref{skenujiperforma} pengujian performa akan dilakukan pada 3 \textit{node host} yang terpasang di lingkungan \textit{swarm}. Pertama akan dilakukan pembuatan \textit{load generator(worker)} terlebih dahulu, kemudian akan dilakukan uji performa sistem ketika menerima layanan uji beban.
 			
 			\subsubsection{Uji Pembuatan \textit{Load Generator}}
-				Kondisi awal ketersediaan sumberdaya sebelum dilakukan pembuatan \textit{load generator} pada masing-masing \textit{node host} ditunjukkan pada Tabel \ref{suberdayaawalpembuatan}.
-				\begin{longtable}{|p{0.05\textwidth}|p{0.25\textwidth}|p{0.14\textwidth}|p{0.17\textwidth}|p{0.14\textwidth}|}
-					\caption{Kondisi awal ketersediaan sumberdaya sebelum pembuatan} \label{suberdayaawalpembuatan} \\
+%				Kondisi awal ketersediaan sumberdaya sebelum dilakukan pembuatan \textit{load generator} pada masing-masing \textit{node host} ditunjukkan pada Tabel \ref{suberdayaawalpembuatan}.
+%				\begin{longtable}{|p{0.05\textwidth}|p{0.25\textwidth}|p{0.14\textwidth}|p{0.17\textwidth}|p{0.14\textwidth}|}
+%					\caption{Kondisi awal ketersediaan sumberdaya sebelum pembuatan} \label{suberdayaawalpembuatan} \\
+%					\hline
+%					\textbf{No} & \textbf{Hostname} & \textbf{CPU} & \textbf{RAM} & \textbf{Storage} \\ \hline
+%					\endhead
+%					\endfoot
+%					\endlastfoot
+%					1 & CLOUD & 99,70\% & 287M/3.9G & 74/78G \\ \hline
+%					2 & RAIN & 99,64\% & 256M/3.9G & 74/78G \\ \hline
+%					3 & STORM & 99,69\% & 255M/3.9G & 74/78G \\ \hline
+%				\end{longtable}
+			
+				Setelah dilakukan uji coba untuk membuat kontainer yang akan digunakan sebagai \textit{load generator}, 
+				ketersediaan sumberdaya \textit{CPU} dan \textit{RAM} ditunjukkan pada Tabel \ref{suberdayasetpembuatan} serta grafik  kondisi ketersediaan \textit{CPU} setelah pemasangan pada Gambar \ref{pembuatancpu} dan kondisi ketersediaan \textit{RAM} setelah pemasangan pada Gambar \ref{pembuatanram}.
+				\begin{longtable}{|p{0.05\textwidth}|p{0.25\textwidth}|p{0.14\textwidth}|p{0.17\textwidth}|}
+					\caption{Kondisi ketersediaan sumberdaya setelah pembuatan} \label{suberdayasetpembuatan} \\
 					\hline
-					\textbf{No} & \textbf{Hostname} & \textbf{CPU} & \textbf{RAM} & \textbf{Storage} \\ \hline
+					\textbf{No} & \textbf{Hostname} & \textbf{CPU} & \textbf{RAM} \\ \hline
 					\endhead
 					\endfoot
 					\endlastfoot
-					1 & CLOUD & 99,70\% & 287M/3.9G & 74/78G \\ \hline
-					2 & RAIN & 99,64\% & 256M/3.9G & 74/78G \\ \hline
-					3 & STORM & 99,69\% & 255M/3.9G & 74/78G \\ \hline
+					1 & CLOUD & 97,9\% & 950M/3,9G \\ \hline
+					2 & RAIN & 97,9\% & 892M/3,9G \\ \hline
+					3 & STORM & 97,8\% & 889M/3,9G \\ \hline
 				\end{longtable}
-			
-				Hasil distribusi kontainer ke setiap \textit{node host} setelah dilakukan pembuatan \textit{load generator} ditunjukkan pada Tabel \ref{jumlahkontainerpem}.
+				
+				\begin{figure}[H]
+					\centering
+					\includegraphics[width=10cm,height=6cm]{Images/C-5/pembuatancpu.PNG}
+					\caption{Kondisi ketersediaan sumberdaya \textit{CPU} setelah pembuatan}
+					\label{pembuatancpu}
+				\end{figure}
+				
+				\begin{figure}[H]
+					\centering
+					\includegraphics[width=10cm,height=6cm]{Images/C-5/pembuatanram.PNG}
+					\caption{Kondisi ketersediaan sumberdaya \textit{RAM} setelah pembuatan}
+					\label{pembuatanram}
+				\end{figure}
+				
+				Sedangkan hasil distribusi kontainer ke setiap \textit{node host} setelah dilakukan pembuatan \textit{load generator} ditunjukkan pada Tabel \ref{jumlahkontainerpem}.
 				\begin{longtable}{|p{0.05\textwidth}|p{0.30\textwidth}|p{0.15\textwidth}|p{0.15\textwidth}|p{0.15\textwidth}|}
 					\caption{Hasil distribusi kontainer setelah pembuatan} \label{jumlahkontainerpem} \\
 					\hline
@@ -223,84 +251,57 @@
 					4 & 400 & 132 & 134 & 134 \\ \hline
 					5 & 500 & 166 & 167 & 167 \\ \hline
 				\end{longtable}
-				
-				Hasil akhir dari pengujian sistem untuk pembuatan \textit{load generator} ditunjukkan pada Tabel \ref{suberdayasetpembuatan} serta grafik  kondisi akhir \textit{CPU} pada Gambar \ref{pembuatancpu} dan kondisi akhir \textit{RAM} pada Gambar \ref{pembuatanram}.
-				\begin{longtable}{|p{0.05\textwidth}|p{0.25\textwidth}|p{0.14\textwidth}|p{0.17\textwidth}|p{0.14\textwidth}|}
-					\caption{Kondisi akhir ketersediaan sumberdaya setelah pembuatan} \label{suberdayasetpembuatan} \\
+			
+			\subsubsection{Uji Performa Sistem ketika Menerima Request Layanan Uji Beban}
+%				Kondisi awal ketersediaan sumberdaya sebelum ada \textit{request} jumlah \textit{load generator} dari pengguna pada masing-masing \textit{node host} ditunjukkan pada Tabel \ref{suberdayaawalperforma}.
+%				\begin{longtable}{|p{0.05\textwidth}|p{0.25\textwidth}|p{0.14\textwidth}|p{0.17\textwidth}|}
+%					\caption{Kondisi awal ketersediaan sumberdaya sebelum pembuatan} \label{suberdayaawalperforma} \\
+%					\hline
+%					\textbf{No} & \textbf{Hostname} & \textbf{CPU} & \textbf{RAM} \\ \hline
+%					\endhead
+%					\endfoot
+%					\endlastfoot
+%					1 & CLOUD & 97,9\% & 950M/3,9G \\ \hline
+%					2 & RAIN & 97,9\% & 892M/3,9G \\ \hline
+%					3 & STORM & 97,8\% & 889M/3,9G \\ \hline
+%				\end{longtable}
+
+				Hasil akhir penggunaan sumberdaya ditunjukkan pada Tabel \ref{sdhasilperforma}, serta grafik ketersediaan CPU pada Gambar \ref{performacpu} dan ketersediaan RAM pada Gambar \ref{performaram}.
+				\begin{longtable}{|p{0.05\textwidth}|p{0.18\textwidth}|p{0.12\textwidth}|p{0.10\textwidth}|p{0.2\textwidth}|}
+					\caption{Kondisi penggunaan sumberdaya ketika ada \textit{request}} \label{sdhasilperforma} \\
 					\hline
-					\textbf{No} & \textbf{Hostname} & \textbf{CPU} & \textbf{RAM} & \textbf{Storage} \\ \hline
+					\textbf{No} & \textbf{Hostname} & \textbf{Jumlah} & \textbf{CPU} & \textbf{RAM} \\ \hline
 					\endhead
 					\endfoot
 					\endlastfoot
-					1 & CLOUD & 97,9\% & 950M/3,9G & 74/78G \\ \hline
-					2 & RAIN & 97,9\% & 892M/3,9G & 74/78G \\ \hline
-					3 & STORM & 97,8\% & 889M/3,9G & 74/78G \\ \hline
-				\end{longtable}
-			
-				\begin{figure}[H]
-					\centering
-					\includegraphics[width=10cm,height=6cm]{Images/C-5/pembuatancpu.PNG}
-					\caption{Kondisi akhir ketersediaan sumberdaya \textit{CPU} setelah pembuatan}
-					\label{pembuatancpu}
-				\end{figure}
-			
-				\begin{figure}[H]
-					\centering
-					\includegraphics[width=10cm,height=6cm]{Images/C-5/pembuatanram.PNG}
-					\caption{Kondisi akhir ketersediaan sumberdaya \textit{RAM} setelah pembuatan}
-					\label{pembuatanram}
-				\end{figure}
-			
-			\subsubsection{Uji Performa Sistem Terhadap Request Jumlah \textit{Load Generator}}
-				Kondisi awal ketersediaan sumberdaya sebelum ada \textit{request} jumlah \textit{load generator} dari pengguna pada masing-masing \textit{node host} ditunjukkan pada Tabel \ref{suberdayaawalperforma}.
-				\begin{longtable}{|p{0.05\textwidth}|p{0.25\textwidth}|p{0.14\textwidth}|p{0.17\textwidth}|p{0.14\textwidth}|}
-					\caption{Kondisi awal ketersediaan sumberdaya sebelum pembuatan} \label{suberdayaawalperforma} \\
-					\hline
-					\textbf{No} & \textbf{Hostname} & \textbf{CPU} & \textbf{RAM} & \textbf{Storage} \\ \hline
-					\endhead
-					\endfoot
-					\endlastfoot
-					1 & CLOUD & 97,9\% & 950M/3,9G & 74/78G \\ \hline
-					2 & RAIN & 97,9\% & 892M/3,9G & 74/78G \\ \hline
-					3 & STORM & 97,8\% & 889M/3,9G & 74/78G \\ \hline
-				\end{longtable}
-			
-				Hasil akhir ketersediaan sumberdaya ditunjukkan pada Tabel \ref{sdhasilperforma}, serta grafik ketersediaan CPU pada Gambar \ref{performacpu} dan ketersediaan RAM pada Gambar \ref{performaram}.
-				\begin{longtable}{|p{0.05\textwidth}|p{0.18\textwidth}|p{0.12\textwidth}|p{0.10\textwidth}|p{0.17\textwidth}|p{0.12\textwidth}|}
-					\caption{Kondisi ketersediaan sumberdaya ketika ada \textit{request}} \label{sdhasilperforma} \\
-					\hline
-					\textbf{No} & \textbf{Hostname} & \textbf{Jumlah} & \textbf{CPU} & \textbf{RAM} & \textbf{Storage} \\ \hline
-					\endhead
-					\endfoot
-					\endlastfoot
-					1 & CLOUD & 100 & 60.5\% & 1.1M/3.9G & 74/78G \\ \cline{3-6}
-					&& 200 & 48\% & 1.2M/3.9G & 74/78G \\ \cline{3-6}
-					&& 300 & 57.8\% & 1.3M/3.9G & 74/78G \\ \cline{3-6}
-					&& 400 & 51.3\% & 1.36M/3.9G & 74/78G \\ \cline{3-6}
-					&& 500 & 49.1\% & 1.39M/3.9G & 74/78G \\ \hline
-					2 & RAIN & 100 & 63.3\% & 1.02M/3.9G & 74/78G \\ \cline{3-6}
-					&& 200 & 54\% & 1.18M/3.9G & 74/78G \\ \cline{3-6}
-					&& 300 & 55.1\% & 1.3M/3.9G & 74/78G \\ \cline{3-6}
-					&& 400 & 53.2\% & 1.33M/3.9G & 74/78G \\ \cline{3-6}
-					&& 500 & 51\% & 1.4M/3.9G & 74/78G \\ \hline
-					3 & STORM & 100 & 61.1\% & 1.05M/3.9G & 74/78G \\ \cline{3-6}
-					&& 200 & 77\% & 1.12M/3.9G & 74/78G \\ \cline{3-6}
-					&& 300 & 59.8\% & 1.19M/3.9G & 74/78G \\ \cline{3-6}
-					&& 400 & 55.1\% & 1.38M/3.9G & 74/78G \\ \cline{3-6}
-					&& 500 & 50.4\% & 1.45M/3.9G & 74/78G \\ \hline
+					1 & CLOUD & 100 & 39,5\% & 1,1/3,9G \\ \cline{3-5}
+					&& 200 & 52\% & 1,2/3,9G \\ \cline{3-5}
+					&& 300 & 42,2\% & 1,3/3,9G \\ \cline{3-5}
+					&& 400 & 48,7\% & 1,36/3,9G \\ \cline{3-5}
+					&& 500 & 50,9\% & 1,39/3,9G \\ \hline
+					2 & RAIN & 100 & 36,7\% & 1,02/3,9G \\ \cline{3-5}
+					&& 200 & 46\% & 1,18/3,9G \\ \cline{3-5}
+					&& 300 & 44,9\% & 1,3/3,9G \\ \cline{3-5}
+					&& 400 & 46,8\% & 1,33/3,9G \\ \cline{3-5}
+					&& 500 & 49\% & 1,4/3,9G \\ \hline
+					3 & STORM & 100 & 38,9\% & 1,05/3,9G \\ \cline{3-5}
+					&& 200 & 23\% & 1,12/3,9G \\ \cline{3-5}
+					&& 300 & 40,2\% & 1,19/3,9G \\ \cline{3-5}
+					&& 400 & 44,9\% & 1,38/3,9G \\ \cline{3-5}
+					&& 500 & 49,6\% & 1,45/3,9G \\ \hline
 				\end{longtable}
 			
 				\begin{figure}[H]
 					\centering
 					\includegraphics[width=10cm,height=5.5cm]{Images/C-5/performacpu.PNG}
-					\caption{Kondisi ketersediaan sumberdaya \textit{CPU} setelah ada \textit{request}}
+					\caption{Kondisi penggunaan sumberdaya \textit{CPU} ketika ada \textit{request}}
 					\label{performacpu}
 				\end{figure}
 				
 				\begin{figure}[H]
 					\centering
 					\includegraphics[width=10cm,height=5.5cm]{Images/C-5/performaram.PNG}
-					\caption{Kondisi ketersediaan sumberdaya \textit{RAM} setelah ada \textit{request}}
+					\caption{Kondisi penggunaan sumberdaya \textit{RAM} ketika ada \textit{request}}
 					\label{performaram}
 				\end{figure}
 			
