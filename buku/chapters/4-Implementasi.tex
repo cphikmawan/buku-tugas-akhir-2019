@@ -40,7 +40,7 @@
 		\subsection{Implementasi Pembuatan \textit{Docker Image}}
 			\textit{Docker Image} digunakan untuk menjalankan kontainer, pada tugas akhir ini \textit{Docker Image} akan dibuat terlebih dahulu agar bisa digunakan untuk menjalankan \textit{Puppeteer} dan \textit{Headless Chrome}. Namun untuk membuat \textit{Docker Image} diperlukan beberapa tahapan yaitu konfigurasi \texttt{Dockerfile}, pemasangan \textit{Docker Compose} dapat dilihat pada Kode Sumber \ref{dockercomposeinstall} dan konfigurasi \texttt{docker-compose.yml} dan unggah \textit{Docker Image} ke \textit{Docker Hub}.
 			
-			\indent Konfigurasi \texttt{Dockerfile} dapat dilihat pada Kode Sumber \ref{dockerimage}, sedangkan konfigurasi \texttt{docker-compose.yml} dapat dilihat pada Kode Sumber \ref{dockercompose}.
+			\indent Konfigurasi \texttt{Dockerfile} dapat dilihat pada Kode Sumber \ref{dockerimage}, sedangkan konfigurasi \texttt{docker-compose.yml} dapat dilihat pada Kode Sumber \ref{dockercompose}. Kemudian jalankan perintah \textit{Docker Compose} pada Kode Sumber \ref{createimg} untuk pembuatan \textit{Docker Image}. Setelah \textit{Docker Image} terbuat, ubah nama \textit{Docker Image} tersebut dan melakukan \textit{commit} agar bisa di \textit{push}. Perintah pada Kode Sumber \ref{pushimagedocker} yang digunakan oleh penulis ketika mengunggah \textit{Docker Image} ke \textit{Docker Hub}.
 				\begin{lstlisting}[frame=single,tabsize=2,breaklines,caption={Konfigurasi \textit{Dockerfile} },label=dockerimage, captionpos=b, language=json]
 	FROM node:8
 	RUN apt-get update
@@ -66,12 +66,10 @@
 			entrypoint: ["sh", "-c", "sleep infinity"]
 				\end{lstlisting}
 				
-				Kemudian jalankan perintah \textit{Docker Compose} berikut untuk pembuatan \textit{Docker Image}.
 				\begin{lstlisting}[frame=single,tabsize=2,breaklines,caption={Perintah untuk menjalankan  \textit{Docker Compose}},label=createimg, captionpos=b, language=json,numbers=none]
 	$ docker-compose up
 				\end{lstlisting}
 				
-				Setelah \textit{Docker Image} terbuat, ubah nama \textit{Docker Image} tersebut dan melakukan \textit{commit} agar bisa di \textit{push}. Perintah pada kode sumber \ref{pushimagedocker} yang digunakan oleh penulis ketika mengunggah \textit{Docker Image} ke \textit{Docker Hub}.
 				\begin{lstlisting}[frame=single,tabsize=2,breaklines,caption={Perintah untuk mengunggah \textit{Docker Image}},label=pushimagedocker, captionpos=b, language=json,numbers=none]
 	$ docker tag puppeteer_puppeteer:latest cphikmawan/ta2019:newpupp
 	
@@ -114,29 +112,24 @@
 	version: '3'
 	# konfigurasi service
 	services:
-		# nama service yang akan dibuat
+		# konfigurasi service puppeteer
 		puppeteer:
-			# docker image yang digunakan
 			image: cphikmawan/ta2019:newpupp
-			# sinkronisasi penyimpanan antara kontainer dengan host
 			volumes:
 				- ./output:/app/output
 				- ./code:/app/code
-			# direktori kerja didalam kontainer
 			working_dir: /app/code
 			# konfigurasi untuk jumlah kontainer dan handling
 			deploy:
 				replicas: 1000
 				restart_policy:
 					condition: on-failure
-			# entrypoint awal tidak akan melakukan apapun
+			# entrypoint awal sleep
 			entrypoint: ["sh", "-c", "sleep infinity"]
 	# konfigurasi jaringan
 	networks:
 		default:
-			# jaringan default akan diubah ke jaringan eksternal
 			external:
-				# akan terkonek ke jaringan "swarm-network"
 				name: swarm-network
 			\end{lstlisting}
 			
@@ -411,7 +404,7 @@
 				\end{longtable}
 		
 			\subsubsection{Tabel \textit{Summary Results}}
-				Pada tabel \textit{summary\_results} menyimpan data perhitungan rata-rata dari hasil uji beban yang sudah disimpan pada tabel \textit{results}. Tabel ini yang akan dibuat sebagai laporan uji beban yang disampaikan ke pengguna. Berikut definisi tabel \textit{summary\_results} pada Tabel \ref{tabelsumresults}.
+				Pada tabel \textit{summary\_results} menyimpan data perhitungan rata-rata dari hasil uji beban yang sudah disimpan pada tabel \textit{results}. Data perhitungan rata-rata tersebut merupakan data \textit{metrics performance} yang akan ditampilkan di web service dan pengguna dapat melihat hasil uji beban ini pada menu yang sudah disediakan. Berikut definisi tabel \textit{summary\_results} pada Tabel \ref{tabelsumresults}.
 			
 				\begin{longtable}{|p{0.05\textwidth}|p{0.30\textwidth}|p{0.20\textwidth}|p{0.35\textwidth}|}
 					\caption{Tabel \textit{summary\_results}} \label{tabelsumresults} \\
@@ -435,7 +428,11 @@
 				\end{longtable}
 			
 		\subsection{Implementasi \textit{Task Queue}}
-			\textit{Task queue} akan digunakan untuk mengatur antrian \textit{request} dari pengguna, pada tugas akhir ini implementasi \textit{task queue} akan dipasang pada komputer yang sama dengan \textit{web service}. Bahasa pemrograman yang akan digunakan untuk mengimplementasikan \textit{task queue} adalah bahasa pemrograman \textit{Python}, sedangkan untuk basis data akan terkoneksi dengan basis data \textit{MySQL} yang terpasang pada server yang berbeda. Selain itu \textit{task queue} akan dijalankan setiap 1 menit sekali pada \textit{crontab}. Selama \textit{task queue} berjalan algoritmenya akan selalu melakukan pengecekan apakah ada antrian yang bisa dieksekusi. \textit{Pseudocode} untuk \textit{task queue} tertera pada Kode Sumber \ref{pseudotaskqueue} dan untuk konfigurasi \textit{crontab} pada Kode Sumber \ref{crontab}. \\
+			\textit{Task queue} akan digunakan untuk mengatur antrian \textit{request} dari pengguna, pada tugas akhir ini implementasi \textit{task queue} akan dipasang pada komputer yang sama dengan \textit{web service}. Bahasa pemrograman yang akan digunakan untuk mengimplementasikan \textit{task queue} adalah bahasa pemrograman \textit{Python}, sedangkan untuk basis data akan terkoneksi dengan basis data \textit{MySQL} yang terpasang pada server yang berbeda. Selain itu \textit{task queue} akan dijalankan setiap 1 menit sekali pada \textit{crontab}. Selama \textit{task queue} berjalan algoritmenya akan selalu melakukan pengecekan apakah ada antrian yang bisa dieksekusi. Konfigurasi \textit{crontab} yang digunakan ditunjukkan pada Kode Sumber \ref{crontab}. Sedangkan \textit{Pseudocode} yang digunakan untuk mengimplementasikan \textit{task queue} ditunjukkan pada Kode Sumber \ref{pseudotaskqueue}. \\
+			
+			\begin{lstlisting}[frame=single,tabsize=2,breaklines,caption={Konfigurasi \textit{crontab} },label=crontab, captionpos=b, language=json]
+			* * * * * /usr/bin/python3 queue.py >> output.log 2>&1
+			\end{lstlisting}
 			
 			\begin{lstlisting}[frame=single,tabsize=2,breaklines,caption={\textit{Pseudocode task queue} },label=pseudotaskqueue, captionpos=b, language=json]
 	Connection
@@ -455,6 +452,4 @@
 	END FUNCTION
 			\end{lstlisting}
 			
-			\begin{lstlisting}[frame=single,tabsize=2,breaklines,caption={Konfigurasi \textit{crontab} },label=crontab, captionpos=b, language=json]
-	* * * * * /usr/bin/python3 queue.py >> output.log 2>&1
-			\end{lstlisting}
+			

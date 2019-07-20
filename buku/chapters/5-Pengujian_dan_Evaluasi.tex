@@ -176,6 +176,8 @@
 					user4 & 519,98 & 661,13 & 1598,62 & 1699,87 & 2188,10 \\ \hline
 					user5 & 523,56 & 665,61 & 1599,40 & 1685,76 & 2190,45 \\ \hline
 				\end{longtable}
+			
+				Selain itu akan didapatkan perhitungan presentase \textit{error} ketika terjadinya \textit{timeout} saat mengakses web yang diuji atau hasil \textit{performance metrics} pada Tabel \ref{dataujibeban} terdapat hasil kurang dari 0 atau minus.
 				
 			\subsubsection{Uji Fungsionalitas \textit{User} Melihat Hasil Uji Beban}
 				Uji coba ini dilakukan dengan mengakses sistem melalui rute yang telah ditentukan pada Tabel \ref{tabelujihasil}. Pengguna akan mengirim \textit{http request} kepada \textit{web service} yang telah
@@ -196,18 +198,18 @@
 			Seperti yang dijelaskan pada bab \ref{skenujiperforma} pengujian performa akan dilakukan pada 3 \textit{node host} yang terpasang di lingkungan \textit{swarm}. Pertama akan dilakukan pembuatan \textit{load generator(worker)} terlebih dahulu, kemudian akan dilakukan uji performa sistem ketika menerima layanan uji beban.
 			
 			\subsubsection{Uji Pembuatan \textit{Load Generator}}
-%				Kondisi awal ketersediaan sumberdaya sebelum dilakukan pembuatan \textit{load generator} pada masing-masing \textit{node host} ditunjukkan pada Tabel \ref{suberdayaawalpembuatan}.
-%				\begin{longtable}{|p{0.05\textwidth}|p{0.25\textwidth}|p{0.14\textwidth}|p{0.17\textwidth}|p{0.14\textwidth}|}
-%					\caption{Kondisi awal ketersediaan sumberdaya sebelum pembuatan} \label{suberdayaawalpembuatan} \\
-%					\hline
-%					\textbf{No} & \textbf{Hostname} & \textbf{CPU} & \textbf{RAM} & \textbf{Storage} \\ \hline
-%					\endhead
-%					\endfoot
-%					\endlastfoot
-%					1 & CLOUD & 99,70\% & 287M/3.9G & 74/78G \\ \hline
-%					2 & RAIN & 99,64\% & 256M/3.9G & 74/78G \\ \hline
-%					3 & STORM & 99,69\% & 255M/3.9G & 74/78G \\ \hline
-%				\end{longtable}
+				Kondisi awal ketersediaan sumberdaya sebelum dilakukan pembuatan \textit{load generator} pada masing-masing \textit{node host} ditunjukkan pada Tabel \ref{suberdayaawalpembuatan}.
+				\begin{longtable}{|p{0.05\textwidth}|p{0.25\textwidth}|p{0.14\textwidth}|p{0.17\textwidth}|p{0.14\textwidth}|}
+					\caption{Kondisi awal ketersediaan sumberdaya sebelum pembuatan} \label{suberdayaawalpembuatan} \\
+					\hline
+					\textbf{No} & \textbf{Hostname} & \textbf{CPU} & \textbf{RAM} & \textbf{Storage} \\ \hline
+					\endhead
+					\endfoot
+					\endlastfoot
+					1 & CLOUD & 99,70\% & 287M/3.9G & 74/78G \\ \hline
+					2 & RAIN & 99,64\% & 256M/3.9G & 74/78G \\ \hline
+					3 & STORM & 99,69\% & 255M/3.9G & 74/78G \\ \hline
+				\end{longtable}
 			
 				Setelah dilakukan uji coba untuk membuat kontainer yang akan digunakan sebagai \textit{load generator}, 
 				ketersediaan sumberdaya \textit{CPU} dan \textit{RAM} ditunjukkan pada Tabel \ref{suberdayasetpembuatan} serta grafik  kondisi ketersediaan \textit{CPU} setelah pemasangan pada Gambar \ref{pembuatancpu} dan kondisi ketersediaan \textit{RAM} setelah pemasangan pada Gambar \ref{pembuatanram}.
@@ -237,6 +239,8 @@
 					\label{pembuatanram}
 				\end{figure}
 				
+				Dari grafik tersebut dapat dilihat kebutuhan sumberdaya \textit{CPU} dan \textit{RAM} tidak mengalami perbedaan yang banyak dan hanya berubah secara \textit{linear}. \textit{CPU} tidak terlalu banyak berubah setelah pembuatan load generator dikarenakan semua \textit{load generator} di atur untuk \textit{sleep} sebelum ada \textit{request} uji beban. Namun ketika pembuatan \textit{load generator} dan pendistribusiannya, tentu saja penggunaan \textit{CPU} bisa sampai 100\% dan untuk penggunaan \textit{RAM} adalah 1,3MB untuk setiap kontainernya. Pada tugas akhir ini, server yang digunakan hanya memiliki spesifikasi 2 \textit{Core CPU}. Adapun masalah-masalah yang dihadapi dalam pengujian ini yaitu ketika membuat \textit{load generator} dengan jumlah diatas 500 secara bersamaan yang akan mengakibatkan \textit{CPU Usage} bisa melebihi kapasitasnya dan hal tersebut akan membuat server \textit{not responding}. Namun untuk penggunaan \textit{RAM} ketika pembuatan masih bisa dikatakan cukup.
+				
 				Sedangkan hasil distribusi kontainer ke setiap \textit{node host} setelah dilakukan pembuatan \textit{load generator} ditunjukkan pada Tabel \ref{jumlahkontainerpem}.
 				\begin{longtable}{|p{0.05\textwidth}|p{0.30\textwidth}|p{0.15\textwidth}|p{0.15\textwidth}|p{0.15\textwidth}|}
 					\caption{Hasil distribusi kontainer setelah pembuatan} \label{jumlahkontainerpem} \\
@@ -252,6 +256,8 @@
 					5 & 500 & 166 & 167 & 167 \\ \hline
 				\end{longtable}
 			
+				Pendistribusian pada Tabel \ref{jumlahkontainerpem} diatasi oleh manajer pada Docker Swarm dan didistribusikan secara rata ke setiap node host yang tergabung.
+			
 			\subsubsection{Uji Performa Sistem ketika Menerima Request Layanan Uji Beban}
 %				Kondisi awal ketersediaan sumberdaya sebelum ada \textit{request} jumlah \textit{load generator} dari pengguna pada masing-masing \textit{node host} ditunjukkan pada Tabel \ref{suberdayaawalperforma}.
 %				\begin{longtable}{|p{0.05\textwidth}|p{0.25\textwidth}|p{0.14\textwidth}|p{0.17\textwidth}|}
@@ -265,8 +271,8 @@
 %					2 & RAIN & 97,9\% & 892M/3,9G \\ \hline
 %					3 & STORM & 97,8\% & 889M/3,9G \\ \hline
 %				\end{longtable}
-
-				Hasil akhir penggunaan sumberdaya ditunjukkan pada Tabel \ref{sdhasilperforma}, serta grafik ketersediaan CPU pada Gambar \ref{performacpu} dan ketersediaan RAM pada Gambar \ref{performaram}.
+				
+				Pengujian ini dilakukan ketika sistem menerima request layanan uji beban, informasi penggunaan sumberdaya ditunjukkan pada Tabel \ref{sdhasilperforma}, dari tabel tersebut didapatkan grafik penggunaan CPU pada Gambar \ref{performacpu} dan grafik penggunaan RAM pada Gambar \ref{performaram}.
 				\begin{longtable}{|p{0.05\textwidth}|p{0.18\textwidth}|p{0.12\textwidth}|p{0.10\textwidth}|p{0.2\textwidth}|}
 					\caption{Kondisi penggunaan sumberdaya ketika ada \textit{request}} \label{sdhasilperforma} \\
 					\hline
@@ -297,6 +303,8 @@
 					\caption{Kondisi penggunaan sumberdaya \textit{CPU} ketika ada \textit{request}}
 					\label{performacpu}
 				\end{figure}
+			
+				Dilihat dari grafik pada Gambar \ref{performacpu}, penggunaan \textit{CPU} mengalami perubahan secara \textit{linear} yaitu semakin banyak \textit{request} uji beban akan semakin tinggi, namun pada saat pengujian ketika jumlah \textit{load generator} 200, terjadi anomali pada ketersediaan sumberdaya, hal tersebut dikarenakan urutan kontainer id yang disimpan pada basis data tidak berimbang untuk nomor urut dari 1 sampai 200, sehingga pada \textit{node host} CLOUD dan RAIN memiliki jumlah \textit{load generator} yang harus dijalankan jauh lebih banyak dari pada \textit{node host} STORM, sehingga mengakibatkan tenjadinya anomali penggunaan \textit{CPU} pada \textit{node host} STORM.
 				
 				\begin{figure}[H]
 					\centering
@@ -304,6 +312,6 @@
 					\caption{Kondisi penggunaan sumberdaya \textit{RAM} ketika ada \textit{request}}
 					\label{performaram}
 				\end{figure}
-			
 				
-			
+				Sedangkan untuk penggunaan \textit{RAM} pada Gambar \ref{performaram}, perubahannya secara linear saja, dikarenakan memang adanya pembatasan berjalannya proses secara bersama dalam setiap waktunya, karena \textit{Chrome} yang dijalankan akan memerlukan sumberdaya yang banyak. Jika tidak dibatasi, dapat mengakibatkan penggunaan \textit{CPU} dan \textit{RAM} akan melebihi kapasitas dan mengakibatkan server menjadi \textit{not responding}. Dapat disimpulkan juga dalam melakukan uji beban menggunakan \textit{Headless Chrome} akan membutuhkan banyak sumberdaya \textit{CPU} dan \textit{RAM}, sedangkan untuk penggunaan \textit{Docker} tidak memerlukan sumberdaya sebanyak \textit{Headless Chrome}.
+				
