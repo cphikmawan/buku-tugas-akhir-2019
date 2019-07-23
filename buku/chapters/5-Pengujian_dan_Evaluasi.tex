@@ -195,7 +195,7 @@
 				
 
 		\subsection{Uji Performa}
-			Seperti yang dijelaskan pada bab \ref{skenujiperforma} pengujian performa akan dilakukan pada 3 \textit{node host} yang terpasang di lingkungan \textit{swarm}. Pertama akan dilakukan pembuatan \textit{load generator(worker)} terlebih dahulu, kemudian akan dilakukan uji performa sistem ketika menerima layanan uji beban.
+			Pengujian performa akan dilakukan pada 3 \textit{node host} yang ada di lingkungan \textit{swarm}. Pertama akan dilakukan pembuatan \textit{load generator(worker)}, kemudian akan dilakukan uji performa sistem ketika menerima request layanan uji beban.
 			
 			\subsubsection{Uji Pembuatan \textit{Load Generator}}
 				Kondisi awal ketersediaan sumberdaya sebelum dilakukan pembuatan \textit{load generator} pada masing-masing \textit{node host} ditunjukkan pada Tabel \ref{suberdayaawalpembuatan}.
@@ -213,6 +213,21 @@
 			
 				Setelah dilakukan uji coba untuk membuat kontainer yang akan digunakan sebagai \textit{load generator}, 
 				ketersediaan sumberdaya \textit{CPU} dan \textit{RAM} ditunjukkan pada Tabel \ref{suberdayasetpembuatan} serta grafik  kondisi ketersediaan \textit{CPU} setelah pemasangan pada Gambar \ref{pembuatancpu} dan kondisi ketersediaan \textit{RAM} setelah pemasangan pada Gambar \ref{pembuatanram}.
+				
+				\begin{figure}[H]
+					\centering
+					\includegraphics[width=8cm,height=5cm]{Images/C-5/pembuatancpu.png}
+					\caption{Kondisi ketersediaan sumberdaya \textit{CPU} setelah pembuatan}
+					\label{pembuatancpu}
+				\end{figure}
+				
+				\begin{figure}[H]
+					\centering
+					\includegraphics[width=8cm,height=5cm]{Images/C-5/pembuatanram.png}
+					\caption{Kondisi ketersediaan sumberdaya \textit{RAM} setelah pembuatan}
+					\label{pembuatanram}
+				\end{figure}
+			
 				\begin{longtable}{|p{0.05\textwidth}|p{0.25\textwidth}|p{0.14\textwidth}|p{0.17\textwidth}|}
 					\caption{Kondisi ketersediaan sumberdaya setelah pembuatan} \label{suberdayasetpembuatan} \\
 					\hline
@@ -225,21 +240,7 @@
 					3 & STORM & 97,8\% & 889M/3,9G \\ \hline
 				\end{longtable}
 				
-				\begin{figure}[H]
-					\centering
-					\includegraphics[width=10cm,height=6cm]{Images/C-5/pembuatancpu.PNG}
-					\caption{Kondisi ketersediaan sumberdaya \textit{CPU} setelah pembuatan}
-					\label{pembuatancpu}
-				\end{figure}
-				
-				\begin{figure}[H]
-					\centering
-					\includegraphics[width=10cm,height=6cm]{Images/C-5/pembuatanram.PNG}
-					\caption{Kondisi ketersediaan sumberdaya \textit{RAM} setelah pembuatan}
-					\label{pembuatanram}
-				\end{figure}
-				
-				Dari grafik tersebut dapat dilihat kebutuhan sumberdaya \textit{CPU} dan \textit{RAM} tidak mengalami perbedaan yang banyak dan hanya berubah secara \textit{linear}. \textit{CPU} tidak terlalu banyak berubah setelah pembuatan load generator dikarenakan semua \textit{load generator} di atur untuk \textit{sleep} sebelum ada \textit{request} uji beban. Namun ketika pembuatan \textit{load generator} dan pendistribusiannya, tentu saja penggunaan \textit{CPU} bisa sampai 100\% dan untuk penggunaan \textit{RAM} adalah 1,3MB untuk setiap kontainernya. Pada tugas akhir ini, server yang digunakan hanya memiliki spesifikasi 2 \textit{Core CPU}. Adapun masalah-masalah yang dihadapi dalam pengujian ini yaitu ketika membuat \textit{load generator} dengan jumlah diatas 500 secara bersamaan yang akan mengakibatkan \textit{CPU Usage} bisa melebihi kapasitasnya dan hal tersebut akan membuat server \textit{not responding}. Namun untuk penggunaan \textit{RAM} ketika pembuatan masih bisa dikatakan cukup.
+				Dari grafik tersebut dapat dilihat kebutuhan sumberdaya \textit{CPU} dan \textit{RAM} tidak mengalami perbedaan yang banyak dan hanya berubah secara \textit{linear}. \textit{CPU} tidak terlalu banyak berubah setelah pembuatan load generator dikarenakan semua \textit{load generator} di atur untuk \textit{sleep} sebelum ada \textit{request} uji beban. Namun ketika pembuatan \textit{load generator} dan pendistribusiannya, tentu saja penggunaan \textit{CPU} bisa sampai 100\% dan untuk kebutuhan sumberdaya \textit{RAM} adalah 1,3MB untuk setiap kontainernya. Pada tugas akhir ini, server yang digunakan hanya memiliki spesifikasi 2 \textit{Core CPU}. Adapun masalah-masalah yang dihadapi dalam pengujian ini yaitu ketika membuat \textit{load generator} dengan jumlah diatas 500 secara bersamaan yang akan mengakibatkan \textit{CPU Usage} bisa melebihi kapasitasnya dan hal tersebut akan membuat server \textit{not responding}.
 				
 				Sedangkan hasil distribusi kontainer ke setiap \textit{node host} setelah dilakukan pembuatan \textit{load generator} ditunjukkan pada Tabel \ref{jumlahkontainerpem}.
 				\begin{longtable}{|p{0.05\textwidth}|p{0.30\textwidth}|p{0.15\textwidth}|p{0.15\textwidth}|p{0.15\textwidth}|}
@@ -299,19 +300,19 @@
 			
 				\begin{figure}[H]
 					\centering
-					\includegraphics[width=10cm,height=5.5cm]{Images/C-5/performacpu.PNG}
+					\includegraphics[width=8cm,height=5cm]{Images/C-5/performacpu.png}
 					\caption{Kondisi penggunaan sumberdaya \textit{CPU} ketika ada \textit{request}}
 					\label{performacpu}
 				\end{figure}
 			
-				Dilihat dari grafik pada Gambar \ref{performacpu}, penggunaan \textit{CPU} mengalami perubahan secara \textit{linear} yaitu semakin banyak \textit{request} uji beban akan semakin tinggi, namun pada saat pengujian ketika jumlah \textit{load generator} 200, terjadi anomali pada ketersediaan sumberdaya, hal tersebut dikarenakan urutan kontainer id yang disimpan pada basis data tidak berimbang untuk nomor urut dari 1 sampai 200, sehingga pada \textit{node host} CLOUD dan RAIN memiliki jumlah \textit{load generator} yang harus dijalankan jauh lebih banyak dari pada \textit{node host} STORM, sehingga mengakibatkan tenjadinya anomali penggunaan \textit{CPU} pada \textit{node host} STORM.
-				
 				\begin{figure}[H]
 					\centering
-					\includegraphics[width=10cm,height=5.5cm]{Images/C-5/performaram.PNG}
+					\includegraphics[width=8cm,height=5cm]{Images/C-5/performaram.png}
 					\caption{Kondisi penggunaan sumberdaya \textit{RAM} ketika ada \textit{request}}
 					\label{performaram}
 				\end{figure}
+			
+				Berdasarkan grafik pada Gambar \ref{performacpu}, penggunaan \textit{CPU} mengalami perubahan secara \textit{linear} yaitu semakin banyak \textit{request} uji beban akan semakin tinggi, namun pada saat pengujian ketika jumlah \textit{load generator} 200, terjadi anomali pada ketersediaan sumberdaya, hal tersebut dikarenakan urutan kontainer id yang disimpan pada basis data tidak berimbang untuk nomor urut dari 1 sampai 200, sehingga pada \textit{node host} CLOUD dan RAIN memiliki jumlah \textit{load generator} yang harus dijalankan jauh lebih banyak dari pada \textit{node host} STORM, sehingga mengakibatkan tenjadinya anomali penggunaan \textit{CPU} pada \textit{node host} STORM.
 				
-				Sedangkan untuk penggunaan \textit{RAM} pada Gambar \ref{performaram}, perubahannya secara linear saja, dikarenakan memang adanya pembatasan berjalannya proses secara bersama dalam setiap waktunya, karena \textit{Chrome} yang dijalankan akan memerlukan sumberdaya yang banyak. Jika tidak dibatasi, dapat mengakibatkan penggunaan \textit{CPU} dan \textit{RAM} akan melebihi kapasitas dan mengakibatkan server menjadi \textit{not responding}. Dapat disimpulkan juga dalam melakukan uji beban menggunakan \textit{Headless Chrome} akan membutuhkan banyak sumberdaya \textit{CPU} dan \textit{RAM}, sedangkan untuk penggunaan \textit{Docker} tidak memerlukan sumberdaya sebanyak \textit{Headless Chrome}.
+				\indent Sedangkan untuk penggunaan \textit{RAM} pada Gambar \ref{performaram}, perubahannya secara linear saja, dikarenakan memang adanya pembatasan berjalannya proses secara bersama dalam setiap waktunya, karena \textit{Chrome} yang dijalankan akan memerlukan sumberdaya yang banyak. Jika tidak dibatasi, dapat mengakibatkan penggunaan \textit{CPU} dan \textit{RAM} akan melebihi kapasitas dan mengakibatkan server menjadi \textit{not responding}. Dapat dilihat dari kedua grafik, untuk penggunaan CPU sekitar 30-55\% dan RAM 1-1,4GB dalam melakukan uji beban karena dibatasi tersebut, namun ketika tidak adanya batasan, ketika menggunakan \textit{Headless Chrome} akan membutuhkan banyak sumberdaya \textit{CPU} dan \textit{RAM}, sedangkan untuk penggunaan \textit{Docker} relatif kecil dan tidak memerlukan sumberdaya sebanyak \textit{Headless Chrome}.
 				

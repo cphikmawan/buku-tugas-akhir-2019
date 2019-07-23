@@ -4,10 +4,17 @@
 	\section{Kesimpulan}
         Dari proses perencangan, implementasi dan pengujian terhadap sistem, dapat diambil beberapa kesimpulan berikut:
         \begin{enumerate}
-        	\item Dalam pengembangan web, uji beban dapat dilakukan menggunakan \textit{Headless Chrome} sebagai \textit{tester}, yang dipadukan dengan \textit{API} pengambil uji beban yaitu \textit{Puppeteer}. Namun ketika \textit{Headless Chrome} dijalankan oleh \textit{load generator}, membutuhkan sumberdaya \textit{CPU} dan \textit{RAM} yang cukup tinggi jika dilakukan secara bersamaan, sehingga harus dilakukan pembatasan terhadap proses yang berjalan secara bersamaan.
-     		\item \textit{Load generator} yang digunakan sebagai \textit{resource user} dapat diimplementasikan oleh \textit{Docker}. \textit{Docker} dipasang menggunakan \textit{Docker Image} yang sudah diinstalasi \textit{Node.js} dan \textit{Puppeteer} didalamnya. Berdasarkan hasil uji coba performa \textit{Docker} sangat mumpuni untuk dijadikan \textit{resource user} karena membutuhkan sedikit sumberdaya dan dapat melakukan akses langsung ke suatu web.
-        	\item Data Laporan uji beban didapatkan menggunakan \textit{Puppeteer} dan disajikan pada web dalam bentuk tabel dengan data inti yaitu \textit{Response End}, \textit{CSS Tracing End}, \textit{Dom Content Loaded}, \textit{First Meaningful Paint} dan \textit{Load Event End}. Laporan yang disajikan juga menampilkan \textit{error console} yang terekam pada \textit{browser} dan tangkapan layar web yang diuji.
+        	\item Sistem ini dapat melakukan uji beban web menggunakan \textit{Headless Chrome} sebagai \textit{tester}, yang dipadukan dengan \textit{API} pengambil uji beban yaitu \textit{Puppeteer}.
+        	
+        	\item Sistem dapat menggunakan \textit{Docker} sebagai \textit{load generator} untuk pengganti \textit{resource user} dengan adanya \textit{Docker Image} yang sudah terpasang \textit{Node} dan \textit{Puppeteer} didalamnya.
+        	
+        	\item Sistem mengambil data atau laporan uji beban menggunakan \textit{Puppeteer} berupa \textit{performance metrics} dalam satuan \textit{millisecond}, \textit{error console} dan tangkapan layar web yang diuji.
+        	
         	\item Dalam menangani layanan uji beban yang dikirimkan oleh pengembang web, sistem menggunakan sebuah \textit{task scheduler crontab} yang menjalankan \textit{script Python} setiap satu menit dan melakukan pengecekan secara berkala.
+        	
+        	\item Sistem pengujian beban aplikasi web yang dibangun menggunakan \textit{Docker} sebagai \textit{load generator} membutuhkan RAM sebesar 1,3MB setiap Docker Container, dan untuk CPU tidak terlalu berpengaruh setelah pembuatan karena Docker Container berada dalam kondisi sleep.
+        	
+        	\item Sistem ketika menerima request uji beban membutuhkan sekitar 30-55\% penggunaan CPU dan 1-1,4GB penggunaan RAM dalam melakukan uji beban dengan jumlah 100,200,300,400 dan 500. Tidak terlalu banyak sumberdaya yang dipakai, karena adanya pembatasan jalannya proses.
         \end{enumerate}
         
 	\section{Saran}

@@ -6,7 +6,7 @@
 		
 		\indent Pengembang aplikasi web tentu saja membutuhkan teknik untuk uji beban, namun dalam melakukan uji beban dibutuhkan \textit{resource user} untuk mengakses web dan waktu yang cukup lama karena dilakukan secara manual. Beberapa contoh \textit{tools} yang dapat mengatasi hal tersebut untuk melakukan uji beban yaitu \textit{JMeter}, \textit{k6} dan sebagainya. Namun \textit{tools} tersebut menggunakan \textit{thread} untuk \textit{resource user}-nya, bila dilihat kondisi lapangan yaitu pengguna mengakses web menggunakan \textit{browser} dan memiliki \textit{IP} masing-masing, \textit{thread} kurang bisa mengatasi hal tersebut. Oleh karena itu, dibutuhkan \textit{tools} yang dapat menangani hal tersebut, salah satunya yaitu pengujian secara \textit{headless} yang memanfaatkan infrastruktur \textit{Docker} dan melakukan otomasi untuk pengambilan data uji beban. \textit{Docker} akan menjadi \textit{resource user} yang mengakses melalui \textit{headless browser} untuk uji beban.
 		
-		\indent Pada tugas akhir ini, akan dibangun sebuah sistem uji beban menggunakan teknik secara \textit{headless} yang akan memanfaatkan \textit{Headless Chrome} sebagai \textit{tester} headless browsernya dan membuat \textit{load generator} yang memanfaatkan infrastruktur \textit{Docker} sebagai \textit{resource user}, serta otomasi pengambilan data dari \textit{tester} menggunakan pustaka \textit{Node} yaitu \textit{Puppeteer}\cite{puppeteer}.
+		\indent Pada tugas akhir ini, akan dibangun sebuah sistem pengujian beban(\textit{workload} aplikasi web) yang akan memanfaatkan \textit{Headless Chrome} sebagai \textit{tester} headless browsernya dan membuat \textit{load generator} yang memanfaatkan infrastruktur \textit{Docker} sebagai \textit{resource user}, serta otomasi pengambilan data dari \textit{tester} menggunakan pustaka \textit{Node} yaitu \textit{Puppeteer}\cite{puppeteer}.
 
 	\section{Rumusan Masalah}
        	Rumusan masalah yang diangkat dalam tugas akhir ini dapat dipaparkan sebagai berikut :
@@ -15,6 +15,8 @@
 			\item Bagaimana cara mengimplementasikan \textit{Docker} bisa menjadi \textit{load generator} untuk uji beban?
 			\item Bagaimana cara menghasilkan laporan uji beban pada web?
 			\item Bagaimana mengelola layanan pengujian untuk \textit{multiuser} dalam bentuk antrian?
+			\item Bagaimana konsumsi sumberdaya setelah pembuatan \textit{load generator}?
+			\item Bagaimana konsumsi sumberdaya ketika ada \textit{request} uji beban?
 		\end{enumerate}
 
 	\section{Batasan Masalah}
@@ -34,6 +36,8 @@
        		\item Membuat sistem agar \textit{Docker} bisa menjadi \textit{load generator} untuk pengujian.
        		\item Membuat sistem untuk menampilkan laporan uji beban pada web.
        		\item Membuat sistem yang dapat mengelola permintaan layanan uji beban dari \textit{multiuser} berupa antrian.
+       		\item Mengetahui kebutuhan sumberdaya setelah pembuatan \textit{load generator}.
+       		\item Mengetahui kebutuhan sumberdaya ketika ada \textit{request} uji beban.
        	\end{enumerate}
         
 	\section{Manfaat}

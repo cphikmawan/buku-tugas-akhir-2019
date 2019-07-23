@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.14159265-2.6-0.99998 (TeX Live 2017/Debian) (preloaded format=xelatex 2019.5.3)  23 JUL 2019 12:46
+This is XeTeX, Version 3.14159265-2.6-0.99998 (TeX Live 2017/Debian) (preloaded format=xelatex 2019.5.22)  23 JUL 2019 22:01
 entering extended mode
  \write18 enabled.
  %&-line parsing enabled.
@@ -1161,12 +1161,6 @@ LaTeX Warning: Label `tabelhasilujirequest' multiply defined.
 LaTeX Warning: Label `tabelhasilujihasil' multiply defined.
 
 
-LaTeX Warning: Label `suberdayaawalpembuatan' multiply defined.
-
-
-LaTeX Warning: Label `sdhasilperforma' multiply defined.
-
-
 LaTeX Warning: Label `mysql' multiply defined.
 
 )
@@ -2057,32 +2051,32 @@ Overfull \hbox (2.24821pt too wide) in paragraph at lines 211--211
 []|\TU/TimesNewRoman(0)/m/n/10.95 255M/3.9G| 
  []
 
+
+Overfull \vbox (1.86777pt too high) has occurred while \output is active []
+
+
 [60]
-Overfull \hbox (2.24821pt too wide) in paragraph at lines 223--223
+File: Images/C-5/pembuatancpu.png Graphic file (type bmp)
+<Images/C-5/pembuatancpu.png>
+File: Images/C-5/pembuatanram.png Graphic file (type bmp)
+<Images/C-5/pembuatanram.png>
+
+Overfull \hbox (2.24821pt too wide) in paragraph at lines 238--238
 []|\TU/TimesNewRoman(0)/m/n/10.95 950M/3,9G| 
  []
 
 
-Overfull \hbox (2.24821pt too wide) in paragraph at lines 224--224
+Overfull \hbox (2.24821pt too wide) in paragraph at lines 239--239
 []|\TU/TimesNewRoman(0)/m/n/10.95 892M/3,9G| 
  []
 
 
-Overfull \hbox (2.24821pt too wide) in paragraph at lines 225--225
+Overfull \hbox (2.24821pt too wide) in paragraph at lines 240--240
 []|\TU/TimesNewRoman(0)/m/n/10.95 889M/3,9G| 
  []
 
-File: Images/C-5/pembuatancpu.PNG Graphic file (type bmp)
-<Images/C-5/pembuatancpu.PNG>
-File: Images/C-5/pembuatanram.PNG Graphic file (type bmp)
-<Images/C-5/pembuatanram.PNG>
 [61]
-Overfull \hbox (3.78368pt too wide) in alignment at lines 245--249
- [] [] [] [] [] 
- []
-
-
-Overfull \hbox (3.78368pt too wide) in alignment at lines 249--250
+Overfull \hbox (3.78368pt too wide) in alignment at lines 246--250
  [] [] [] [] [] 
  []
 
@@ -2092,21 +2086,33 @@ Overfull \hbox (3.78368pt too wide) in alignment at lines 250--251
  []
 
 
-Overfull \hbox (3.78368pt too wide) in alignment at lines 251--257
+Overfull \hbox (3.78368pt too wide) in alignment at lines 251--252
  [] [] [] [] [] 
  []
 
-[62]
-Overfull \hbox (1.00937pt too wide) in paragraph at lines 279--279
+
+Overfull \hbox (3.78368pt too wide) in alignment at lines 252--258
+ [] [] [] [] [] 
+ []
+
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [62]
+Overfull \hbox (1.00937pt too wide) in paragraph at lines 280--280
 []|\TU/TimesNewRoman(0)/bx/n/10.95 Jumlah| 
  []
 
-[63]
-File: Images/C-5/performacpu.PNG Graphic file (type bmp)
-<Images/C-5/performacpu.PNG>
-File: Images/C-5/performaram.PNG Graphic file (type bmp)
-<Images/C-5/performaram.PNG>
- [64]) (./chapters/6-Penutup.tex [65] [66
+File: Images/C-5/performacpu.png Graphic file (type bmp)
+<Images/C-5/performacpu.png>
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [63]
+File: Images/C-5/performaram.png Graphic file (type bmp)
+<Images/C-5/performaram.png>
+
+[64]) (./chapters/6-Penutup.tex [65] [66
 
 ]
 BAB VI.
@@ -2199,9 +2205,9 @@ LaTeX Warning: There were multiply-defined labels.
 
  ) 
 Here is how much of TeX's memory you used:
- 25658 strings out of 493007
- 470056 string characters out of 6136720
- 735947 words of memory out of 5000000
+ 25657 strings out of 493007
+ 470052 string characters out of 6136719
+ 735945 words of memory out of 5000000
  29277 multiletter control sequences out of 15000+600000
  533651 words of font info for 67 fonts, out of 8000000 for 9000
  1348 hyphenation exceptions out of 8191
